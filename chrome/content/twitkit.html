@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" id="something">
+<head id="thehead">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>twitkit</title>
+	<script type="text/javascript" src="chrome://twitkit/skin/mootools.v1.00.js"></script>
+	<script type="text/javascript" src="chrome://twitkit/content/twitkit.js"></script>
+	<script type="text/javascript">
+		function setReply(username) {
+			var bah = $('status');
+			bah.value = '@' + username + ' ';
+		}
+	</script>
+	<link rel="stylesheet" type="text/css" href="chrome://twitkit/content/twitkit.css" />
+</head>
+<body id="thebody" onfocus="var x=document.getElementById('status');x.focus();">
+	<table id="loginbox" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<div id="whoami">
+					<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">sign in!</a>
+				</div>
+				<div id="loginwrap">
+					<div id="loginform"><div>
+						<h1>Please Sign In</h1>
+						<form action="#" onsubmit="try { var btn=$('loginbutton'); btn.value='Signing in...'; Tweetbar.sign_in($('username').value, $('password').value, function() {btn.value='Sign In';}); } catch(e) {}; return false;">
+							<label for="username">username or email:</label>
+							<input class="textbox" type="text" name="username" id="username" size="10" />
+							<label for="password">password:</label>
+							<input class="textbox" type="password" name="password" id="password" size="10" />
+							<input class="piton" type="submit" name="loginbutton" id="loginbutton" value="Sign In!" />
+						</form>
+						<h3>or <a href="http://twitter.com/account/create?tb_10" target="_content">sign up now</a>!</h3>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table id="tweetbar" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td id="topper">
+				<div id="poster">
+					<h1>what are you doing?</h1>
+					<h3><span id="status-field-char-counter">0</span></h3>
+					<form action="./" onsubmit="var box=document.getElementById('status'); Tweetbar.update_status(box.value, function() { updateStatusTextCharCounter('');}); box.value = ''; return false;">
+						<div id="statusbox">
+							 <input type="text" name="status" id="status" onkeyup="updateStatusTextCharCounter(this.value)" />
+						</div>
+					</form>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td id="stalker">
+					<table id="navigation" style="margin: 0;" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td id="tab_for_public_timeline"><a href="#" onclick="Tweetbar.activate_panel('public_timeline',this); void 0;" alt="watch the public timeline" title="watch the public timeline">public</a></td>
+							<td id="tab_for_friends_timeline"><a href="#" onclick="Tweetbar.activate_panel('friends_timeline',this); void 0;">user</a></td>
+							<td id="tab_for_friends"><a href="#" onclick="Tweetbar.activate_panel('friends',this); void 0">friends</a></td>
+							<td id="tab_for_followers"><a href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;">followers</a></td>
+							<td id="tab_for_replies"><a href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;">@s</a></td>
+							<td id="tab_for_me" style="margin: 0;"><a href="#" onclick="Tweetbar.activate_panel('me',this); void 0;">me</a></td>
+						</tr>
+					</table>
+					<table id="refresher" border="0" cellpadding="0" cellspacing="0" width="100%" height="20">
+						<tr>
+							<td id="refresh_activity" width="18" align="left" valign="middle">
+								<img width="16" height="16" src="chrome://twitkit/skin/activity-white.gif" />
+							</td>
+							<td align="left" valign="middle">
+								<h3 id="refreshing" style="display:none;">refreshing...</h3>
+								<label id="refresh_interval_label"><a href="#" onclick="Tweetbar.manual_refresh(); this.blur(); return false;">refresh</a></label>
+							</td>
+							<td align="right" valign="middle">
+								[<a href="#" onclick="Tweetbar.clear_current_tweets();">clear</a>]
+							</td>
+						</tr>
+					</table>
+				<!-- /div -->
+				
+				<div id="lists">
+					<ul id="tweets">
+						<li>loading...</li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+	</table><script type="text/javascript">
+	//<![CDATA[
+		//
+		// i.. uh... "borrowed" this character counting code from twitter home page...
+		// @obvious: if that's uncool, please let me know and i'll replace it -- mike@mikedemers.net
+		//
+		function updateStatusTextCharCounter(value) {
+			var len = value.length;
+		  /*if (140 - value.length >= 0) {
+			  $('status-field-char-counter').innerHTML = 140 - value.length;
+			} else {
+			  $('status-field-char-counter').innerHTML = 0;
+			}*/
+			$('status-field-char-counter').innerHTML = 140 - len;
+			if ( len >= 140 ) {
+				$('status-field-char-counter').setStyles({'color': '#ff0000', 'font-weight': 'bold'});
+			} else if ( len > 130 ) {
+				$('status-field-char-counter').setStyles({'color': '#d40d12', 'font-weight': 'normal'});
+			} else if ( len > 120 ) {
+				$('status-field-char-counter').setStyles({'color': '#5c0002', 'font-weight': 'normal'});
+			} else {
+				$('status-field-char-counter').setStyles({'color': '#888888', 'font-weight': 'normal'});
+			}
+		};
+
+		$('status-field-char-counter').innerHTML = 140 - $('status').value.length;
+		//]]>
+	</script>
+</body>
+</html>

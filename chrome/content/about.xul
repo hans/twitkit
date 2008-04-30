@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE window [
+	<!ENTITY % twitkitDTD SYSTEM "chrome://twitkit/locale/twitkit.dtd">
+	%twitkitDTD;
+]>
+
+<window id="twitkitAbout" title="&about;"  
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	windowtype="TwitKit:About"
+	persist="screenX screenY">
+		<vbox>
+				<hbox>
+						<image src="chrome://twitkit/skin/logo.png" align="center" style="padding: 20px 70px;"/>
+				</hbox>
+				<hbox pack="center">
+						<label>&about.version;</label>
+				</hbox>
+				<hbox pack="center">
+						<label>&about.author;</label>
+				</hbox>
+				<hbox pack="center">
+						<label href="http://engel.uk.to/twitkit/" class="text-link">TwitKit Website</label>
+				</hbox>
+		</vbox>
+</window>

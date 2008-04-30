@@ -1,0 +1,19 @@
+<!ENTITY prefs.title "&twitKit; Preferences">
+	<!ENTITY prefs.general "General">
+		<!ENTITY prefs.general.showAppSource "Show 'from [application]' after tweets">
+		<!ENTITY prefs.general.refreshInterval "Refresh interval:">
+			<!ENTITY prefs.general.refreshInterval.30 "30 seconds">
+			<!ENTITY prefs.general.refreshInterval.1 "1 minute">
+			<!ENTITY prefs.general.refreshInterval.3 "3 minutes">
+			<!ENTITY prefs.general.refreshInterval.5 "5 minutes">
+			<!ENTITY prefs.general.refreshInterval.10 "10 minutes">
+		<!ENTITY prefs.general.showNamesAs "Show names as:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Screen names">
+			<!ENTITY prefs.general.showNamesAs.fullNames "Full names">
+	<!ENTITY prefs.theme "Theme">
+		<!ENTITY prefs.theme.colorScheme "Color scheme:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Deep Brown">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "Twitter Blue">
+			<!ENTITY prefs.theme.colorScheme.pastel "Pastel">
+			<!ENTITY prefs.theme.colorScheme.muted "Muted">
+		<!ENTITY prefs.theme.fontSize "Font size:">

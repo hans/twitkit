@@ -1,0 +1,89 @@
+/*
+Palette: muted
+Author: traumadoll
+URL: http://www.colourlovers.com/palette/305810/muted
+*/
+
+body {
+	background-color: #eda68e;
+}
+
+a {
+	color: #496a9c;
+}
+
+#whoami a.signin {
+	background-color: #496a9c;
+	color: #d1e5ff;
+}
+
+#loginform {
+	background-color: #d1e5ff;
+	border: 1px solid #346145;
+}
+#loginform input {
+	border: 1px solid #346145;
+}
+#loginform input.piton {
+	background-color: #496a9c;
+	color: #d1e5ff;
+}
+
+#poster h1 {
+	color: #333;
+}
+#poster h3 {
+	color: #888;
+}
+
+input#status {
+	border-top: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+#navigation td {
+	background-color: #496a9c;
+	border-left: 2px solid #eda68e;
+	border-right: 2px solid #eda68e;
+}
+#navigation td:hover {
+	background-color: #346145;
+}
+#navigation td a {
+	color: #d1e5ff;
+}
+#navigation td.active {
+	background-color: #346145;
+}
+
+#refresher {
+	background-color: #fff;
+}
+
+.even {
+	background-color: #eee;
+}
+.even:hover {
+	background-color: #fff;
+}
+
+ul#tweets {
+	background-color: #fff;
+}
+ul#tweets li p.pic a img {
+	border: 1px solid #ccc;
+}
+ul#tweets li p.what {
+	color: #333;
+}
+ul#tweets li p.who {
+	color: #555;
+}
+ul#tweets li p.who a {
+	color: #00f;
+}
+ul#tweets li div.source a {
+	color: #4f3f3f;
+}

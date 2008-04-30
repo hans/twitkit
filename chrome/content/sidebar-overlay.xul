@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://browser/skin/" type="text/css"?> 
+<?xml-stylesheet href="chrome://browser/content/browser.css" type="text/css"?>
+<?xml-stylesheet href="chrome://twitkit/skin/toolbar-button.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://twitkit/locale/twitkit.dtd">
+
+<overlay id="sidebarOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://twitkit/content/sidebar-overlay.js"/>
+
+	<menupopup id="viewSidebarMenu">
+		<menuitem key="key_openTweetbar" observes="viewTweetbar"  />
+	</menupopup>
+	
+	<menupopup id="menu_ToolsPopup">
+		<menu id="twitkit-menu" label="&twitKit;" insertbefore="devToolsSeparator">
+			<menupopup>
+				<menuitem label="&menu.toggle;" oncommand="toggleSidebar('viewTweetbar');"/>
+				<menuitem label="&menu.prefs;" oncommand="TwitOverlay.openPrefs();"/>
+				<menuitem label="&menu.about;" oncommand="TwitOverlay.openAbout();"/>
+				<menuitem label="&menu.help;" oncommand="gBrowser.loadOneTab('http://engel.uk.to/twitkit/wiki/')"/>
+			</menupopup>
+		</menu>
+	</menupopup>
+
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="tweetbar-button" class="toolbarbutton-1"
+			image="chrome://twitkit/skin/twitter-icon.png"
+			label="&toolbar.label;" tooltiptext="&toolbar.tooltip;"
+			oncommand="toggleSidebar('viewTweetbar');"/>
+	</toolbarpalette>
+
+	<keyset id="mainKeyset">
+		<key id="key_openTweetbar" command="viewTweetbar"
+			key="&openTweetbar.commandkey;" 
+			modifiers="&openTweetbar.modifierskey;" />
+	</keyset>
+
+	<broadcasterset id="mainBroadcasterSet"> 
+		<broadcaster id="viewTweetbar" 
+			label="TwitKit"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="chrome://twitkit/content/twitkit.xul"
+			sidebarTitle="Sidebar Title"
+			oncommand="toggleSidebar('viewTweetbar');" />
+	</broadcasterset>
+
+</overlay>
