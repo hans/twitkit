@@ -213,6 +213,25 @@ var Tweetbar = {
 			}
 			this.update_current_list();
 		},
+		
+	// URL Compression //
+	compress_url:
+		function() {
+			var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+			if (selection.length==0) {
+				return;
+			}
+			var url = "http://is.gd/api.php?longurl="+selection;
+			var aj = new Ajax( url,
+							   { method: 'get',
+							     onSuccess:
+							     	function(replaced) {
+										var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+										var text = document.getElementById('status').value.substring(0,document.getElementById('status').selectionStart) + replaced + (selection.length==selection.trim().length?"":" ")+ document.getElementById('status').value.substring(document.getElementById('status').selectionEnd);  
+										document.getElementById('status').value=text;
+									},
+							   }).request();
+		},
 	
 	// Rendering //
 	render_tweet:

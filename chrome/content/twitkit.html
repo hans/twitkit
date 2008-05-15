@@ -42,7 +42,7 @@
 			<td id="topper">
 				<div id="poster">
 					<h1>what are you doing?</h1>
-					<h3><span id="status-field-char-counter">0</span></h3>
+					<h3><a href="#" class="signin" id="tinyurl" title="Select textpart, and convert to tinyurl" onclick="Tweetbar.compress_url();"><img src="chrome://twitkit/skin/compress.png" /></a><span id="status-field-char-counter">0</span></h3>
 					<form action="./" onsubmit="var box=document.getElementById('status'); Tweetbar.update_status(box.value, function() { updateStatusTextCharCounter('');}); box.value = ''; return false;">
 						<div id="statusbox">
 							 <input type="text" name="status" id="status" onkeyup="updateStatusTextCharCounter(this.value)" />
