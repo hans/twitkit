@@ -67,7 +67,7 @@ var Tweetbar = {
 			
 			$('thebody').setStyle('font-size', Tweetbar.prefService.getCharPref('fontSize') + '%');
 			
-			this.setListHeight();
+			this.setListSize();
 			
 			this.loginSlider = new Fx.Slide('loginform', {duration: 500});
 			this.loginSlider.hide();
@@ -531,7 +531,7 @@ var Tweetbar = {
 		},
 	
 	// Styling //
-	setListHeight:
+	setListSize:
 		function() {
 			var h = Window.getHeight() -
 					( $('topper').getSize()['size']['y'] +
@@ -540,6 +540,8 @@ var Tweetbar = {
 					);
 			$('lists').setStyle('overflow', 'auto');
 			$('lists').setStyle('height', h+'px');
+			var w = Window.getWidth() + 15;
+			$('tweets').setStyle('max-width', w+'px');
 		},
 	
 	// Authorization //
@@ -660,5 +662,5 @@ window.onload = function() {
 };
 
 window.onresize = function() {
-	Tweetbar.setListHeight();
+	Tweetbar.setListSize();
 };
