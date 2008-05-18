@@ -272,7 +272,8 @@ var Tweetbar = {
 			/*
 			 * Hashtags implementation - by Joschi
 			 */
-			status= status.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
+			status = status.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
+			status = Tweetbar.expand_status(status);
     
 			return '<p class="pic"><a href="#" onclick="setReply(\'' + user['screen_name'] + '\');"><img src="' + user['profile_image_url'] + '" width="24" height="24" alt="'+user['name']+'" /></a>' +
 				   '<p class="what" style="font-size: 120%;">' + user['name'] + '</p>' +
