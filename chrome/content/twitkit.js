@@ -356,7 +356,7 @@ var Tweetbar = {
 								   	 			'<div style="font-size: 110%;">' + user.name + '</div>' +
 								   	 			'<div style="font-size: 0.8em;">' +
 								   	 			'<strong>Location</strong>: ' + user.location + '<br/>' +
-								   	 			'<strong>Bio</strong>: ' + user.description + '<br/>' +
+								   	 			'<strong>Bio</strong>: ' + Tweetbar.expand_status(user.description) + '<br/>' +
 								   	 			'<strong>Friends</strong>: ' + user.friends_count + '<br/>' +
 								   	 			'<strong>Followers</strong>: ' + user.followers_count + '<br/>' +
 								   	 			'<strong>Favorites</strong>: ' + user.favourites_count + '<br/>' +
