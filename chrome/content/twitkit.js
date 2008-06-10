@@ -268,12 +268,16 @@ var Tweetbar = {
 		},
 	render_user:
 		function(user) {
-			( user.protected == true ) ? status = '<em>My updates are protected.</em>' : status = user.status.text;
-			/*
-			 * Hashtags implementation - by Joschi
-			 */
-			status = status.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
-			status = Tweetbar.expand_status(status);
+			status = user.status.text;
+			if ( user.protected == true ) {
+				status = '<em>My updates are protected.</em>';
+			} else {
+				/*
+				 * Hashtags implementation - by Joschi
+				 */
+				status = Tweetbar.expand_status(status);
+				status = status.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
+			}
     
 			return '<p class="pic"><a href="#" onclick="setReply(\'' + user['screen_name'] + '\');"><img src="' + user['profile_image_url'] + '" width="24" height="24" alt="'+user['name']+'" /></a>' +
 				   '<p class="what" style="font-size: 120%;">' + user['name'] + '</p>' +
