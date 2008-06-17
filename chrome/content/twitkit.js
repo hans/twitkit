@@ -1,5 +1,5 @@
 /*
-	TwitKit v1.0
+	TwitKit v1.1
 	
 	Based off of Tweetbar by Mike Demers [mike@mikedemers.net]
 	
@@ -100,8 +100,8 @@ var Tweetbar = {
 			if(!Tweetbar.httpHeaders) {
 				Tweetbar.httpHeaders = {
 					'X-Twitter-Client': 'TwitKit',
-					'X-Twitter-Client-Version': '1.0',
-					'X-Twitter-Client-URL': 'http://engel.uk.to/twitkit/1.0.xml',
+					'X-Twitter-Client-Version': '1.1',
+					'X-Twitter-Client-URL': 'http://engel.uk.to/twitkit/1.1.xml',
 				};
 				if(Tweetbar.username && Tweetbar.password) {
 					Tweetbar.httpHeaders['Authorization'] = Tweetbar.http_basic_auth();
