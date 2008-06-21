@@ -23,8 +23,6 @@
 			<preference id="extensions.twitkit.colorScheme" name="extensions.twitkit.colorScheme" type="string"/>
 			<preference id="extensions.twitkit.fontSize" name="extensions.twitkit.fontSize" type="string"/>
 		</preferences>
-		
-		<script type="application/x-javascript" src="chrome://twitkit/content/preferences.js"/>  
    		
    		<groupbox>
    			<caption label="&prefs.general;"/>
