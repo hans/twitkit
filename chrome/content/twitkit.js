@@ -302,6 +302,9 @@ var Tweetbar = {
 					if((i % 2) == 0) {
 						li.addClass('even');
 					}
+					if ( current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
+						li.setStyle('background-color', '#ffffe0');
+					}
 					li.injectInside($('tweets'));
 				}
 			} else if ( this.currentList == 'friends' || this.currentList == 'followers' ) {
