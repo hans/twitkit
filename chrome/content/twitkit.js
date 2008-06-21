@@ -8,21 +8,12 @@
 	Todo:
 		* Search twittersearch.com from TwitKit
 		-----------------------------------------------------------------------
-		* don't make an extra request when authenticating
 		* improve behavior when twitter is down
 		* highlight friends and followers in public timeline
 		* add a configurable maximum tweet count
-		* don't send the an update if the status box is empty
 		* do some profiling... i think i'm leaking memory
 		* add ability to "share" theme by uploading to TwitKit site?
 		* import theme from twitter profile? (ryan)
-		* add ability to block users
-			* requires maintenance panel
-		* behave better when multiple windows are open
-		* add tinyurl-ifier (highlight and click?)
-			* look into urltea.com (it offers an API)
-		* add ability to "insert link from browser" and/or "insert browser selection"
-			* use: window._content.document.title
 		* add support for multiple accounts
 		* direct-messaging support
 	*/
