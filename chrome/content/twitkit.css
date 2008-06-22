@@ -92,12 +92,12 @@ a img {
 	position:						absolute;
 	top:							0;
 	right:							5px;
-	text-align:						right;
+	text-align:					right;
 	font-size:						0.8em;
 	line-height:					1.2em;
 	display:						block;
 	height:							1.5em;
-	text-align:						center;
+	text-align:					center;
 	z-index:						31;
 	margin:							0;
 	padding:						0;
@@ -160,7 +160,7 @@ input#status {
 #navigation td {
 	border:							0;
 	height:							2.5em;
-	text-align:						center;
+	text-align:					center;
 	font-size:						0.7em;
 	font-weight:					bold;
 	padding:						0 0.2em;
@@ -183,13 +183,13 @@ input#status {
 h3#refreshing {
 	font-size:						0.9em;
 	font-weight:					normal;
-	font-style:						italic;
+	font-style:					italic;
 	padding:						0;
 	line-height:					1.6em;
 }
 
 #refresher {
-	max-height:						20px;
+	max-height:					20px;
 	font-size:						0.8em;
 	padding:						0;
 	margin:							0;
@@ -214,8 +214,8 @@ h3#refreshing {
 }
 
 ul#tweets {
-	list-style:						none;
-	min-height:						4em;
+	list-style:					none;
+	min-height:					4em;
 }
 ul#tweets li {
 	clear:							both;
@@ -233,7 +233,7 @@ ul#tweets li p.pic {
 	padding:						0;
 }
 ul#tweets li p.pic span.re {
-	margin-top:						2px;
+	margin-top:					2px;
 }
 ul#tweets li p.pic a {
 	border:							0;
@@ -253,7 +253,7 @@ ul#tweets li p.pic a img {
 	padding:						0;
 }
 ul#tweets li p.pic a img.re {
-	text-align:						center;
+	text-align:					center;
 	height:							10px;
 	width:							10px;
 	margin:							0;
