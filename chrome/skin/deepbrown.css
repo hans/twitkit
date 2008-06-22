@@ -1,32 +1,32 @@
 body {
-	background-color: #4f3f3f;
+	background-color:				#4f3f3f;
 }
 
 #loginform {
-	color: #fff;
-	background-color: #605040;
-	border: 2px solid #7a6c5e;
+	color:							#fff;
+	background-color:				#605040;
+	border:							2px solid #7a6c5e;
 }
 #loginform h3 a {
-	color: #fff;
+	color:							#fff;
 }
 #loginform h3 a:hover {
-	background-color: #7a6c5e;
+	background-color:				#7a6c5e;
 }
 #loginform input.textbox {
-	border: 1px solid #7a6c5e;
+	border:							1px solid #7a6c5e;
 }
 #loginform input.piton {
-	border: 1px solid #7a6c5e;
-	background-color: #4f3f3f;
-	color: #fff;
+	border:							1px solid #7a6c5e;
+	background-color:				#4f3f3f;
+	color:							#fff;
 }
 
 #whoami {
-	color: #fff;
+	color:							#fff;
 }
 #whoami p {
-	background-color: #4f3f3f;
+	background-color:				#4f3f3f;
 }
 #whoami p a {
 	color:							#fff;
@@ -54,7 +54,7 @@ body {
 
 input#status {
 	background-color:				#fff;
-	border-top:						1px solid #aaa;
+	border-top:					1px solid #aaa;
 	border-left:					1px solid #aaa;
 	border-bottom:					1px solid #ccc;
 	border-right:					1px solid #ccc;

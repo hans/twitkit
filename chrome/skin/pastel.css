@@ -5,82 +5,82 @@ URL: http://www.colourlovers.com/palette/318261/pastel_crayons
 */
 
 body {
-	background-color: #f2dc9b;
+	background-color:				#f2dc9b;
 	
 }
 
 a {
-	color: #333;
+	color:							#333;
 }
 
 #whoami a.signin {
-	background-color: #9bf2d8;
+	background-color:				#9bf2d8;
 }
 
 #loginform {
-	background-color: #f29b9b;
-	color: #333;
-	border: 1px solid #9bf2d8;
+	background-color:				#f29b9b;
+	color:							#333;
+	border:							1px solid #9bf2d8;
 }
 #loginform input {
-	border: 1px solid #9bf2d8;
+	border:							1px solid #9bf2d8;
 }
 #loginform input.piton {
-	background-color: #b4f29b;
+	background-color:				#b4f29b;
 }
 
 #poster h1 {
-	color: #333;
+	color:							#333;
 }
 #poster h3 {
-	color: #888;
+	color:							#888;
 }
 
 input#status {
-	border-top: 1px solid #aaa;
-	border-left: 1px solid #aaa;
-	border-bottom: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	border-top:					1px solid #aaa;
+	border-left:					1px solid #aaa;
+	border-bottom:					1px solid #ccc;
+	border-right:					1px solid #ccc;
 }
 
 #navigation td {
-	background-color: #b4f29b;
-	border-left: 2px solid #f2dc9b;
-	border-right: 2px solid #f2dc9b;
+	background-color:				#b4f29b;
+	border-left:					2px solid #f2dc9b;
+	border-right:					2px solid #f2dc9b;
 }
 #navigation td:hover {
-	background-color: #f29b9b;
+	background-color:				#f29b9b;
 }
 #navigation td.active {
-	background-color: #f29b9b;
+	background-color:				#f29b9b;
 }
 
 #refresher {
-	background-color: #fff;
+	background-color:				#fff;
 }
 
 .even {
-	background-color: #eee;
+	background-color:				#eee;
 }
 .even:hover {
-	background-color: #fff;
+	background-color:				#fff;
 }
 
 ul#tweets {
-	background-color: #fff;
+	background-color:				#fff;
 }
 ul#tweets li p.pic a img {
-	border: 1px solid #ccc;
+	border:							1px solid #ccc;
 }
 ul#tweets li p.what {
-	color: #333;
+	color:							#333;
 }
 ul#tweets li p.who {
-	color: #555;
+	color:							#555;
 }
 ul#tweets li p.who a {
-	color: #00f;
+	color:							#00f;
 }
 ul#tweets li div.source a {
-	color: #4f3f3f;
+	color:							#4f3f3f;
 }
