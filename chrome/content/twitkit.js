@@ -677,10 +677,10 @@ var Tweetbar = {
 												}
 												Tweetbar.set_username_on_page();
 											} else {
-												alert('sign in failed: '+raw_data);
+												alert(this._('errors.signOut'));
 											}
 											if(callback) {
-												try { callback(); } catch(e) { alert('sign-in callback error: '+e); };
+												try { callback(); } catch(e) { };
 											}
 										},
 								  }).request();
