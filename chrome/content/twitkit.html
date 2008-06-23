@@ -93,11 +93,6 @@
 		//
 		function updateStatusTextCharCounter(value) {
 			var len = value.length;
-		  /*if (140 - value.length >= 0) {
-			  $('status-field-char-counter').innerHTML = 140 - value.length;
-			} else {
-			  $('status-field-char-counter').innerHTML = 0;
-			}*/
 			$('status-field-char-counter').innerHTML = 140 - len;
 			if ( len >= 140 ) {
 				$('status-field-char-counter').setStyles({'color': '#ff0000', 'font-weight': 'bold'});
