@@ -20,7 +20,7 @@
 
 var Tweetbar = {
 	
-	// Variables //	
+	// Variables //
 	tweets: {
 		friends: {},
 		followers: {},
@@ -28,7 +28,7 @@ var Tweetbar = {
 		friends_timeline: {},
 		replies: {},
 		me: {},
-	},			
+	},
 	month_names: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
 	isAuthenticated: false,
 	currentList: null,
@@ -161,7 +161,7 @@ var Tweetbar = {
 	clear_http_headers:
 		function() {
 			Tweetbar.httpHeaders = null;
-		},	
+		},
 	/**
 	 * http_headers ( )
 	 * Return standarad HTTP headers to be sent to Twitter.
@@ -219,7 +219,7 @@ var Tweetbar = {
 				}
 			}
 		},
-		
+	
 	// Miscellaneous //
 	/**
 	 * api_url_for ( resource )
@@ -353,7 +353,7 @@ var Tweetbar = {
 			   return (parseInt(delta / 86400)).toString() + ' days ago';
 		   }
 		},
-		
+	
 	// Misc. Tweet Functions //
 	/**
 	 * current_tweets ( )
@@ -366,7 +366,7 @@ var Tweetbar = {
 	current_tweets:
 		function() {
 			return this.tweets[this.currentList];
-		},		
+		},
 	/**
 	 * clear_current_tweets ( )
 	 * Clear tweets from the current panel.
@@ -385,7 +385,7 @@ var Tweetbar = {
 			}
 			this.update_current_list();
 		},
-		
+	
 	// URL Compression //
 	/**
 	 * compress_url ( )
@@ -576,7 +576,7 @@ var Tweetbar = {
 								   	 	},
 								   }).request();
 			}
-		},	
+		},
 	/**
 	 * get_tweets ( )
 	 * Retrieve tweets from Twitter.
@@ -667,7 +667,7 @@ var Tweetbar = {
 			var interval = Tweetbar.prefService.getIntPref('refreshInterval');
 			var up_int = parseInt(interval);
 			this.updater = this.get_tweets.periodical(up_int);
-		},	
+		},
 	/**
 	 * manual_refresh ( )
 	 * Refresh the current panel, regardless of the periodical updater. Used when user manually clicks 'refresh'.
@@ -707,7 +707,7 @@ var Tweetbar = {
 			$('refresh_activity').setStyle('display', 'none');
 			$('refreshing').setStyle('display', 'none');
 		},
-		
+	
 	// Tweet Actions //	
 	/**
 	 * fav_tweet ( tweetid )
@@ -726,7 +726,7 @@ var Tweetbar = {
 										alert(this._('errors.ajax')+e);
 									},
 							   }).request();
-		},		
+		},
 	/**
 	 * delete_tweet ( tweetid )
 	 * Delete one of the user's tweets.
@@ -767,7 +767,7 @@ var Tweetbar = {
 				this.authenticate('update');
 				this.pendingUpdate = {callback: callback, status: status};
 			}
-		},		
+		},
 	/**
 	 * send_tweet ( status, callback )
 	 * Send a status update to Twitter.
@@ -943,7 +943,7 @@ var Tweetbar = {
 		function(action) {
 			this.open_login();
 			this.pendingAction = action;
-		},	
+		},
 	/**
 	 * sign_out ( )
 	 * Sign out of the current Twitter account.
@@ -976,7 +976,7 @@ var Tweetbar = {
 							   			alert(this._('errors.signOut'));
 							   		},
 							 }).request();
-		},	
+		},
 	/**
 	 * sign_in ( un, pw, callback )
 	 * Sign in to a Twitter account.
@@ -1021,7 +1021,7 @@ var Tweetbar = {
 											}
 										},
 								  }).request();
-		},	
+		},
 	/**
 	 * set_username_on_page ( )
 	 * Show the current user's name and a sign-out button
@@ -1036,7 +1036,7 @@ var Tweetbar = {
 			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
 			$('loginwrap').setStyle('display', 'none');
 		},
-		
+	
 };
 
 window.onload = function() {
