@@ -21,15 +21,15 @@
 				</div>
 				<div id="loginwrap">
 					<div id="loginform"><div>
-						<h1>Please Sign In</h1>
+						<h1 id="login-header">Please Sign In</h1>
 						<form action="#" onsubmit="try { var btn=$('loginbutton'); btn.value='Signing in...'; Tweetbar.sign_in($('username').value, $('password').value, function() {btn.value='Sign In';}); } catch(e) {}; return false;">
-							<label for="username">username or email:</label>
+							<label id="username-label" for="username">username or email:</label>
 							<input class="textbox" type="text" name="username" id="username" size="10" />
-							<label for="password">password:</label>
+							<label id="password-label" for="password">password:</label>
 							<input class="textbox" type="password" name="password" id="password" size="10" />
 							<input class="piton" type="submit" name="loginbutton" id="loginbutton" value="Sign In!" />
 						</form>
-						<h3>or <a href="http://twitter.com/account/create?tb_10" target="_content">sign up now</a>!</h3>
+						<h3 id="signup">or <a href="http://twitter.com/account/create?tb_10" target="_content">sign up now</a>!</h3>
 						</div>
 					</div>
 				</div>
@@ -40,8 +40,8 @@
 		<tr>
 			<td id="topper">
 				<div id="poster">
-					<h1>what are you doing?</h1>
-					<h3><a href="#" class="signin" id="tinyurl" title="Select textpart, and convert to tinyurl" onclick="Tweetbar.compress_url();"><img src="chrome://twitkit/skin/compress.png" /></a><span id="status-field-char-counter">0</span></h3>
+					<h1 id="question">what are you doing?</h1>
+					<h3><a id="compress" href="#" class="signin" id="tinyurl" title="Select textpart, and convert to tinyurl" onclick="Tweetbar.compress_url();"><img src="chrome://twitkit/skin/compress.png" /></a><span id="status-field-char-counter">0</span></h3>
 					<form action="./" onsubmit="var box=document.getElementById('status'); Tweetbar.update_status(box.value, function() { updateStatusTextCharCounter('');}); box.value = ''; return false;">
 						<div id="statusbox">
 							 <input type="text" name="status" id="status" onkeyup="updateStatusTextCharCounter(this.value)" />
@@ -54,12 +54,12 @@
 			<td id="stalker">
 					<table id="navigation" style="margin: 0;" border="0" cellpadding="0" cellspacing="0">
 						<tr>
-							<td id="tab_for_public_timeline"><a href="#" onclick="Tweetbar.activate_panel('public_timeline',this); void 0;" alt="watch the public timeline" title="watch the public timeline">public</a></td>
-							<td id="tab_for_friends_timeline"><a href="#" onclick="Tweetbar.activate_panel('friends_timeline',this); void 0;">user</a></td>
-							<td id="tab_for_friends"><a href="#" onclick="Tweetbar.activate_panel('friends',this); void 0">friends</a></td>
-							<td id="tab_for_followers"><a href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;">followers</a></td>
-							<td id="tab_for_replies"><a href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;">@s</a></td>
-							<td id="tab_for_me" style="margin: 0;"><a href="#" onclick="Tweetbar.activate_panel('me',this); void 0;">me</a></td>
+							<td id="tab_for_public_timeline"><a id="public" href="#" onclick="Tweetbar.activate_panel('public_timeline',this); void 0;" alt="watch the public timeline" title="watch the public timeline">public</a></td>
+							<td id="tab_for_friends_timeline"><a id="user" href="#" onclick="Tweetbar.activate_panel('friends_timeline',this); void 0;">user</a></td>
+							<td id="tab_for_friends"><a id="friends" href="#" onclick="Tweetbar.activate_panel('friends',this); void 0">friends</a></td>
+							<td id="tab_for_followers"><a id="followers" href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;">followers</a></td>
+							<td id="tab_for_replies"><a id="replies" href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;">@s</a></td>
+							<td id="tab_for_me" style="margin: 0;"><a id="me" href="#" onclick="Tweetbar.activate_panel('me',this); void 0;">me</a></td>
 						</tr>
 					</table>
 					<table id="refresher" border="0" cellpadding="0" cellspacing="0" width="100%" height="20">
@@ -69,10 +69,10 @@
 							</td>
 							<td align="left" valign="middle">
 								<h3 id="refreshing" style="display:none;">refreshing...</h3>
-								<label id="refresh_interval_label"><a href="#" onclick="Tweetbar.manual_refresh(); this.blur(); return false;">refresh</a></label>
+								<label id="refresh_interval_label"><a id="refresh" href="#" onclick="Tweetbar.manual_refresh(); this.blur(); return false;">refresh</a></label>
 							</td>
 							<td align="right" valign="middle">
-								[<a href="#" onclick="Tweetbar.clear_current_tweets();">clear</a>]
+								[<a id="clear-link" href="#" onclick="Tweetbar.clear_current_tweets();">clear</a>]
 							</td>
 						</tr>
 					</table>
@@ -80,7 +80,7 @@
 				
 				<div id="lists">
 					<ul id="tweets">
-						<li>loading...</li>
+						<li id="loading">loading...</li>
 					</ul>
 				</div>
 			</td>

@@ -46,6 +46,13 @@ var Tweetbar = {
 			Tweetbar.prefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.twitkit.");
 			Tweetbar.cookieManager = Components.classes["@mozilla.org/cookiemanager;1"].getService(Components.interfaces.nsICookieManager);
 			
+			// l10n //
+			Tweetbar.stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
+			Tweetbar.strings = {
+				UI: Tweetbar.stringBundleService.createBundle('chrome://twitkit/locale/ui.properties')
+			};
+			this.localize();
+			
 			var scheme = Tweetbar.prefService.getCharPref('colorScheme').toLowerCase();
 			var link = new Element('link');
 			link.setProperties({
@@ -79,6 +86,37 @@ var Tweetbar = {
 			} catch(e) { }
 			
 			this.activate_panel(initial_panel);
+		},
+	localize:
+		function() {
+			$('.signin').innerHTML = this._('login.signIn');
+			$('login-header').innerHTML = this._('login.header');
+			$('username-label').innerHTML = this._('login.form.username');
+			$('password-label').innerHTML = this._('login.form.password');
+			$('loginbutton').setProperty('value', this._('login.form.submit'));
+			$('signup').innerHTML = this._('login.signUp', '<a href="http://twitter.com/account/create?tb_10" target="_content">', '</a>');
+			$('question').innerHTML = this._('poster.question');
+			$('compress').setProperty('title', this._('poster.compress'));
+			$('public').innerHTML = this._('tabs.public.title');
+			$('user').innerHTML = this._('tabs.user.title');
+			$('friends').innerHTML = this._('tabs.friends.title');
+			$('followers').innerHTML = this._('tabs.followers.title');
+			$('replies').innerHTML = this._('tabs.replies.title');
+			$('me').innerHTML = this._('tabs.me.title');
+			$('refreshing').innerHTML = this._('misc.refreshing');
+			$('refresh').innerHTML = this._('misc.refresh');
+			$('clear-link').innerHTML = this._('misc.clear');
+			$('loading').innerHTML = this._('misc.loading');
+		},
+	
+	// l10n //
+	_:
+		function(label) {
+			if ( arguments.length === 1 )
+				return Tweetbar.strings.UI.GetStringFromName(label);
+			return Tweetbar.strings.UI.formatStringFromName(
+				label,
+				Array.prototype.slice.call(arguments, 1), arguments.length - 1);
 		},
 	
 	// HTTP Headers //
@@ -127,7 +165,7 @@ var Tweetbar = {
 		},
 	expand_status:
 		function(s) {
-			return s.toString().replace(/\</,'&lt;').replace(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag('http:\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 on twitter'));
+			return s.toString().replace(/\</,'&lt;').replace(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag('http:\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
 		},
 	create_status_object:
 		function(obj) {
@@ -242,7 +280,7 @@ var Tweetbar = {
 				}
 				var tsource = tweet.source;
 				tsource = tsource.replace(/<a /, '<a target="_blank" ');
-				( Tweetbar.prefService.getBoolPref('showAppSource') ) ? source = '<div class="source">from ' + tsource + '</div>' : source = '';
+				( Tweetbar.prefService.getBoolPref('showAppSource') ) ? source = '<div class="source">' + this._('misc.from') + ' ' + tsource + '</div>' : source = '';
 				( tweet.user['screen_name'] == Tweetbar.username ) ? dellink = '<a href="#" onclick="Tweetbar.delete_tweet(\'' + tweet.id + '\');"><img style="border: none; float: right;" src="chrome://twitkit/skin/delete.png" alt="" /></a>' : dellink = '';
 				( this.currentList == 'replies' ) ? date = '' : date = ' - ' + Tweetbar.relative_time_string(tweet.created_at);
 				/*
@@ -261,7 +299,7 @@ var Tweetbar = {
 		function(user) {
 			status = user.status.text;
 			if ( user.protected == true ) {
-				status = '<em>My updates are protected.</em>';
+				status = '<em>' + this._('tabs.friends.protected') + '</em>';
 			} else {
 				/*
 				 * Hashtags implementation - by Joschi
@@ -349,12 +387,12 @@ var Tweetbar = {
 								   	 			'<img src="' + user.profile_image_url + '" alt="' + user.screen_name + '" style="float: right; width: 48px; height: 48px;" />' +
 								   	 			'<div style="font-size: 110%;">' + user.name + '</div>' +
 								   	 			'<div style="font-size: 0.8em;">' +
-								   	 			'<strong>Location</strong>: ' + user.location + '<br/>' +
-								   	 			'<strong>Bio</strong>: ' + Tweetbar.expand_status(user.description) + '<br/>' +
-								   	 			'<strong>Friends</strong>: ' + user.friends_count + '<br/>' +
-								   	 			'<strong>Followers</strong>: ' + user.followers_count + '<br/>' +
-								   	 			'<strong>Favorites</strong>: ' + user.favourites_count + '<br/>' +
-								   	 			'<strong>Updates</strong>: ' + user.statuses_count + '</div>' +
+								   	 			'<strong>' + this._('tabs.me.location') + '</strong>: ' + user.location + '<br/>' +
+								   	 			'<strong>' + this._('tabs.me.bio') + '</strong>: ' + Tweetbar.expand_status(user.description) + '<br/>' +
+								   	 			'<strong>' + this._('tabs.me.friends') + '</strong>: ' + user.friends_count + '<br/>' +
+								   	 			'<strong>' + this._('tabs.me.followers') + '</strong>: ' + user.followers_count + '<br/>' +
+								   	 			'<strong>' + this._('tabs.me.favorites') + '</strong>: ' + user.favourites_count + '<br/>' +
+								   	 			'<strong>' + this._('tabs.me.updates') + '</strong>: ' + user.statuses_count + '</div>' +
 								   	 			'</div>';
 								   	 		tweets.setHTML(inner);
 								   	 	},
@@ -448,7 +486,7 @@ var Tweetbar = {
 							   { headers: Tweetbar.http_headers(),
 								 onFailure:
 									function(e) {
-										alert('TwitKit AJAX Error: '+e);
+										alert(this._('errors.ajax')+e);
 									},
 							   }).request();
 		},		
@@ -463,7 +501,7 @@ var Tweetbar = {
 							   		},
 							   	onFailure:
 							   		function(e) {
-							   			alert('TwitKit AJAX Error: '+e);
+							   			alert(this._('errors.ajax')+e);
 							   		},
 							   }).request();
 		},
@@ -492,7 +530,7 @@ var Tweetbar = {
 									},
 								onFailure:
 									function(e) {
-										alert('Tweetbar AJAX Error: '+e);
+										alert(this._('errors.ajax')+e);
 									},
 							  }).request();
 		},
@@ -552,7 +590,7 @@ var Tweetbar = {
 		function(obj) {
 			this.loginSlider.slideOut();
 			
-			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">sign in!</a>');
+			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">' + this._('login.signIn') + '</a>');
 			if(obj) {
 				obj.blur();
 			}
@@ -567,7 +605,7 @@ var Tweetbar = {
 		function(obj) {
 			this.loginSlider.slideIn();
 			
-			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.close_login(this); return false;">close</a>');
+			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.close_login(this); return false;">' + this._('login.close') + '</a>');
 			if(obj) {
 				obj.blur();
 			}
@@ -598,7 +636,7 @@ var Tweetbar = {
 										Tweetbar.clear_http_headers();
 										Tweetbar.clear_cookies();
 										
-										$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">sign in!</a>');
+										$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">' + Tweetbar._('login.signIn') + '</a>');
 										$('whoami').setStyle('backgroundColor', '#75b7ba');
 										$('loginwrap').setStyle('display', 'block');
 										Tweetbar.loginSlider.hide();
@@ -608,7 +646,7 @@ var Tweetbar = {
 							   	 	},
 							   	onFailure:
 							   		function() {
-							   			alert('There was an error signing out.');
+							   			alert(this._('errors.signOut'));
 							   		},
 							 }).request();
 		},	
@@ -650,7 +688,7 @@ var Tweetbar = {
 	set_username_on_page:
 		function() {
 			$('whoami').setStyle('backgroundColor', 'transparent');
-			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">sign out</a>]</p>');
+			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
 			$('loginwrap').setStyle('display', 'none');
 		},
 		
