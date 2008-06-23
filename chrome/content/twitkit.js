@@ -40,7 +40,17 @@ var Tweetbar = {
 	httpHeaders: null,
 	prefService: null,
 	
-	// Startup Functions //	
+	// Startup Functions //
+	/**
+	 * run ( )
+	 * Initializes TwitKit processes and prepares the
+	 * sidebar. This function is essential for TwitKit to
+	 * function correctly.
+	 * 
+	 * @constructor
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	run:
 		function() {
 			Tweetbar.prefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.twitkit.");
@@ -87,6 +97,14 @@ var Tweetbar = {
 			
 			this.activate_panel(initial_panel);
 		},
+	/**
+	 * localize ( )
+	 * Translates all words in the HTML document to the
+	 * user's current locale.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.1
+	 */
 	localize:
 		function() {
 			$('.signin').innerHTML = this._('login.signIn');
@@ -110,6 +128,19 @@ var Tweetbar = {
 		},
 	
 	// l10n //
+	/**
+	 * _ ( label )
+	 * Translates a string into the user's current locale.
+	 * If one parameter is given, the string is retrieved.
+	 * If more than one parameters are given, the string is
+	 * formatted with the 2nd, 3rd, 4th parameters, etc.
+	 * 
+	 * @param {String} label Word to localize
+	 * @param {String} [vars=""] (optional) Extra variables
+	 * @returns {String} A localized string
+	 * @memberOf Tweetbar
+	 * @since 1.1
+	 */
 	_:
 		function(label) {
 			if ( arguments.length === 1 )
@@ -120,10 +151,25 @@ var Tweetbar = {
 		},
 	
 	// HTTP Headers //
+	/**
+	 * clear_http_headers ( )
+	 * Reset all HTTP headers (used in logging in/out)
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	clear_http_headers:
 		function() {
 			Tweetbar.httpHeaders = null;
 		},	
+	/**
+	 * http_headers ( )
+	 * Return standarad HTTP headers to be sent to Twitter.
+	 * 
+	 * @returns {Array} An array of HTTP headers.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	http_headers:
 		function() {
 			if(!Tweetbar.httpHeaders) {
@@ -138,12 +184,28 @@ var Tweetbar = {
 			}
 			return Tweetbar.httpHeaders;
 		},
+	/**
+	 * http_basic_auth ( )
+	 * Return Basic authentication for HTTP headers.
+	 * 
+	 * @returns {String} Basic authentication string.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	http_basic_auth:
 		function() {
 			return 'Basic '+btoa(Tweetbar.username+':'+Tweetbar.password);
 		},
 	
 	// Cookies //
+	/**
+	 * clear_cookies ( )
+	 * Clears cookies for twitter.com, to prevent sign-in
+	 * problems.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	clear_cookies:
 		function() {
 			var url = 'HTTP://TWITTER.COM';
@@ -159,14 +221,40 @@ var Tweetbar = {
 		},
 		
 	// Miscellaneous //
+	/**
+	 * api_url_for ( resource )
+	 * Returns the Twitter API request URL for the specified action.
+	 * 
+	 * @param {String} resource A valid Twitter API request.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	api_url_for:
 		function(resource) {
 			return 'http://twitter.com/statuses/' + resource + '.json';
 		},
+	/**
+	 * expand_status ( s )
+	 * Make links and replies clickable.
+	 * 
+	 * @param {String} s Tweet text
+	 * @returns {String} Tweet text with clickable links and Twitter names
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	expand_status:
 		function(s) {
 			return s.toString().replace(/\</,'&lt;').replace(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag('http:\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
 		},
+	/**
+	 * create_status_object ( obj )
+	 * Take a JSON object, parse it for parameters we need, and format them.
+	 *
+	 * @param {Object} obj A JSON object returned from the Twitter API.
+	 * @returns {Object} A filtered and formatted tweet object
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	create_status_object:
 		function(obj) {
 			return {
@@ -176,7 +264,16 @@ var Tweetbar = {
 				'source': obj.source,
 			}
 		},
-	
+	/**
+	 * create_user_object ( obj )
+	 * Take a JSON object containing a user, parse it, and format it.
+	 * 
+	 * @param {Object} obj A JSON object returned from a 'friends' or 'followers' API request.
+	 * @returns {Object} A filtered and formatted user object
+	 * @see Tweetbar#create_status_object
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	create_user_object:
 		function(obj) {
 			return {
@@ -189,6 +286,18 @@ var Tweetbar = {
 				'screen_name': obj.screen_name,
 			}
 		},
+	/**
+	 * user_anchor_tag ( user, text )
+	 * Link a username to its Twitter profile.
+	 * 
+	 * @param {String} user A user object returned from Tweetbar#create_user_object.
+	 * @param {String} [text="$username"] The text to show in the link. Username by default.
+	 * @returns {String} A linked tag.
+	 * @see Tweetbar#create_user_object
+	 * @see Tweetbar#anchor_tag
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	user_anchor_tag:
 		function(user, text) {
 			var name;
@@ -197,7 +306,17 @@ var Tweetbar = {
 									( (text) ? text : name),
 									user['name'] + ' in ' + user['location']);
 		},
-		
+	/**
+	 * anchor_tag ( url, text, title )
+	 * Anchor a tag.
+	 * 
+	 * @param {String} url The URL to link to.
+	 * @param {String} [text=""] The text to anchor.
+	 * @param {String} [title=""] Title to use (text displayed when link is hovered over).
+	 * @returns {String} An anchored tag.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	anchor_tag:
 		function (url, text, title) {
 			return '<a href="'+url+'" target="_blank" title="' +
@@ -205,6 +324,15 @@ var Tweetbar = {
 					( (title) ? title : '') +'">'+
 					( (text) ? text : url ) + '</a>';
 		},
+	/**
+	 * relative_time_string ( time_value )
+	 * Convert a date returned from Twitter API requests to a relative time string.
+	 * 
+	 * @param {String} time_value A date returned from Twitter API requests
+	 * @returns {String} Relative time string
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	relative_time_string:
 		function (time_value) {
 		   var delta = parseInt(((new Date).getTime() - time_value) / 1000);
@@ -227,10 +355,25 @@ var Tweetbar = {
 		},
 		
 	// Misc. Tweet Functions //
+	/**
+	 * current_tweets ( )
+	 * This is a shorthand method of retrieving the tweets currently being displayed.
+	 * 
+	 * @returns {Object} An object filled with tweets
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	current_tweets:
 		function() {
 			return this.tweets[this.currentList];
 		},		
+	/**
+	 * clear_current_tweets ( )
+	 * Clear tweets from the current panel.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	clear_current_tweets:
 		function() {
 			var panel = this.currentList;
@@ -244,6 +387,13 @@ var Tweetbar = {
 		},
 		
 	// URL Compression //
+	/**
+	 * compress_url ( )
+	 * 
+	 * @description Replaces a long URL in the status box with a URL compressed by is.gd
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	compress_url:
 		function() {
 			var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
@@ -263,6 +413,17 @@ var Tweetbar = {
 		},
 	
 	// Rendering //
+	/**
+	 * render_tweet ( )
+	 * Render a tweet (but don't print it).
+	 * 
+	 * @param {Object} tweet A tweet object returned by Tweetbar#create_status_object.
+	 * @param {Object} li A MooTools Element object of a 'li' element.
+	 * @returns {String} Fully-rendered tweet HTML.
+	 * @see Tweetbar#create_status_object
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	render_tweet:
 		function(tweet, li) {
 			var display_date = '';
@@ -295,6 +456,16 @@ var Tweetbar = {
 					   source + dellink;
 			}
 		},
+	/**
+	 * render_user ( user )
+	 * Render a user (but don't print it).
+	 * 
+	 * @param {Object} user A user object returned by Tweetbar#create_user_object.
+	 * @returns {String} Fully-rendered user HTML.
+	 * @see Tweetbar#create_user_object
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	render_user:
 		function(user) {
 			status = user.status.text;
@@ -315,6 +486,13 @@ var Tweetbar = {
 		},
 	
 	// List Updating //
+	/**
+	 * update_current_list ( )
+	 * Update the current list of tweets (print it).
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	update_current_list:
 		function() {
 			$('tweets').setHTML('');
@@ -399,6 +577,13 @@ var Tweetbar = {
 								   }).request();
 			}
 		},	
+	/**
+	 * get_tweets ( )
+	 * Retrieve tweets from Twitter.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	get_tweets:
 		function() {
 			var panel = Tweetbar.currentList;
@@ -426,6 +611,15 @@ var Tweetbar = {
 									},
 							  }).request();
 		},
+	/**
+	 * save_tweets ( panel, response_data )
+	 * Save the fresh tweets to the current panel's registry.
+	 * 
+	 * @param {String} panel The name of the current panel.
+	 * @param {Object} response_data Raw JSON response data from a Twitter API request.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	save_tweets:
 		function(panel, response_data) {
 			var new_tweets = Json.evaluate(response_data);
@@ -447,12 +641,26 @@ var Tweetbar = {
 				}
 			}
 		},
+	/**
+	 * clear_updater ( )
+	 * Stop periodical updates.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	clear_updater:
 		function() {
 			if(this.updater) {
 				$clear(this.updater);
 			}
 		},
+	/**
+	 * set_updater ( )
+	 * Reset (or start for the first time) periodical updates.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	set_updater:
 		function() {
 			this.clear_updater();
@@ -460,6 +668,13 @@ var Tweetbar = {
 			var up_int = parseInt(interval);
 			this.updater = this.get_tweets.periodical(up_int);
 		},	
+	/**
+	 * manual_refresh ( )
+	 * Refresh the current panel, regardless of the periodical updater. Used when user manually clicks 'refresh'.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	manual_refresh:
 		function() {
 			this.clear_updater();
@@ -468,11 +683,25 @@ var Tweetbar = {
 		},
 	
 	// Refresh //
+	/**
+	 * show_refresh_activity ( )
+	 * Show the refresher label and icon.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	show_refresh_activity:
 		function() {
 			$('refresh_activity').setStyle('display', 'block');
 			$('refreshing').setStyle('display', 'inline');
 		},
+	/**
+	 * hide_refresh_activity ( )
+	 * Hide the refresher label and icon.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	hide_refresh_activity:
 		function() {
 			$('refresh_activity').setStyle('display', 'none');
@@ -480,6 +709,14 @@ var Tweetbar = {
 		},
 		
 	// Tweet Actions //	
+	/**
+	 * fav_tweet ( tweetid )
+	 * Add a tweet to the user's favorites.
+	 * 
+	 * @param {String} tweetid The ID of the tweet to add to favorites.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	fav_tweet:
 		function(tweetid) {
 			var aj = new Ajax( 'http://twitter.com/favorites/create/' + tweetid + '.json',
@@ -490,6 +727,14 @@ var Tweetbar = {
 									},
 							   }).request();
 		},		
+	/**
+	 * delete_tweet ( tweetid )
+	 * Delete one of the user's tweets.
+	 * 
+	 * @param {String} tweetid The ID of the tweet to delete. The user MUST own this tweet.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	delete_tweet:
 		function(tweetid) {
 			var aj = new Ajax( 'http://twitter.com/statuses/destroy/' + tweetid + '.json',
@@ -505,6 +750,15 @@ var Tweetbar = {
 							   		},
 							   }).request();
 		},
+	/**
+	 * update_status ( )
+	 * Umbrella function for updating the user's status -
+	 * does some authentication checking and then runs the
+	 * actual update function, Tweetbar#send_tweet.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	update_status:
 		function(status, callback) {
 			if(this.isAuthenticated) {
@@ -514,6 +768,15 @@ var Tweetbar = {
 				this.pendingUpdate = {callback: callback, status: status};
 			}
 		},		
+	/**
+	 * send_tweet ( status, callback )
+	 * Send a status update to Twitter.
+	 * 
+	 * @param {String} status Status to send to Twitter
+	 * @param {Function} [callback=""] Function to run after the tweet is successfully sent
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	send_tweet:
 		function(status, callback) {
 			var aj = new Ajax( Tweetbar.api_url_for('update'),
@@ -536,6 +799,15 @@ var Tweetbar = {
 		},
 	
 	// Panel Functions //
+	/**
+	 * activate_panel ( name, caller )
+	 * Switch to a new panel.
+	 * 
+	 * @param {String} name The name of the panel to switch to.
+	 * @param {Object} [caller=""] A DOM object from where the function was called.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	activate_panel:
 		function(name, caller) {
 			if(!this.authorization_required_for(name) || this.isAuthenticated) {
@@ -568,6 +840,13 @@ var Tweetbar = {
 		},
 	
 	// Styling //
+	/**
+	 * setListSize ( )
+	 * Adjust the list of tweets to fit Firefox's current window size.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	setListSize:
 		function() {
 			var h = Window.getHeight() -
@@ -582,10 +861,25 @@ var Tweetbar = {
 		},
 	
 	// Authorization //
+	/**
+	 * toggle_login ( )
+	 * Toggle the display of the login window.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	toggle_login:
 		function() {
 			this.loginSlider.toggle();
 		},
+	/**
+	 * close_login ( obj )
+	 * Close the login window.
+	 * 
+	 * @param {Object} [obj=""] A DOM object from where the function was called.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	close_login:
 		function(obj) {
 			this.loginSlider.slideOut();
@@ -601,6 +895,14 @@ var Tweetbar = {
 			x = document.getElementById('password');
 			x.value = '';
 		},
+	/**
+	 * open_login ( obj )
+	 * Open the login window.
+	 * 
+	 * @param {Object} [obj=""] A DOM object from where the function was called.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	open_login:
 		function(obj) {
 			this.loginSlider.slideIn();
@@ -611,6 +913,16 @@ var Tweetbar = {
 			}
 			$('username').focus();
 		},
+	/**
+	 * authorization_required_for ( resource )
+	 * Check if authorization is required to make a certain
+	 * API request.
+	 * 
+	 * @param {String} resource The name of the API request.
+	 * @return {Boolean}
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	authorization_required_for:
 		function(resource) {
 			if(resource == 'public_timeline') {
@@ -619,11 +931,26 @@ var Tweetbar = {
 				return true;
 			}
 		},
+	/**
+	 * authenticate ( action )
+	 * Have the user log in, and then perform an action.
+	 * 
+	 * @param {String} action An action (API request) to perform.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	authenticate:
 		function(action) {
 			this.open_login();
 			this.pendingAction = action;
 		},	
+	/**
+	 * sign_out ( )
+	 * Sign out of the current Twitter account.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	sign_out:
 		function() {
 			var aj = new Ajax( 'http://twitter.com/account/end_session',
@@ -650,6 +977,16 @@ var Tweetbar = {
 							   		},
 							 }).request();
 		},	
+	/**
+	 * sign_in ( un, pw, callback )
+	 * Sign in to a Twitter account.
+	 * 
+	 * @param {String} un Twitter username
+	 * @param {String} pw Twitter password
+	 * @param {Function} [callback=""] A function to call once the action has completed successfully.
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	sign_in:
 		function(un, pw, callback) {
 			this.username = un;
@@ -685,6 +1022,14 @@ var Tweetbar = {
 										},
 								  }).request();
 		},	
+	/**
+	 * set_username_on_page ( )
+	 * Show the current user's name and a sign-out button
+	 * after signing in.
+	 * 
+	 * @memberOf Tweetbar
+	 * @since 1.0
+	 */
 	set_username_on_page:
 		function() {
 			$('whoami').setStyle('backgroundColor', 'transparent');
