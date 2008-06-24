@@ -58,7 +58,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	run:
-		function() {
+		function () {
 			Tweetbar.prefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.twitkit.");
 			Tweetbar.cookieManager = Components.classes["@mozilla.org/cookiemanager;1"].getService(Components.interfaces.nsICookieManager);
 			
@@ -89,7 +89,7 @@ var Tweetbar = {
 			var initial_panel = '';
 			try {
 				initial_panel = Tweetbar.prefService.getCharPref('active_panel');
-			} catch(e) {
+			} catch (e) {
 				initial_panel = 'public_timeline';
 				Tweetbar.prefService.setCharPref('active_panel', initial_panel);
 			}
@@ -99,7 +99,7 @@ var Tweetbar = {
 				Tweetbar.password = Tweetbar.prefService.getCharPref('password');
 				Tweetbar.isAuthenticated = true;
 				Tweetbar.set_username_on_page();
-			} catch(e) { }
+			} catch (e) { }
 			
 			this.activate_panel(initial_panel);
 		},
@@ -112,7 +112,7 @@ var Tweetbar = {
 	 * @since 1.1
 	 */
 	localize:
-		function() {
+		function () {
 			$('.signin').innerHTML = this._('login.signIn');
 			$('login-header').innerHTML = this._('login.header');
 			$('username-label').innerHTML = this._('login.form.username');
@@ -148,7 +148,7 @@ var Tweetbar = {
 	 * @since 1.1
 	 */
 	_:
-		function(label) {
+		function (label) {
 			if ( arguments.length === 1 )
 				return Tweetbar.strings.UI.GetStringFromName(label);
 			return Tweetbar.strings.UI.formatStringFromName(
@@ -165,7 +165,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	clear_http_headers:
-		function() {
+		function () {
 			Tweetbar.httpHeaders = null;
 		},
 	/**
@@ -177,14 +177,14 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	http_headers:
-		function() {
-			if(!Tweetbar.httpHeaders) {
+		function () {
+			if ( !Tweetbar.httpHeaders ) {
 				Tweetbar.httpHeaders = {
 					'X-Twitter-Client': 'TwitKit',
 					'X-Twitter-Client-Version': '1.1',
 					'X-Twitter-Client-URL': 'http://engel.uk.to/twitkit/1.1.xml',
 				};
-				if(Tweetbar.username && Tweetbar.password) {
+				if ( Tweetbar.username && Tweetbar.password ) {
 					Tweetbar.httpHeaders['Authorization'] = Tweetbar.http_basic_auth();
 				}
 			}
@@ -199,7 +199,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	http_basic_auth:
-		function() {
+		function () {
 			return 'Basic '+btoa(Tweetbar.username+':'+Tweetbar.password);
 		},
 	
@@ -213,13 +213,13 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	clear_cookies:
-		function() {
+		function () {
 			var url = 'HTTP://TWITTER.COM';
 			var iter = Tweetbar.cookieManager.enumerator;
-			while (iter.hasMoreElements()) {
+			while ( iter.hasMoreElements() ) {
 				var cookie = iter.getNext();
-				if (cookie instanceof Components.interfaces.nsICookie) {
-					if (url.indexOf(cookie.host.toUpperCase()) != -1) {
+				if ( cookie instanceof Components.interfaces.nsICookie ) {
+					if ( url.indexOf(cookie.host.toUpperCase()) != -1 ) {
 						Tweetbar.cookieManager.remove(cookie.host, cookie.name, cookie.path, cookie.blocked);
 					}
 				}
@@ -236,7 +236,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	api_url_for:
-		function(resource) {
+		function (resource) {
 			return 'http://twitter.com/statuses/' + resource + '.json';
 		},
 	/**
@@ -249,7 +249,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	expand_status:
-		function(s) {
+		function (s) {
 			return s.toString().replace(/\</,'&lt;').replace(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag('http:\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
 		},
 	/**
@@ -262,7 +262,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	create_status_object:
-		function(obj) {
+		function (obj) {
 			return {
 				'id': parseInt(obj.id),
 				'text': Tweetbar.expand_status(obj.text),
@@ -281,7 +281,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	create_user_object:
-		function(obj) {
+		function (obj) {
 			return {
 				'id': parseInt(obj.id),
 				'url': obj.url,
@@ -305,7 +305,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	user_anchor_tag:
-		function(user, text) {
+		function (user, text) {
 			var name;
 			( Tweetbar.prefService.getCharPref('showNamesAs') == 'screennames' ) ? name = user['screen_name'] : name = user['name'];
 			return this.anchor_tag('http://twitter.com/' + user['screen_name'],
@@ -343,20 +343,20 @@ var Tweetbar = {
 		function (time_value) {
 		   var delta = parseInt(((new Date).getTime() - time_value) / 1000);
 		   
-		   if(delta < 60) {
+		   if ( delta < 60 ) {
 			   return 'less than a minute ago';
-		   } else if(delta < 120) {
+		   } else if ( delta < 120 ) {
 			   return 'about a minute ago';
-		   } else if(delta < (45*60)) {
-			   return (parseInt(delta / 60)).toString() + ' minutes ago';
-		   } else if(delta < (90*60)) {
+		   } else if ( delta < ( 45*60 ) ) {
+			   return ( parseInt(delta / 60) ).toString() + ' minutes ago';
+		   } else if ( delta < ( 90*60 ) ) {
 			   return 'about an hour ago';
-		   } else if(delta < (24*60*60)) {
-			   return 'about ' + (parseInt(delta / 3600)).toString() + ' hours ago';
-		   } else if(delta < (48*60*60)) {
+		   } else if ( delta < ( 24*60*60 ) ) {
+			   return 'about ' + ( parseInt(delta / 3600) ).toString() + ' hours ago';
+		   } else if ( delta < ( 48*60*60 ) ) {
 			   return '1 day ago';
 		   } else {
-			   return (parseInt(delta / 86400)).toString() + ' days ago';
+			   return ( parseInt(delta / 86400) ).toString() + ' days ago';
 		   }
 		},
 	
@@ -370,7 +370,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	current_tweets:
-		function() {
+		function () {
 			return this.tweets[this.currentList];
 		},
 	/**
@@ -381,11 +381,11 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	clear_current_tweets:
-		function() {
+		function () {
 			var panel = this.currentList;
 			
-			for(var tweet in this.tweets[panel]) {
-				if(this.tweets[panel][tweet]._b) {
+			for ( var tweet in this.tweets[panel] ) {
+				if ( this.tweets[panel][tweet]._b ) {
 					delete this.tweets[panel][tweet];
 				}
 			}
@@ -401,16 +401,16 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	compress_url:
-		function() {
+		function () {
 			var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-			if (selection.length==0) {
+			if ( selection.length == 0 ) {
 				return;
 			}
 			var url = "http://is.gd/api.php?longurl="+selection;
 			var aj = new Ajax( url,
 							   { method: 'get',
 							     onSuccess:
-							     	function(replaced) {
+							     	function (replaced) {
 										var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
 										var text = document.getElementById('status').value.substring(0,document.getElementById('status').selectionStart) + replaced + (selection.length==selection.trim().length?"":" ")+ document.getElementById('status').value.substring(document.getElementById('status').selectionEnd);  
 										document.getElementById('status').value=text;
@@ -431,17 +431,17 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	render_tweet:
-		function(tweet, li) {
+		function (tweet, li) {
 			var display_date = '';
-			if(tweet) {
-				if(!tweet._a) {
+			if ( tweet ) {
+				if( !tweet._a ) {
 					tweet._a = true;
-				} else if(!tweet._b) {
+				} else if ( !tweet._b ) {
 					tweet._b = true;
 				}
 				if ( this.currentList != 'replies' ) { li.setProperty('id', tweet.id); }
 				var user_image = '';
-				if(tweet.user && tweet.user.profile_image_url) {
+				if ( tweet.user && tweet.user.profile_image_url ) {
 					user_image = '<img src="' + tweet.user.profile_image_url +
 								 '" width="24" height="24" alt="'+tweet.user.name+'" />';
 				}
@@ -473,7 +473,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	render_user:
-		function(user) {
+		function (user) {
 			status = user.status.text;
 			if ( user.protected == true ) {
 				status = '<em>' + this._('tabs.friends.protected') + '</em>';
@@ -500,19 +500,19 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	update_current_list:
-		function() {
+		function () {
 			$('tweets').setHTML('');
-			if((this.currentList == 'public_timeline') || (this.currentList == 'friends_timeline')) {
+			if( ( this.currentList == 'public_timeline' ) || ( this.currentList == 'friends_timeline' ) ) {
 				var current_tweets = this.current_tweets();
 				var tweet_ids = [];
-				for(var tid in current_tweets) {
+				for ( var tid in current_tweets ) {
 					tweet_ids.push(tid);
 				}
 				tweet_ids = tweet_ids.sort().reverse();
-				for(var i=0; i < tweet_ids.length; i++) {
+				for ( var i=0; i < tweet_ids.length; i++ ) {
 					var li = new Element('li');
 					li.setHTML(this.render_tweet(current_tweets[tweet_ids[i]], li));
-					if((i % 2) == 0) {
+					if ( ( i % 2 ) == 0 ) {
 						li.addClass('even');
 					}
 					if ( current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
@@ -525,7 +525,7 @@ var Tweetbar = {
 				var aj = new Ajax( theurl,
 								   { headers: Tweetbar.http_headers(),
 								   	 onSuccess:
-								   	 	function(raw_data) {
+								   	 	function (raw_data) {
 											var rsp = Json.evaluate(raw_data);
 											var i = 0;
 											for ( var user in rsp ) {
@@ -545,7 +545,7 @@ var Tweetbar = {
 				var aj = new Ajax( 'http://twitter.com/statuses/replies.json',
 								   { headers: Tweetbar.http_headers(),
 								   	 onSuccess:
-								   	 	function(raw_data) {
+								   	 	function (raw_data) {
 								   	 		var rsp = Json.evaluate(raw_data);
 								   	 		var i = 0;
 								   	 		for ( var reply in rsp ) {
@@ -564,7 +564,7 @@ var Tweetbar = {
 				var aj = new Ajax( 'http://twitter.com/users/show/' + this.username + '.json',
 								   { headers: Tweetbar.http_headers(),
 								   	 onSuccess:
-								   	 	function(raw_data) {
+								   	 	function (raw_data) {
 								   	 		var user = Json.evaluate(raw_data);
 								   	 		var tweets = $('tweets');
 								   	 		var inner = '<div style="padding-bottom: 10px;">' +
@@ -591,27 +591,27 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	get_tweets:
-		function() {
+		function () {
 			var panel = Tweetbar.currentList;
 			var aj = new Ajax( Tweetbar.api_url_for(panel),
 							  { headers: Tweetbar.http_headers(),
 								onComplete:
-									function(raw_data) {
+									function (raw_data) {
 										Tweetbar.hide_refresh_activity();
 										Tweetbar.set_updater();
 									},
 								onSuccess:
-									function(raw_data) {
+									function (raw_data) {
 										Tweetbar.save_tweets(panel, raw_data);
 										Tweetbar.update_current_list();
 									},
 								onFailure:
-									function(e) {
+									function (e) {
 										Tweetbar.hide_refresh_activity();
 										Tweetbar.set_updater();
 									},
 								onRequest:
-									function() {
+									function () {
 										Tweetbar.show_refresh_activity();
 										Tweetbar.clear_updater();
 									},
@@ -627,12 +627,12 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	save_tweets:
-		function(panel, response_data) {
+		function (panel, response_data) {
 			var new_tweets = Json.evaluate(response_data);
-			for(var i=0; i < new_tweets.length; i++) {
-				if(new_tweets[i].user) {
+			for ( var i=0; i < new_tweets.length; i++ ) {
+				if ( new_tweets[i].user ) {
 					var status = Tweetbar.create_status_object(new_tweets[i]);
-					if(!this.tweets[panel][status.id]) {
+					if ( !this.tweets[panel][status.id] ) {
 						this.tweets[panel][status.id] = status;
 						this.tweets[panel][status.id].user = Tweetbar.create_user_object(new_tweets[i].user);
 					}
@@ -640,7 +640,7 @@ var Tweetbar = {
 					var user = Tweetbar.create_user_object(new_tweets[i]);
 					var status = Tweetbar.create_status_object(new_tweets[i].status);
 					var name_key = user.screen_name.toLowerCase();
-					if(!this.tweets[panel][name_key] || (this.tweets[panel][name_key].status.id != status.id)) {
+					if ( !this.tweets[panel][name_key] || ( this.tweets[panel][name_key].status.id != status.id ) ) {
 						this.tweets[panel][name_key] = status;
 						this.tweets[panel][name_key].user = user;
 					}
@@ -655,7 +655,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	clear_updater:
-		function() {
+		function () {
 			if(this.updater) {
 				$clear(this.updater);
 			}
@@ -668,7 +668,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	set_updater:
-		function() {
+		function () {
 			this.clear_updater();
 			var interval = Tweetbar.prefService.getIntPref('refreshInterval');
 			var up_int = parseInt(interval);
@@ -682,7 +682,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	manual_refresh:
-		function() {
+		function () {
 			this.clear_updater();
 			this.get_tweets();
 			this.set_updater();
@@ -697,7 +697,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	show_refresh_activity:
-		function() {
+		function () {
 			$('refresh_activity').setStyle('display', 'block');
 			$('refreshing').setStyle('display', 'inline');
 		},
@@ -709,7 +709,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	hide_refresh_activity:
-		function() {
+		function () {
 			$('refresh_activity').setStyle('display', 'none');
 			$('refreshing').setStyle('display', 'none');
 		},
@@ -724,11 +724,11 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	fav_tweet:
-		function(tweetid) {
+		function (tweetid) {
 			var aj = new Ajax( 'http://twitter.com/favorites/create/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 								 onFailure:
-									function(e) {
+									function (e) {
 										alert(this._('errors.ajax')+e);
 									},
 							   }).request();
@@ -742,16 +742,16 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	delete_tweet:
-		function(tweetid) {
+		function (tweetid) {
 			var aj = new Ajax( 'http://twitter.com/statuses/destroy/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 							   	onSuccess:
-							   		function() {
+							   		function () {
 							   			var slider = new Fx.Slide(tweetid);
 							   			slider.toggle();
 							   		},
 							   	onFailure:
-							   		function(e) {
+							   		function (e) {
 							   			alert(this._('errors.ajax')+e);
 							   		},
 							   }).request();
@@ -766,8 +766,8 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	update_status:
-		function(status, callback) {
-			if(this.isAuthenticated) {
+		function (status, callback) {
+			if ( this.isAuthenticated ) {
 				this.send_tweet(status, callback);
 			} else {
 				this.authenticate('update');
@@ -784,21 +784,21 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	send_tweet:
-		function(status, callback) {
+		function (status, callback) {
 			var aj = new Ajax( Tweetbar.api_url_for('update'),
 							  { headers:  Tweetbar.http_headers(),
 								postBody: Object.toQueryString({status: status, source: 'twitkit'}),
 								onComplete:
-									function(raw_data) {
+									function (raw_data) {
 										callback();
 									},
 								onSuccess:
-									function(raw_data) {
+									function (raw_data) {
 										Tweetbar.save_tweets(this.currentList, raw_data);
 										setTimeout('Tweetbar.manual_refresh();', 1000);
 									},
 								onFailure:
-									function(e) {
+									function (e) {
 										alert(this._('errors.ajax')+e);
 									},
 							  }).request();
@@ -815,8 +815,8 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	activate_panel:
-		function(name, caller) {
-			if(!this.authorization_required_for(name) || this.isAuthenticated) {
+		function (name, caller) {
+			if ( !this.authorization_required_for(name) || this.isAuthenticated ) {
 				
 				this.currentList = name;
 				this.update_current_list();
@@ -831,7 +831,7 @@ var Tweetbar = {
 				
 				$('tab_for_'+name).addClass('active');
 				
-				if(caller) {
+				if ( caller ) {
 					caller.blur();
 				}
 				
@@ -855,7 +855,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	setListSize:
-		function() {
+		function () {
 			var h = Window.getHeight() -
 					( $('topper').getSize()['size']['y'] +
 					  $('navigation').getSize()['size']['y'] +
@@ -876,7 +876,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	toggle_login:
-		function() {
+		function () {
 			this.loginSlider.toggle();
 		},
 	/**
@@ -888,11 +888,11 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	close_login:
-		function(obj) {
+		function (obj) {
 			this.loginSlider.slideOut();
 			
 			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">' + this._('login.signIn') + '</a>');
-			if(obj) {
+			if ( obj ) {
 				obj.blur();
 			}
 			
@@ -911,11 +911,11 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	open_login:
-		function(obj) {
+		function (obj) {
 			this.loginSlider.slideIn();
 			
 			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.close_login(this); return false;">' + this._('login.close') + '</a>');
-			if(obj) {
+			if ( obj ) {
 				obj.blur();
 			}
 			$('username').focus();
@@ -931,8 +931,8 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	authorization_required_for:
-		function(resource) {
-			if(resource == 'public_timeline') {
+		function (resource) {
+			if ( resource == 'public_timeline' ) {
 				return false;
 			} else {
 				return true;
@@ -947,7 +947,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	authenticate:
-		function(action) {
+		function (action) {
 			this.open_login();
 			this.pendingAction = action;
 		},
@@ -959,11 +959,11 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	sign_out:
-		function() {
+		function () {
 			var aj = new Ajax( 'http://twitter.com/account/end_session',
 							   { headers: Tweetbar.http_headers(),
 							   	 onSuccess:
-							   	 	function() {
+							   	 	function () {
 										this.username = null;
 										this.password = null;
 										this.isAuthenticated = false;
@@ -974,12 +974,12 @@ var Tweetbar = {
 										$('whoami').setStyle('backgroundColor', '#75b7ba');
 										$('loginwrap').setStyle('display', 'block');
 										Tweetbar.loginSlider.hide();
-										if(Tweetbar.authorization_required_for(this.currentList)) {
+										if ( Tweetbar.authorization_required_for(this.currentList) ) {
 											Tweetbar.activate_panel('public_timeline');
 										}
 							   	 	},
 							   	onFailure:
-							   		function() {
+							   		function () {
 							   			alert(this._('errors.signOut'));
 							   		},
 							 }).request();
@@ -995,7 +995,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	sign_in:
-		function(un, pw, callback) {
+		function (un, pw, callback) {
 			this.username = un;
 			this.password = pw;
 			this.clear_http_headers();
@@ -1003,14 +1003,14 @@ var Tweetbar = {
 			var authr = new Ajax( 'http://twitter.com/account/verify_credentials',
 								  { headers: this.http_headers(),
 									onComplete:
-										function(raw_data) {
-											if(this.transport.status == 200) {
+										function (raw_data) {
+											if ( this.transport.status == 200 ) {
 												Tweetbar.isAuthenticated = true;
 												Tweetbar.prefService.setCharPref('username', Tweetbar.username);
 												Tweetbar.prefService.setCharPref('password', Tweetbar.password);
 												Tweetbar.close_login();
-												if(Tweetbar.pendingAction) {
-													if(Tweetbar.pendingAction == 'update') {
+												if ( Tweetbar.pendingAction ) {
+													if ( Tweetbar.pendingAction == 'update' ) {
 														Tweetbar.send_tweet(Tweetbar.pendingUpdate['status'], Tweetbar.pendingUpdate['callback']);
 														Tweetbar.pendingAction = null;
 														Tweetbar.pendingUpdate = null;
@@ -1038,7 +1038,7 @@ var Tweetbar = {
 	 * @since 1.0
 	 */
 	set_username_on_page:
-		function() {
+		function () {
 			$('whoami').setStyle('backgroundColor', 'transparent');
 			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
 			$('loginwrap').setStyle('display', 'none');
@@ -1046,10 +1046,10 @@ var Tweetbar = {
 	
 };
 
-window.onload = function() {
+window.onload = function () {
 	Tweetbar.run();
 };
 
-window.onresize = function() {
+window.onresize = function () {
 	Tweetbar.setListSize();
 };
