@@ -156,6 +156,7 @@ input#status {
 
 #navigation {
 	padding:						0;
+	margin:							0px auto;
 }
 #navigation td {
 	border:							0;
