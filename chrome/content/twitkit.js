@@ -841,6 +841,7 @@ var Tweetbar = {
 				this.get_tweets();
 				this.set_updater();
 			} else {
+				alert(this._('misc.needAuth'));
 				this.authenticate(action);
 			}
 		},
