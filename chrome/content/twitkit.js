@@ -34,6 +34,7 @@ var Tweetbar = {
 		friends_timeline: {},
 		replies: {},
 		me: {},
+		search: {}
 	},
 	month_names: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
 	isAuthenticated: false,
@@ -127,6 +128,7 @@ var Tweetbar = {
 			$('followers').innerHTML = this._('tabs.followers.title');
 			$('replies').innerHTML = this._('tabs.replies.title');
 			$('me').innerHTML = this._('tabs.me.title');
+			$('search').innerHTML = this._('tabs.search.title');
 			$('refreshing').innerHTML = this._('misc.refreshing');
 			$('refresh').innerHTML = this._('misc.refresh');
 			$('clear-link').innerHTML = this._('misc.clear');
@@ -490,6 +492,29 @@ var Tweetbar = {
 				   '<p class="who">' + status + '<br/>' +
 				   '<a target="_blank" href="http://twitter.com/' + user['screen_name'] + '">' + user['screen_name'] + '</a></p>';
 		},
+	/**
+	 * render_result ( )
+	 * Render a search result (but don't print it).
+	 * 
+	 * @param {Object} result A result object.
+	 * @returns {String} Fully-rendered result HTML.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	render_result:
+		function (result) {
+			created = result['created_at'].replace(/(.+), (.+) (.+) (.+) (.+):(.+):(.+) \+(.+)/, '$1 $3 $2 $5:$6:$7 +$8 $4');
+			date = ' - ' + Tweetbar.relative_time_string(created);
+			user = {
+				screen_name: result['from_user'],
+				name: result['from_user']
+			};
+			return '<p class="pic"><a href="#" onclick="setReply(\'' + result['from_user'] + '\');"><img src="' + result['profile_image_url'] + '" width="24" height="24" alt="' + result['from_user'] + '" /></a>' +
+					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ result['from_user'] + '\'); return false;"><img class="re" src="chrome://twitkit/skin/reply.png" alt="" /></a>&nbsp;' +
+					   '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + result.id + '\'); void 0;"><img class="re" src="chrome://twitkit/skin/fav_add.png" alt="" /></a></span></p>' +
+					   '<p class="what">' + result.text + '</p>' +
+					   '<p class="who">' + this.user_anchor_tag(user) + date + '</p>';
+		},
 	
 	// List Updating //
 	/**
@@ -581,6 +606,29 @@ var Tweetbar = {
 								   	 		tweets.setHTML(inner);
 								   	 	},
 								   }).request();
+			} else if ( this.currentList == 'search' ) {
+				query = $('status').getValue();
+				if ( query == '' )
+					alert(this._('tabs.search.enterQuery'));
+				var aj = new Ajax( 'http://summize.com/search.json?q=' + query,
+									{ headers: Tweetbar.http_headers(),
+									  onSuccess:
+									  	function (raw_data) {
+									  		var results = Json.evaluate(raw_data);
+									  		var results = results.results;
+									  		var i = 0;
+									  		for ( var result in results ) {
+									  			var li = new Element('li');
+									  			results[result].text = Tweetbar.expand_status(results[result].text);
+									  			li.setHTML(Tweetbar.render_result(results[result]));
+									  			if ( ( i % 2 ) == 0 ) {
+									  				li.addClass('even');
+									  			}
+									  			li.injectInside('tweets');
+									  			i++;
+									  		}
+									  	},
+									}).request();
 			}
 		},
 	/**
@@ -828,6 +876,7 @@ var Tweetbar = {
 				$('tab_for_followers').removeClass('active');
 				$('tab_for_replies').removeClass('active');
 				$('tab_for_me').removeClass('active');
+				$('tab_for_search').removeClass('active');
 				
 				$('tab_for_'+name).addClass('active');
 				
