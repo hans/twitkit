@@ -966,6 +966,8 @@ var Tweetbar = {
 							   	 	function () {
 										this.username = null;
 										this.password = null;
+										Tweetbar.prefService.setCharPref('username', '');
+										Tweetbar.prefService.setCharPref('password', '');
 										this.isAuthenticated = false;
 										Tweetbar.clear_http_headers();
 										Tweetbar.clear_cookies();
