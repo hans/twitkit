@@ -60,19 +60,19 @@ input#status {
 	border-right:					1px solid #ccc;
 }
 
-#navigation td {
+.navigation td {
 	background-color:				#7a6c5e;
 	border-right:					2px solid #4f3f3f;
 	border-left:					2px solid #4f3f3f;
 }
-#navigation td:hover {
+.navigation td:hover {
 	color:							#fff;
 	background-color:				#525366;
 }
-#navigation td.active {
+.navigation td.active {
 	background-color:				#605040;
 }
-#navigation td a {
+.navigation td a {
 	color:							#fff;
 }
 

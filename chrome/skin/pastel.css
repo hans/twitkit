@@ -43,15 +43,15 @@ input#status {
 	border-right:					1px solid #ccc;
 }
 
-#navigation td {
+.navigation td {
 	background-color:				#b4f29b;
 	border-left:					2px solid #f2dc9b;
 	border-right:					2px solid #f2dc9b;
 }
-#navigation td:hover {
+.navigation td:hover {
 	background-color:				#f29b9b;
 }
-#navigation td.active {
+.navigation td.active {
 	background-color:				#f29b9b;
 }
 
