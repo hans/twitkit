@@ -858,7 +858,7 @@ var Tweetbar = {
 		function () {
 			var h = Window.getHeight() -
 					( $('topper').getSize()['size']['y'] +
-					  $('navigation').getSize()['size']['y'] +
+					  $('main-nav').getSize()['size']['y'] +
 					  $('refresher').getSize()['size']['y']
 					);
 			$('lists').setStyle('overflow', 'auto');
