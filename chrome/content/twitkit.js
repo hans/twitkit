@@ -516,7 +516,7 @@ var Tweetbar = {
 						li.addClass('even');
 					}
 					if ( current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
-						li.setStyle('background-color', '#ffffe0');
+						li.addClass('reply');
 					}
 					li.injectInside($('tweets'));
 				}

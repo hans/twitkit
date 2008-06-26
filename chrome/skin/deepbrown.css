@@ -103,6 +103,10 @@ input#status {
 	background-color:				#fff;
 }
 
+.reply {
+	background-color:				#ffffe0;
+}
+
 ul#tweets {
 	background-color:				#fff;
 }
