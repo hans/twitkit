@@ -45,6 +45,7 @@ var Tweetbar = {
 	pendingAction: null,
 	httpHeaders: null,
 	prefService: null,
+	firefox: null,
 	
 	// Startup Functions //
 	/**
@@ -94,15 +95,174 @@ var Tweetbar = {
 				Tweetbar.prefService.setCharPref('active_panel', initial_panel);
 			}
 			
-			try {
-				Tweetbar.username = Tweetbar.prefService.getCharPref('username');
-				Tweetbar.password = Tweetbar.prefService.getCharPref('password');
+			var pass = Components.classes["@mozilla.org/passwordmanager;1"];
+			var login = Components.classes["@mozilla.org/login-manager;1"];
+			if ( pass != null ) {
+				this.accountService = pass.createInstance(Components.interfaces.nsIPasswordManager);
+				this.firefox = '2';
+			} else if ( login != null ) {
+				this.accountService = login.getService(Components.interfaces.nsILoginManager);
+				this.firefox = '3';
+			}
+			this.accounts = this.loadAccounts();
+			for ( var user in this.accounts ) {
+				if ( typeof this.accounts[user] == 'string' ) {
+					this.addAccountOnPage(user);
+				}
+			}
+			var username = Tweetbar.prefService.getCharPref('username');
+			if ( this.accounts[username] ) {
+				Tweetbar.username = username;
+				Tweetbar.password = this.accounts[username];
 				Tweetbar.isAuthenticated = true;
 				Tweetbar.set_username_on_page();
-			} catch (e) { }
+			}
 			
 			this.activate_panel(initial_panel);
 		},
+	
+	// Account Management //
+	/**
+	 * loadAccounts ( )
+	 * Load all Twitter accounts into an object.
+	 * 
+	 * @return {Object} An account object
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	loadAccounts:
+		function () {
+			var accounts = [];
+			var i = 0;
+			if ( this.firefox == '2' && this.accountService ) {
+				var enumerator = this.accountService.enumerator;
+				while (enumerator.hasMoreElements()) {
+					next = enumerator.getNext().QueryInterface(Components.interfaces.nsIPassword);
+					if ( next.host == 'chrome://twitkit/' ) {
+						i++;
+						accounts[next.user] = next.password;
+					}
+				}
+			} else if ( this.firefox == '3' && this.accountService ) {
+				var dummy = {};
+				var logins = this.accountService.findLogins(dummy, 'chrome://twitkit', '', null);
+				for ( var j = 0; j < logins.length; j++ ) {
+					accounts[logins[j].username] = logins[j].password;
+				}
+			}
+			return accounts;
+		},
+	/**
+	 * addAccount ( username, password )
+	 * Add an account.
+	 * 
+	 * @param {String} user The username for the account.
+	 * @param {String} password The password for the account.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	addAccount:
+		function (username, password) {
+			if ( this.firefox == '2' && this.accountService ) {
+				this.accountService.addUser('chrome://twitkit/', username, password);
+			} else if ( this.firefox == '3' && this.accountService ) {
+				var nsLoginInfo = new Components.Constructor("@mozilla.org/login-manager/loginInfo;1", Components.interfaces.nsILoginInfo, 'init');
+				var login = new nsLoginInfo('chrome://twitkit', 'chrome://twitkit/' + username, null, username, 'username', password, 'password');
+				this.accountService.addLogin(login);
+			}
+			this.addAccountOnPage(username);
+		},
+	/**
+	 * removeAccount ( username )
+	 * Remove an account.
+	 * 
+	 * @param {String} username The username for the account.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	removeAccount:
+		function (username) {
+			if ( this.accounts[username] ) {
+				if ( this.firefox == '2' && this.accountService ) {
+					this.accountService.removeUser('chrome://twitkit/', username);
+				} else if ( this.firefox == '3' && this.accountService ) {
+					var logins = this.accountService.findLogins({}, 'chrome://twitkit', '', null);
+					for ( var i = 0; i < logins.length; ++i ) {
+						if ( logins[i].username == username ) {
+							this.accountService.removeLogin(logins[i]);
+						}
+					}
+				}
+			} else {
+				return false;
+			}
+			this.removeAccountOnPage(username);
+			this.accounts = this.loadAccounts();
+			return true;
+		},
+	/**
+	 * addAccountOnPage ( username )
+	 * Add a tab for an account into the UI.
+	 * 
+	 * @param {String} username The username of the account to add.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	addAccountOnPage:
+		function (username) {
+			if ( this.accounts[username] ) {
+				var account = new Element('td');
+				account.setProperty('id', 'account-' + username);
+				account.setHTML('<a href="#" onclick="Tweetbar.switchAccount(\'' + username + '\'); void 0;">' + username + '</a>');
+				account.injectInside('account-list');
+			} else {
+				return false;
+			}
+			return true;
+		},
+	/**
+	 * removeAccountOnPage ( username )
+	 * Remove an account from the page.
+	 * 
+	 * @param {String} username The username of the account to remove.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	removeAccountOnPage:
+		function (username) {
+			if ( this.accounts[username] ) {
+				$('account-' + username).remove();
+			} else {
+				return false;
+			}
+		},
+	/**
+	 * switchAccount ( username )
+	 * Switch to an account.
+	 * 
+	 * @param {String} username The username of the account to switch to.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	switchAccount:
+		function (username) {
+			if ( this.accounts[username] ) {
+				for ( var user in this.accounts ) {
+					if ( typeof this.accounts[user] == 'string' ) {
+						$('account-' + user).removeClass('active');
+					}
+				}
+				Tweetbar.username = username;
+				Tweetbar.password = this.accounts[username];
+				Tweetbar.prefService.setCharPref('username', username);
+				Tweetbar.update_current_list();
+				$('account-' + username).addClass('active');
+			} else {
+				return false;
+			}
+			return true;
+		},
+	 
 	/**
 	 * localize ( )
 	 * Translates all words in the HTML document to the
@@ -964,6 +1124,9 @@ var Tweetbar = {
 							   { headers: Tweetbar.http_headers(),
 							   	 onSuccess:
 							   	 	function () {
+							   	 		if ( this.accounts[this.username] ) {
+							   	 			this.removeAccount(this.username);
+							   	 		}
 										this.username = null;
 										this.password = null;
 										Tweetbar.prefService.setCharPref('username', '');
@@ -1007,6 +1170,9 @@ var Tweetbar = {
 									onComplete:
 										function (raw_data) {
 											if ( this.transport.status == 200 ) {
+												if ( ! this.accounts[Tweetbar.username] ) {
+													this.addAccount(Tweetbar.username, Tweetbar.password);
+												}
 												Tweetbar.isAuthenticated = true;
 												Tweetbar.prefService.setCharPref('username', Tweetbar.username);
 												Tweetbar.prefService.setCharPref('password', Tweetbar.password);
