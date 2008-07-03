@@ -515,7 +515,7 @@ var Tweetbar = {
 					if ( ( i % 2 ) == 0 ) {
 						li.addClass('even');
 					}
-					if ( current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
+					if ( Tweetbar.username && current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
 						li.addClass('reply');
 					}
 					li.injectInside($('tweets'));
