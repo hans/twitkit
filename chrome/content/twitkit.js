@@ -6,14 +6,11 @@
 	homepage:  http://engel.uk.to/twitkit
 
 	Todo:
-		* Search twittersearch.com from TwitKit
-		-----------------------------------------------------------------------
+		* Search (probably via Summize)
+			* How should this be orchestrated? With a new tab?
 		* improve behavior when twitter is down
 		* highlight friends and followers in public timeline
 		* add a configurable maximum tweet count
-		* do some profiling... i think i'm leaking memory
-		* add ability to "share" theme by uploading to TwitKit site?
-		* import theme from twitter profile? (ryan)
 		* add support for multiple accounts
 		* direct-messaging support
 	*/
@@ -675,7 +672,7 @@ var Tweetbar = {
 					if ( ( i % 2 ) == 0 ) {
 						li.addClass('even');
 					}
-					if ( current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
+					if ( Tweetbar.username && current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
 						li.addClass('reply');
 					}
 					li.injectInside($('tweets'));
