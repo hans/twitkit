@@ -568,12 +568,12 @@ var Tweetbar = {
 								   	 			'<img src="' + user.profile_image_url + '" alt="' + user.screen_name + '" style="float: right; width: 48px; height: 48px;" />' +
 								   	 			'<div style="font-size: 110%;">' + user.name + '</div>' +
 								   	 			'<div style="font-size: 0.8em;">' +
-								   	 			'<strong>' + this._('tabs.me.location') + '</strong>: ' + user.location + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.bio') + '</strong>: ' + Tweetbar.expand_status(user.description) + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.friends') + '</strong>: ' + user.friends_count + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.followers') + '</strong>: ' + user.followers_count + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.favorites') + '</strong>: ' + user.favourites_count + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.updates') + '</strong>: ' + user.statuses_count + '</div>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.location') + '</strong>: ' + user.location + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.bio') + '</strong>: ' + Tweetbar.expand_status(user.description) + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.friends') + '</strong>: ' + user.friends_count + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.followers') + '</strong>: ' + user.followers_count + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.favorites') + '</strong>: ' + user.favourites_count + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.updates') + '</strong>: ' + user.statuses_count + '</div>' +
 								   	 			'</div>';
 								   	 		tweets.setHTML(inner);
 								   	 	},
