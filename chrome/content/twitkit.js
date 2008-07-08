@@ -83,10 +83,8 @@ var Tweetbar = {
 			this.loginSlider = new Fx.Slide('loginform', {duration: 500});
 			this.loginSlider.hide();
 			
-			var initial_panel = '';
-			try {
-				initial_panel = Tweetbar.prefService.getCharPref('active_panel');
-			} catch (e) {
+			var initial_panel = Tweetbar.prefService.getCharPref('active_panel');
+			if ( initial_panel == '' ) {
 				initial_panel = 'public_timeline';
 				Tweetbar.prefService.setCharPref('active_panel', initial_panel);
 			}
