@@ -1039,7 +1039,7 @@ var Tweetbar = {
 	set_username_on_page:
 		function () {
 			$('whoami').setStyle('backgroundColor', 'transparent');
-			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
+			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '" target="_blank">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
 			$('loginwrap').setStyle('display', 'none');
 		},
 	
