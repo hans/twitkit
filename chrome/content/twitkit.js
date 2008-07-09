@@ -745,12 +745,12 @@ var Tweetbar = {
 			var aj = new Ajax( 'http://twitter.com/statuses/destroy/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 							     postBody: {},
-							   	onSuccess:
+							   	 onSuccess:
 							   		function () {
 							   			var slider = new Fx.Slide(tweetid);
 							   			slider.toggle();
 							   		},
-							   	onFailure:
+							   	 onFailure:
 							   		function (e) {
 							   			alert(this._('errors.ajax')+e);
 							   		},
