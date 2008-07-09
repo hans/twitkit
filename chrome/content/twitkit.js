@@ -13,6 +13,7 @@
 		* add a configurable maximum tweet count
 		* add support for multiple accounts
 		* direct-messaging support
+		* alert user when they're making their 1000th/2000th/etc. tweet
 	*/
 
 /**
