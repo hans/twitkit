@@ -518,6 +518,7 @@ var Tweetbar = {
 				( this.currentList == 'friends' ) ? theurl = 'http://twitter.com/statuses/friends/' + this.username + '.json?lite=true' : theurl = 'http://twitter.com/statuses/followers.json?lite=true';
 				var aj = new Ajax( theurl,
 								   { headers: Tweetbar.http_headers(),
+								     postBody: {},
 								   	 onSuccess:
 								   	 	function (raw_data) {
 											var rsp = Json.evaluate(raw_data);
@@ -538,6 +539,7 @@ var Tweetbar = {
 			} else if ( this.currentList == 'replies' ) {
 				var aj = new Ajax( 'http://twitter.com/statuses/replies.json',
 								   { headers: Tweetbar.http_headers(),
+								     postBody: {},
 								   	 onSuccess:
 								   	 	function (raw_data) {
 								   	 		var rsp = Json.evaluate(raw_data);
@@ -557,6 +559,7 @@ var Tweetbar = {
 			} else if ( this.currentList == 'me' ) {
 				var aj = new Ajax( 'http://twitter.com/users/show/' + this.username + '.json',
 								   { headers: Tweetbar.http_headers(),
+								     postBody: {},
 								   	 onSuccess:
 								   	 	function (raw_data) {
 								   	 		var user = Json.evaluate(raw_data);
@@ -589,6 +592,7 @@ var Tweetbar = {
 			var panel = Tweetbar.currentList;
 			var aj = new Ajax( Tweetbar.api_url_for(panel),
 							  { headers: Tweetbar.http_headers(),
+							    postBody: {},
 								onComplete:
 									function (raw_data) {
 										Tweetbar.hide_refresh_activity();
@@ -721,6 +725,7 @@ var Tweetbar = {
 		function (tweetid) {
 			var aj = new Ajax( 'http://twitter.com/favorites/create/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
+							     postBody: {},
 								 onFailure:
 									function (e) {
 										alert(this._('errors.ajax')+e);
@@ -739,6 +744,7 @@ var Tweetbar = {
 		function (tweetid) {
 			var aj = new Ajax( 'http://twitter.com/statuses/destroy/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
+							     postBody: {},
 							   	onSuccess:
 							   		function () {
 							   			var slider = new Fx.Slide(tweetid);
@@ -956,6 +962,7 @@ var Tweetbar = {
 		function () {
 			var aj = new Ajax( 'http://twitter.com/account/end_session',
 							   { headers: Tweetbar.http_headers(),
+							     postBody: {},
 							   	 onSuccess:
 							   	 	function () {
 										this.username = null;
@@ -998,6 +1005,7 @@ var Tweetbar = {
 			
 			var authr = new Ajax( 'http://twitter.com/account/verify_credentials',
 								  { headers: this.http_headers(),
+								    postBody: {},
 									onComplete:
 										function (raw_data) {
 											if ( this.transport.status == 200 ) {
