@@ -84,12 +84,9 @@ var Tweetbar = {
 			this.loginSlider = new Fx.Slide('loginform', {duration: 500});
 			this.loginSlider.hide();
 			
-			var initial_panel = '';
-			try {
-				initial_panel = Tweetbar.prefService.getCharPref('active_panel');
-			} catch (e) {
+			var initial_panel = Tweetbar.prefService.getCharPref('active_panel');
+			if ( initial_panel == '' ) {
 				initial_panel = 'public_timeline';
-				Tweetbar.prefService.setCharPref('active_panel', initial_panel);
 			}
 			
 			var pass = Components.classes["@mozilla.org/passwordmanager;1"];
@@ -681,6 +678,7 @@ var Tweetbar = {
 				( this.currentList == 'friends' ) ? theurl = 'http://twitter.com/statuses/friends/' + this.username + '.json?lite=true' : theurl = 'http://twitter.com/statuses/followers.json?lite=true';
 				var aj = new Ajax( theurl,
 								   { headers: Tweetbar.http_headers(),
+								     postBody: {},
 								   	 onSuccess:
 								   	 	function (raw_data) {
 											var rsp = Json.evaluate(raw_data);
@@ -701,6 +699,7 @@ var Tweetbar = {
 			} else if ( this.currentList == 'replies' ) {
 				var aj = new Ajax( 'http://twitter.com/statuses/replies.json',
 								   { headers: Tweetbar.http_headers(),
+								     postBody: {},
 								   	 onSuccess:
 								   	 	function (raw_data) {
 								   	 		var rsp = Json.evaluate(raw_data);
@@ -720,6 +719,7 @@ var Tweetbar = {
 			} else if ( this.currentList == 'me' ) {
 				var aj = new Ajax( 'http://twitter.com/users/show/' + this.username + '.json',
 								   { headers: Tweetbar.http_headers(),
+								     postBody: {},
 								   	 onSuccess:
 								   	 	function (raw_data) {
 								   	 		var user = Json.evaluate(raw_data);
@@ -728,12 +728,12 @@ var Tweetbar = {
 								   	 			'<img src="' + user.profile_image_url + '" alt="' + user.screen_name + '" style="float: right; width: 48px; height: 48px;" />' +
 								   	 			'<div style="font-size: 110%;">' + user.name + '</div>' +
 								   	 			'<div style="font-size: 0.8em;">' +
-								   	 			'<strong>' + this._('tabs.me.location') + '</strong>: ' + user.location + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.bio') + '</strong>: ' + Tweetbar.expand_status(user.description) + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.friends') + '</strong>: ' + user.friends_count + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.followers') + '</strong>: ' + user.followers_count + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.favorites') + '</strong>: ' + user.favourites_count + '<br/>' +
-								   	 			'<strong>' + this._('tabs.me.updates') + '</strong>: ' + user.statuses_count + '</div>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.location') + '</strong>: ' + user.location + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.bio') + '</strong>: ' + Tweetbar.expand_status(user.description) + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.friends') + '</strong>: ' + user.friends_count + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.followers') + '</strong>: ' + user.followers_count + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.favorites') + '</strong>: ' + user.favourites_count + '<br/>' +
+								   	 			'<strong>' + Tweetbar._('tabs.me.updates') + '</strong>: ' + user.statuses_count + '</div>' +
 								   	 			'</div>';
 								   	 		tweets.setHTML(inner);
 								   	 	},
@@ -752,6 +752,7 @@ var Tweetbar = {
 			var panel = Tweetbar.currentList;
 			var aj = new Ajax( Tweetbar.api_url_for(panel),
 							  { headers: Tweetbar.http_headers(),
+							    postBody: {},
 								onComplete:
 									function (raw_data) {
 										Tweetbar.hide_refresh_activity();
@@ -884,6 +885,7 @@ var Tweetbar = {
 		function (tweetid) {
 			var aj = new Ajax( 'http://twitter.com/favorites/create/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
+							     postBody: {},
 								 onFailure:
 									function (e) {
 										alert(this._('errors.ajax')+e);
@@ -902,12 +904,13 @@ var Tweetbar = {
 		function (tweetid) {
 			var aj = new Ajax( 'http://twitter.com/statuses/destroy/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
-							   	onSuccess:
+							     postBody: {},
+							   	 onSuccess:
 							   		function () {
 							   			var slider = new Fx.Slide(tweetid);
 							   			slider.toggle();
 							   		},
-							   	onFailure:
+							   	 onFailure:
 							   		function (e) {
 							   			alert(this._('errors.ajax')+e);
 							   		},
@@ -1119,6 +1122,7 @@ var Tweetbar = {
 		function () {
 			var aj = new Ajax( 'http://twitter.com/account/end_session',
 							   { headers: Tweetbar.http_headers(),
+							     postBody: {},
 							   	 onSuccess:
 							   	 	function () {
 							   	 		if ( this.accounts[this.username] ) {
@@ -1164,6 +1168,7 @@ var Tweetbar = {
 			
 			var authr = new Ajax( 'http://twitter.com/account/verify_credentials',
 								  { headers: this.http_headers(),
+								    postBody: {},
 									onComplete:
 										function (raw_data) {
 											if ( this.transport.status == 200 ) {
@@ -1205,7 +1210,7 @@ var Tweetbar = {
 	set_username_on_page:
 		function () {
 			$('whoami').setStyle('backgroundColor', 'transparent');
-			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
+			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '" target="_blank">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
 			$('loginwrap').setStyle('display', 'none');
 		},
 	
