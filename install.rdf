@@ -18,6 +18,7 @@
 			<em:homepageURL>http://engel.uk.to/twitkit/</em:homepageURL>
 			<em:iconURL>chrome://twitkit/skin/twitter-icon.png</em:iconURL>
 			<em:optionsURL>chrome://twitkit/content/preferences.xul</em:optionsURL>
+			<em:aboutURL>chrome://twitkit/content/about.xul</em:aboutURL>
 			
 			<!-- Firefox -->
 			<em:targetApplication>
