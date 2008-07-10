@@ -5,11 +5,15 @@
 			<em:id>twitkit@engel.uk.to</em:id>
 			<em:name>TwitKit</em:name>
 			<em:version>1.1</em:version>
+			
 			<em:creator>Hans Engel</em:creator>
+			
 			<em:developer>Jochen Cichon</em:developer>
 			<em:developer>Alan Rice</em:developer>
+			
 			<em:contributor>Michael Kaiser</em:contributor>
 			<em:contributor>Mike Demers</em:contributor>
+			
 			<em:description>An extension that adds a Twitter sidebar to your browsing experience!</em:description>
 			<em:homepageURL>http://engel.uk.to/twitkit/</em:homepageURL>
 			<em:iconURL>chrome://twitkit/skin/twitter-icon.png</em:iconURL>
