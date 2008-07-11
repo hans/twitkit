@@ -26,7 +26,7 @@
 
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="tweetbar-button" class="toolbarbutton-1"
-			image="chrome://twitkit/skin/twitter-icon.png"
+			image="chrome://twitkit/skin/images/twitter-icon.png"
 			label="&toolbar.label;" tooltiptext="&toolbar.tooltip;"
 			oncommand="toggleSidebar('viewTweetbar');"/>
 	</toolbarpalette>

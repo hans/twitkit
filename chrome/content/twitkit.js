@@ -443,15 +443,15 @@ var Tweetbar = {
 				var tsource = tweet.source;
 				tsource = tsource.replace(/<a /, '<a target="_blank" ');
 				( Tweetbar.prefService.getBoolPref('showAppSource') ) ? source = '<div class="source">' + this._('misc.from') + ' ' + tsource + '</div>' : source = '';
-				( tweet.user['screen_name'] == Tweetbar.username ) ? dellink = '<a href="#" onclick="Tweetbar.delete_tweet(\'' + tweet.id + '\');"><img style="border: none; float: right;" src="chrome://twitkit/skin/delete.png" alt="" /></a>' : dellink = '';
+				( tweet.user['screen_name'] == Tweetbar.username ) ? dellink = '<a href="#" onclick="Tweetbar.delete_tweet(\'' + tweet.id + '\');"><img style="border: none; float: right;" src="chrome://twitkit/skin/images/delete.png" alt="" /></a>' : dellink = '';
 				( this.currentList == 'replies' ) ? date = '' : date = ' - ' + Tweetbar.relative_time_string(tweet.created_at);
 				/*
 				 * Hashtags implementation - by Joschi
 				 */
 				tweet.text = tweet.text.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
 				return '<p class="pic"><a href="#" onclick="setReply(\'' + tweet.user['screen_name'] + '\');">'+ user_image + '</a>' +
-					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user['screen_name'] + '\'); return false;"><img class="re" src="chrome://twitkit/skin/reply.png" alt="" /></a>&nbsp;' +
-					   '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img class="re" src="chrome://twitkit/skin/fav_add.png" alt="" /></a></span></p>' +
+					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user['screen_name'] + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
+					   '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img class="re" src="chrome://twitkit/skin/images/fav_add.png" alt="" /></a></span></p>' +
 					   '<p class="what">' + tweet.text + '</p>' +
 					   '<p class="who">' + this.user_anchor_tag(tweet.user) + date + '</p>' +
 					   source + dellink;

@@ -12,7 +12,7 @@
 	persist="screenX screenY">
 		<vbox>
 				<hbox>
-						<image src="chrome://twitkit/skin/logo.png" align="center" style="padding: 20px 70px;"/>
+						<image src="chrome://twitkit/skin/images/logo.png" align="center" style="padding: 20px 70px;"/>
 				</hbox>
 				<hbox pack="center">
 						<label>&about.version;</label>

@@ -1,7 +1,7 @@
 #tweetbar-button {
-  list-style-image: url("chrome://tweetbar/skin/twitter_icon.png");
+  list-style-image: url("chrome://tweetbar/skin/images/twitter_icon.png");
 }
 
 toolbar[iconsize="small"] #tweetbar-button {
-  list-style-image: url("chrome://tweetbar/skin/twitter_icon.png");
+  list-style-image: url("chrome://tweetbar/skin/images/twitter_icon.png");
 }
