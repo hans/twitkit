@@ -71,7 +71,7 @@ var Tweetbar = {
 			var link = new Element('link');
 			link.setProperties({
 				'rel': 'stylesheet',
-				'href': 'chrome://twitkit/skin/' + scheme + '.css',
+				'href': 'chrome://twitkit/skin/themes/' + scheme + '.css',
 				'type': 'text/css',
 				'media': 'screen',
 			});
