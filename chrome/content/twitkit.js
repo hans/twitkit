@@ -45,6 +45,7 @@ var Tweetbar = {
 	pendingAction: null,
 	httpHeaders: null,
 	prefService: null,
+	isTwitterUp: null,
 	
 	// Startup Functions //
 	/**
@@ -164,6 +165,29 @@ var Tweetbar = {
 	clear_http_headers:
 		function () {
 			Tweetbar.httpHeaders = null;
+		},
+	// Twitter Status //
+	/**
+	 * check_twitter_status ( )
+	 * Returns the status of Twitter (on / off) in boolean
+	 * 
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	check_twitter_status:
+		function () {
+				if (window.XMLHttpRequest) {
+					req=new XMLHttpRequest()
+				}
+				else if (window.ActiveXObject) {
+					req=new ActiveXObject("Microsoft.XMLHTTP")
+				}
+				req.open("GET","http://istwitterdown.com/",false);
+				req.send(null);
+				var IsTwitterDown = req.responseText;
+				
+				(IsTwitterDown.match('No') == 'No') ? Tweetbar.isTwitterUp = true : Tweetbar.isTwitterUp = false;
+				
 		},
 	/**
 	 * http_headers ( )
@@ -592,6 +616,8 @@ var Tweetbar = {
 	 */
 	get_tweets:
 		function () {
+			Tweetbar.check_twitter_status();
+			if (Tweetbar.isTwitterUp == true) {
 			var panel = Tweetbar.currentList;
 			var aj = new Ajax( Tweetbar.api_url_for(panel),
 							  { headers: Tweetbar.http_headers(),
@@ -617,6 +643,10 @@ var Tweetbar = {
 										Tweetbar.clear_updater();
 									},
 							  }).request();
+			}
+			else {
+				alert("Twitter is currently down.");
+			}
 		},
 	/**
 	 * save_tweets ( panel, response_data )
