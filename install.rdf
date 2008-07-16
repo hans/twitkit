@@ -15,6 +15,8 @@
 			<em:contributor>Michael Kaiser</em:contributor>
 			<em:contributor>Mike Demers</em:contributor>
 			
+			<em:translator>Patrick Heinecke</em:translator>
+			
 			<em:description>An extension that adds a Twitter sidebar to your browsing experience!</em:description>
 			<em:homepageURL>http://engel.uk.to/twitkit/</em:homepageURL>
 			<em:iconURL>chrome://twitkit/skin/images/twitter-icon.png</em:iconURL>
