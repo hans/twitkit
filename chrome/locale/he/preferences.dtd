@@ -1,0 +1,19 @@
+<!ENTITY prefs.title "העדפות TwitKit">
+	<!ENTITY prefs.general "כללי">
+		<!ENTITY prefs.general.showAppSource "הראה 'מ[תוכנה]' לאחר כל הודעה">
+		<!ENTITY prefs.general.refreshInterval "הפער בין רענונים">
+			<!ENTITY prefs.general.refreshInterval.30 "30 שניות">
+			<!ENTITY prefs.general.refreshInterval.1 "דקה">
+			<!ENTITY prefs.general.refreshInterval.3 "3 דקות">
+			<!ENTITY prefs.general.refreshInterval.5 "5 דקות">
+			<!ENTITY prefs.general.refreshInterval.10 "10 דקות">
+		<!ENTITY prefs.general.showNamesAs "הראה שם כ:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "כינוי">
+			<!ENTITY prefs.general.showNamesAs.fullNames "שם מלא">
+	<!ENTITY prefs.theme "עיצוב">
+		<!ENTITY prefs.theme.colorScheme "חבילת צבעים:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "חום כהה">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "כחול טוויטר">
+			<!ENTITY prefs.theme.colorScheme.pastel "פסטל">
+			<!ENTITY prefs.theme.colorScheme.muted "צבעים אילמים">
+		<!ENTITY prefs.theme.fontSize "גודל הגופן">
