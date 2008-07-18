@@ -268,6 +268,7 @@ var Tweetbar = {
 				'text': Tweetbar.expand_status(obj.text),
 				'created_at': Date.parse(obj.created_at || Date()),
 				'source': obj.source,
+				'favorited': obj.favorited
 			}
 		},
 	/**
@@ -457,10 +458,16 @@ var Tweetbar = {
 
 				// Markdown //
 				tweet.text = Tweetbar.markDown.makeHtml(tweet.text);
+				
+				favorite = '';
+				if ( tweet.favorited == true )
+					favorite = '<a class="re" href="javascript: Tweetbar.unfav_tweet(\'' + tweet.id + '\'); void 0;"><img id="fav-' + tweet.id + '" class="re" src="chrome://twitkit/skin/images/fav_remove.png" alt="" /></a>';
+				else
+					favorite = '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img id="fav-' + tweet.id + '" class="re" src="chrome://twitkit/skin/images/fav_add.png" alt="" /></a>';
 
 				return '<p class="pic"><a href="#" onclick="setReply(\'' + tweet.user['screen_name'] + '\');">'+ user_image + '</a>' +
 					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user['screen_name'] + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
-					   '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img class="re" src="chrome://twitkit/skin/images/fav_add.png" alt="" /></a></span></p>' +
+					   favorite + '</span></p>' +
 					   '<p class="what">' + tweet.text + '</p>' +
 					   '<p class="who">' + this.user_anchor_tag(tweet.user) + date + '</p>' +
 					   source + dellink;
@@ -736,10 +743,39 @@ var Tweetbar = {
 			var aj = new Ajax( 'http://twitter.com/favorites/create/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 							     postBody: {},
+							     onSuccess:
+							     	function () {
+							     		var x = document.getElementById('fav-' + tweetid);
+							     		x.src = 'chrome://twitkit/skin/images/fav_remove.png';
+							     	},
 								 onFailure:
 									function (e) {
 										alert(this._('errors.ajax')+e);
 									},
+							   }).request();
+		},
+	/**
+	 * unfav_tweet ( tweetid )
+	 * Remove a tweet from the user's favorites.
+	 * 
+	 * @param {String} tweetid The ID of the tweet to remove from favorites.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	unfav_tweet:
+		function (tweetid) {
+			var aj = new Ajax( 'http://twitter.com/favorites/destroy/' + tweetid + '.json',
+							   { headers: Tweetbar.http_headers(),
+								 postBody: {},
+								 onSuccess:
+								 	function () {
+								 		var x = document.getElementById('fav-' + tweetid);
+								 		x.src = 'chrome://twitkit/skin/images/fav_add.png';
+								 	},
+								 onFailure:
+								 	function (e) {
+								 		alert(this._('errors.ajax') + e);
+								 	}
 							   }).request();
 		},
 	/**
