@@ -68,6 +68,9 @@ var Tweetbar = {
 				UI: Tweetbar.stringBundleService.createBundle('chrome://twitkit/locale/ui.properties')
 			};
 			this.localize();
+
+			// Markdown //
+			Tweetbar.markDown = new Showdown.converter();
 			
 			var scheme = Tweetbar.prefService.getCharPref('colorScheme').toLowerCase();
 			var link = new Element('link');
@@ -451,6 +454,10 @@ var Tweetbar = {
 				 * Hashtags implementation - by Joschi
 				 */
 				tweet.text = tweet.text.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
+
+				// Markdown //
+				tweet.text = Tweetbar.markDown.makeHtml(tweet.text);
+
 				return '<p class="pic"><a href="#" onclick="setReply(\'' + tweet.user['screen_name'] + '\');">'+ user_image + '</a>' +
 					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user['screen_name'] + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
 					   '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img class="re" src="chrome://twitkit/skin/images/fav_add.png" alt="" /></a></span></p>' +
