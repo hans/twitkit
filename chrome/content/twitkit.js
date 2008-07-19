@@ -91,6 +91,11 @@ var Tweetbar = {
 
 			( Tweetbar.prefService.getBoolPref('secureConnection') ) ? Tweetbar.protocol = 'https' : Tweetbar.protocol = 'http';
 			
+			if ( Tweetbar.protocol == 'https' )
+				$('using-ssl').setProperty('src', 'chrome://twitkit/skin/images/ssl-on.png');
+			else
+				$('using-ssl').setProperty('src', 'chrome://twitkit/skin/images/ssl-off.png');
+			
 			var initial_panel = Tweetbar.prefService.getCharPref('active_panel');
 			if ( initial_panel == '' ) {
 				initial_panel = 'public_timeline';
