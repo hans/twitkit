@@ -5,15 +5,15 @@
 <!ENTITY openTweetbar.modifierskey  "shift accel">
 
 <!ENTITY toolbar.label   "twitkit">
-<!ENTITY toolbar.tooltip "open twitkit">
+<!ENTITY toolbar.tooltip "twitkit öffnen">
 
-<!ENTITY menu.toggle "Open / Close">
-<!ENTITY menu.prefs "TwitKit Preferences">
-<!ENTITY menu.about "About">
-<!ENTITY menu.help "Help">
+<!ENTITY menu.toggle "Öffnen / Schließen">
+<!ENTITY menu.prefs "TwitKit Einstellungen">
+<!ENTITY menu.about "Über">
+<!ENTITY menu.help "Hilfe">
 
 <!ENTITY twitKit "TwitKit">
 
-<!ENTITY about "About TwitKit">
+<!ENTITY about "Über TwitKit">
 	<!ENTITY about.version "TwitKit 1.1">
-	<!ENTITY about.author "By Hans Engel">
+	<!ENTITY about.credits "Danksagungen">

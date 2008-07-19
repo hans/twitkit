@@ -3,11 +3,20 @@
 <head id="thehead">
 	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
 	<script type="text/javascript" src="chrome://twitkit/skin/mootools.js"></script>
+	<script type="text/javascript" src="chrome://twitkit/content/lib/showdown.js"></script>
 	<script type="text/javascript" src="chrome://twitkit/content/twitkit.js"></script>
 	<script type="text/javascript">
 		function setReply(username) {
 			var bah = $('status');
 			bah.value = bah.value + '@' + username + ' ';
+			document.getElementById('status').focus();
+		}
+		function copySelection() {
+			var selection = content.window.getSelection();
+			if ( selection == '' )
+				selection = window.getSelection();
+			var bah = $('status');
+			bah.value = bah.value + selection;
 			document.getElementById('status').focus();
 		}
 	</script>
@@ -42,7 +51,7 @@
 			<td id="topper">
 				<div id="poster">
 					<h1 id="question">what are you doing?</h1>
-					<h3><a id="compress" href="#" class="signin" id="tinyurl" title="Select textpart, and convert to tinyurl" onclick="Tweetbar.compress_url();"><img src="chrome://twitkit/skin/images/compress.png" /></a><span id="status-field-char-counter">0</span></h3>
+					<h3><a id="copy-selection" href="#" class="tweet-action" title="Copy selection to status box" onclick="copySelection();"><img src="chrome://twitkit/skin/images/copy-selection.png" /></a><a id="compress" href="#" class="signin" id="tinyurl" title="Select textpart, and convert to tinyurl" onclick="Tweetbar.compress_url();"><img src="chrome://twitkit/skin/images/compress.png" /></a><span id="status-field-char-counter">0</span></h3>
 					<form action="./" onsubmit="var box=document.getElementById('status'); Tweetbar.update_status(box.value, function() { updateStatusTextCharCounter('');}); box.value = ''; return false;">
 						<div id="statusbox">
 							 <input type="text" name="status" id="status" onkeyup="updateStatusTextCharCounter(this.value)" />

@@ -11,9 +11,13 @@
 			
 			<em:developer>Jochen Cichon</em:developer>
 			<em:developer>Alan Rice</em:developer>
+			<em:developer>Guy Lewin</em:developer>
 			
 			<em:contributor>Michael Kaiser</em:contributor>
 			<em:contributor>Mike Demers</em:contributor>
+			
+			<em:translator>Patrick Heinecke</em:translator>
+			<em:translator>Guy Lewin</em:translator>
 			
 			<em:description>An extension that adds a Twitter sidebar to your browsing experience!</em:description>
 			<em:homepageURL>http://engel.uk.to/twitkit/</em:homepageURL>

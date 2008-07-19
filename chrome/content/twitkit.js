@@ -69,6 +69,9 @@ var Tweetbar = {
 				UI: Tweetbar.stringBundleService.createBundle('chrome://twitkit/locale/ui.properties')
 			};
 			this.localize();
+
+			// Markdown //
+			Tweetbar.markDown = new Showdown.converter();
 			
 			var scheme = Tweetbar.prefService.getCharPref('colorScheme').toLowerCase();
 			var link = new Element('link');
@@ -271,7 +274,7 @@ var Tweetbar = {
 	 */
 	expand_status:
 		function (s) {
-			return s.toString().replace(/\</,'&lt;').replace(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag('http:\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
+			return s.toString().replace(/\</,'&lt;').replace(/((?:ftp|https?):\/\/\S+)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag('http:\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
 		},
 	/**
 	 * create_status_object ( obj )
@@ -289,6 +292,7 @@ var Tweetbar = {
 				'text': Tweetbar.expand_status(obj.text),
 				'created_at': Date.parse(obj.created_at || Date()),
 				'source': obj.source,
+				'favorited': obj.favorited
 			}
 		},
 	/**
@@ -475,9 +479,19 @@ var Tweetbar = {
 				 * Hashtags implementation - by Joschi
 				 */
 				tweet.text = tweet.text.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
+
+				// Markdown //
+				tweet.text = Tweetbar.markDown.makeHtml(tweet.text);
+				
+				favorite = '';
+				if ( tweet.favorited == true )
+					favorite = '<a class="re" href="javascript: Tweetbar.unfav_tweet(\'' + tweet.id + '\'); void 0;"><img id="fav-' + tweet.id + '" class="re" src="chrome://twitkit/skin/images/fav_remove.png" alt="" /></a>';
+				else
+					favorite = '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img id="fav-' + tweet.id + '" class="re" src="chrome://twitkit/skin/images/fav_add.png" alt="" /></a>';
+
 				return '<p class="pic"><a href="#" onclick="setReply(\'' + tweet.user['screen_name'] + '\');">'+ user_image + '</a>' +
 					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user['screen_name'] + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
-					   '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img class="re" src="chrome://twitkit/skin/images/fav_add.png" alt="" /></a></span></p>' +
+					   favorite + '</span></p>' +
 					   '<p class="what">' + tweet.text + '</p>' +
 					   '<p class="who">' + this.user_anchor_tag(tweet.user) + date + '</p>' +
 					   source + dellink;
@@ -759,10 +773,39 @@ var Tweetbar = {
 			var aj = new Ajax( 'http://twitter.com/favorites/create/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 							     postBody: {},
+							     onSuccess:
+							     	function () {
+							     		var x = document.getElementById('fav-' + tweetid);
+							     		x.src = 'chrome://twitkit/skin/images/fav_remove.png';
+							     	},
 								 onFailure:
 									function (e) {
 										alert(this._('errors.ajax')+e);
 									},
+							   }).request();
+		},
+	/**
+	 * unfav_tweet ( tweetid )
+	 * Remove a tweet from the user's favorites.
+	 * 
+	 * @param {String} tweetid The ID of the tweet to remove from favorites.
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	unfav_tweet:
+		function (tweetid) {
+			var aj = new Ajax( 'http://twitter.com/favorites/destroy/' + tweetid + '.json',
+							   { headers: Tweetbar.http_headers(),
+								 postBody: {},
+								 onSuccess:
+								 	function () {
+								 		var x = document.getElementById('fav-' + tweetid);
+								 		x.src = 'chrome://twitkit/skin/images/fav_add.png';
+								 	},
+								 onFailure:
+								 	function (e) {
+								 		alert(this._('errors.ajax') + e);
+								 	}
 							   }).request();
 		},
 	/**

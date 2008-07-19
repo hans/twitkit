@@ -1,19 +1,19 @@
 <!ENTITY prefs.title "&twitKit; Voreinstellungen">
-	<!ENTITY prefs.general "General">
-		<!ENTITY prefs.general.showAppSource "Show 'from [application]' after tweets">
-		<!ENTITY prefs.general.refreshInterval "Refresh interval:">
+	<!ENTITY prefs.general "Allgemein">
+		<!ENTITY prefs.general.showAppSource "'via [Anwendung]' hinter Tweets anzeigen">
+		<!ENTITY prefs.general.refreshInterval "Aktualisierungsintervall:">
 			<!ENTITY prefs.general.refreshInterval.30 "30 Sekunden">
 			<!ENTITY prefs.general.refreshInterval.1 "1 Minuten">
 			<!ENTITY prefs.general.refreshInterval.3 "3 Minuten">
 			<!ENTITY prefs.general.refreshInterval.5 "5 Minuten">
 			<!ENTITY prefs.general.refreshInterval.10 "10 Minuten">
-		<!ENTITY prefs.general.showNamesAs "Show names as:">
-			<!ENTITY prefs.general.showNamesAs.screenNames "Screen names">
-			<!ENTITY prefs.general.showNamesAs.fullNames "Full names">
-	<!ENTITY prefs.theme "Theme">
-		<!ENTITY prefs.theme.colorScheme "Color scheme:">
-			<!ENTITY prefs.theme.colorScheme.deepBrown "Deep Brown">
-			<!ENTITY prefs.theme.colorScheme.twitterBlue "Twitter Blue">
-			<!ENTITY prefs.theme.colorScheme.pastel "Pastel">
-			<!ENTITY prefs.theme.colorScheme.muted "Muted">
-		<!ENTITY prefs.theme.fontSize "Font size:">
+		<!ENTITY prefs.general.showNamesAs "Namen anzeigen als:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Nicknamen">
+			<!ENTITY prefs.general.showNamesAs.fullNames "Ganze Namen">
+	<!ENTITY prefs.theme "Anzeige">
+		<!ENTITY prefs.theme.colorScheme "Farbschema:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Sattes Braun">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "Twitter Blau">
+			<!ENTITY prefs.theme.colorScheme.pastel "Pastell">
+			<!ENTITY prefs.theme.colorScheme.muted "Gedeckte Farben">
+		<!ENTITY prefs.theme.fontSize "Schriftgröße:">
