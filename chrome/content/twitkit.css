@@ -21,6 +21,14 @@ a img {
 	border:							none;
 }
 
+img#twitter-status {
+	position:						absolute;
+	left:							2px;
+	top:							2px;
+	width:							16px;
+	height:							16px;
+}
+
 #tweetbar {
 	margin:							0;
 	padding:						0;

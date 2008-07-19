@@ -185,12 +185,27 @@ var Tweetbar = {
 				else if (window.ActiveXObject) {
 					req=new ActiveXObject("Microsoft.XMLHTTP")
 				}
-				req.open("GET","http://istwitterdown.com/",false);
+				req.open("GET","http://istwitterdown.com",false);
 				req.send(null);
 				var IsTwitterDown = req.responseText;
 				
 				(IsTwitterDown.match('No') == 'No') ? Tweetbar.isTwitterUp = true : Tweetbar.isTwitterUp = false;
-				
+		},
+	/**
+	 * set_twitter_status ( status )
+	 * Set the icon displaying Twitter's current status.
+	 * 
+	 * @param {Boolean} status Is twitter up?
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	set_twitter_status:
+		function (status) {
+			var x = document.getElementById('twitter-status');
+			if ( status == true )
+				x.src = 'chrome://twitkit/skin/images/twitter-up.png';
+			else
+				x.src = 'chrome://twitkit/skin/images/twitter-down.png';
 		},
 	/**
 	 * http_headers ( )
@@ -632,6 +647,7 @@ var Tweetbar = {
 		function () {
 			Tweetbar.check_twitter_status();
 			if (Tweetbar.isTwitterUp == true) {
+			this.set_twitter_status(true);
 			var panel = Tweetbar.currentList;
 			var aj = new Ajax( Tweetbar.api_url_for(panel),
 							  { headers: Tweetbar.http_headers(),
@@ -657,9 +673,9 @@ var Tweetbar = {
 										Tweetbar.clear_updater();
 									},
 							  }).request();
-			}
-			else {
-				alert("Twitter is currently down.");
+			} else {
+				this.set_twitter_status(false);
+				this.hide_refresh_activity();
 			}
 		},
 	/**
