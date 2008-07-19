@@ -17,3 +17,5 @@
 			<!ENTITY prefs.theme.colorScheme.pastel "פסטל">
 			<!ENTITY prefs.theme.colorScheme.muted "צבעים אילמים">
 		<!ENTITY prefs.theme.fontSize "גודל הגופן">
+	<!ENTITY prefs.connection "Connection">
+		<!ENTITY prefs.connection.secureConnection "Use secure connection with Twitter">

@@ -88,6 +88,8 @@ var Tweetbar = {
 			
 			this.loginSlider = new Fx.Slide('loginform', {duration: 500});
 			this.loginSlider.hide();
+
+			( Tweetbar.prefService.getBoolPref('secureConnection') ) ? Tweetbar.protocol = 'https' : Tweetbar.protocol = 'http';
 			
 			var initial_panel = Tweetbar.prefService.getCharPref('active_panel');
 			if ( initial_panel == '' ) {
@@ -118,7 +120,7 @@ var Tweetbar = {
 			$('username-label').innerHTML = this._('login.form.username');
 			$('password-label').innerHTML = this._('login.form.password');
 			$('loginbutton').setProperty('value', this._('login.form.submit'));
-			$('signup').innerHTML = this._('login.signUp', '<a href="http://twitter.com/account/create?tb_10" target="_content">', '</a>');
+			$('signup').innerHTML = this._('login.signUp', '<a href="' + Tweetbar.protocol + '://twitter.com/account/create?tb_10" target="_content">', '</a>');
 			$('question').innerHTML = this._('poster.question');
 			$('compress').setProperty('title', this._('poster.compress'));
 			$('public').innerHTML = this._('tabs.public.title');
@@ -237,7 +239,7 @@ var Tweetbar = {
 	 */
 	api_url_for:
 		function (resource) {
-			return 'http://twitter.com/statuses/' + resource + '.json';
+			return Tweetbar.protocol + '://twitter.com/statuses/' + resource + '.json';
 		},
 	/**
 	 * expand_status ( s )
@@ -250,7 +252,7 @@ var Tweetbar = {
 	 */
 	expand_status:
 		function (s) {
-			return s.toString().replace(/\</,'&lt;').replace(/((?:ftp|https?):\/\/\S+)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag('http:\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
+			return s.toString().replace(/\</,'&lt;').replace(/((?:ftp|https?):\/\/\S+)/g, this.anchor_tag('$1')).replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag(Tweetbar.protocol + ':\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
 		},
 	/**
 	 * create_status_object ( obj )
@@ -309,7 +311,7 @@ var Tweetbar = {
 		function (user, text) {
 			var name;
 			( Tweetbar.prefService.getCharPref('showNamesAs') == 'screennames' ) ? name = user['screen_name'] : name = user['name'];
-			return this.anchor_tag('http://twitter.com/' + user['screen_name'],
+			return this.anchor_tag(Tweetbar.protocol + '://twitter.com/' + user['screen_name'],
 									( (text) ? text : name),
 									user['name'] + ' in ' + user['location']);
 		},
@@ -499,7 +501,7 @@ var Tweetbar = {
 			return '<p class="pic"><a href="#" onclick="setReply(\'' + user['screen_name'] + '\');"><img src="' + user['profile_image_url'] + '" width="24" height="24" alt="'+user['name']+'" /></a>' +
 				   '<p class="what" style="font-size: 120%;">' + user['name'] + '</p>' +
 				   '<p class="who">' + status + '<br/>' +
-				   '<a target="_blank" href="http://twitter.com/' + user['screen_name'] + '">' + user['screen_name'] + '</a></p>';
+				   '<a target="_blank" href="' + Tweetbar.protocol + '://twitter.com/' + user['screen_name'] + '">' + user['screen_name'] + '</a></p>';
 		},
 	
 	// List Updating //
@@ -532,7 +534,7 @@ var Tweetbar = {
 					li.injectInside($('tweets'));
 				}
 			} else if ( this.currentList == 'friends' || this.currentList == 'followers' ) {
-				( this.currentList == 'friends' ) ? theurl = 'http://twitter.com/statuses/friends/' + this.username + '.json?lite=true' : theurl = 'http://twitter.com/statuses/followers.json?lite=true';
+				( this.currentList == 'friends' ) ? theurl = Tweetbar.protocol + '://twitter.com/statuses/friends/' + this.username + '.json?lite=true' : theurl = Tweetbar.protocol + '://twitter.com/statuses/followers.json?lite=true';
 				var aj = new Ajax( theurl,
 								   { headers: Tweetbar.http_headers(),
 								     postBody: {},
@@ -554,7 +556,7 @@ var Tweetbar = {
 								   	 	},
 								   }).request();
 			} else if ( this.currentList == 'replies' ) {
-				var aj = new Ajax( 'http://twitter.com/statuses/replies.json',
+				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/replies.json',
 								   { headers: Tweetbar.http_headers(),
 								     postBody: {},
 								   	 onSuccess:
@@ -574,7 +576,7 @@ var Tweetbar = {
 								   	 	}
 								   }).request();
 			} else if ( this.currentList == 'me' ) {
-				var aj = new Ajax( 'http://twitter.com/users/show/' + this.username + '.json',
+				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/users/show/' + this.username + '.json',
 								   { headers: Tweetbar.http_headers(),
 								     postBody: {},
 								   	 onSuccess:
@@ -740,7 +742,7 @@ var Tweetbar = {
 	 */
 	fav_tweet:
 		function (tweetid) {
-			var aj = new Ajax( 'http://twitter.com/favorites/create/' + tweetid + '.json',
+			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/favorites/create/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 							     postBody: {},
 							     onSuccess:
@@ -764,7 +766,7 @@ var Tweetbar = {
 	 */
 	unfav_tweet:
 		function (tweetid) {
-			var aj = new Ajax( 'http://twitter.com/favorites/destroy/' + tweetid + '.json',
+			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/favorites/destroy/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 								 postBody: {},
 								 onSuccess:
@@ -788,7 +790,7 @@ var Tweetbar = {
 	 */
 	delete_tweet:
 		function (tweetid) {
-			var aj = new Ajax( 'http://twitter.com/statuses/destroy/' + tweetid + '.json',
+			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/destroy/' + tweetid + '.json',
 							   { headers: Tweetbar.http_headers(),
 							     postBody: {},
 							   	 onSuccess:
@@ -1006,7 +1008,7 @@ var Tweetbar = {
 	 */
 	sign_out:
 		function () {
-			var aj = new Ajax( 'http://twitter.com/account/end_session',
+			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/account/end_session',
 							   { headers: Tweetbar.http_headers(),
 							     postBody: {},
 							   	 onSuccess:
@@ -1049,7 +1051,7 @@ var Tweetbar = {
 			this.password = pw;
 			this.clear_http_headers();
 			
-			var authr = new Ajax( 'http://twitter.com/account/verify_credentials',
+			var authr = new Ajax( Tweetbar.protocol + '://twitter.com/account/verify_credentials',
 								  { headers: this.http_headers(),
 								    postBody: {},
 									onComplete:
@@ -1090,7 +1092,7 @@ var Tweetbar = {
 	set_username_on_page:
 		function () {
 			$('whoami').setStyle('backgroundColor', 'transparent');
-			$('whoami').setHTML('<p><a href="http://twitter.com/' + Tweetbar.username + '" target="_blank">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
+			$('whoami').setHTML('<p><a href="' + Tweetbar.protocol + '://twitter.com/' + Tweetbar.username + '" target="_blank">'+Tweetbar.username+'</a> [<a href="#" onclick="Tweetbar.sign_out(); return false;" alt="sign out" title="sign out">' + this._('login.signOut') + '</a>]</p>');
 			$('loginwrap').setStyle('display', 'none');
 		},
 	

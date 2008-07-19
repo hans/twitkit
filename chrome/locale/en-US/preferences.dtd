@@ -17,3 +17,5 @@
 			<!ENTITY prefs.theme.colorScheme.pastel "Pastel">
 			<!ENTITY prefs.theme.colorScheme.muted "Muted">
 		<!ENTITY prefs.theme.fontSize "Font size:">
+	<!ENTITY prefs.connection "Connection">
+		<!ENTITY prefs.connection.secureConnection "Use secure connection with Twitter">

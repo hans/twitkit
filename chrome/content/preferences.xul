@@ -22,6 +22,7 @@
 			<preference id="extensions.twitkit.showNamesAs" name="extensions.twitkit.showNamesAs" type="string"/>
 			<preference id="extensions.twitkit.colorScheme" name="extensions.twitkit.colorScheme" type="string"/>
 			<preference id="extensions.twitkit.fontSize" name="extensions.twitkit.fontSize" type="string"/>
+			<preference id="extensions.twitkit.secureConnection" name="extensions.twitkit.secureConnection" type="bool"/>
 		</preferences>
    		
    		<groupbox>
@@ -75,6 +76,10 @@
 					</row>
 				</rows>
 			</grid>
+		</groupbox>
+		<groupbox>
+			<caption label="&prefs.connection;"/>
+			<checkbox label="&prefs.connection.secureConnection;" preference="extensions.twitkit.secureConnection"/>
 		</groupbox>
 	</prefpane>
 </prefwindow>
