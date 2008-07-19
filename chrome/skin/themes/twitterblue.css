@@ -54,26 +54,11 @@ input#status {
 }
 
 #navigation td {
-	background-color:				#75b7ba;
-	border-right:					2px solid #9ae4e8;
-	border-left:					2px solid #9ae4e8;
-}
-#navigation td:hover {
-	background-color:				#5c9a9d;
+	border-right:					4px solid #9ae4e8;
+	padding:							0px 5px;
 }
 #navigation td.active {
 	background-color:				#fff;
-}
-#navigation td.active a {
-	color:							#369;
-}
-#navigation td a {
-	display:						block;
-	height:							1.6em;
-	line-height:					1.6em;
-	color:							#000;
-	text-decoration:				none;
-	color:							#fff;
 }
 
 #refresher {

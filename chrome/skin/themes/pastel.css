@@ -44,15 +44,11 @@ input#status {
 }
 
 #navigation td {
-	background-color:				#b4f29b;
-	border-left:					2px solid #f2dc9b;
-	border-right:					2px solid #f2dc9b;
-}
-#navigation td:hover {
-	background-color:				#f29b9b;
+	border-right:					4px solid #f2dc9b;
+	padding:							0px 5px;
 }
 #navigation td.active {
-	background-color:				#f29b9b;
+	background-color:				#fff;
 }
 
 #refresher {

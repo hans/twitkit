@@ -65,14 +65,15 @@
 		</tr>
 		<tr>
 			<td id="stalker">
+					<div id="nav-label">&nbsp;</div>
 					<table id="navigation" border="0" cellpadding="0" cellspacing="0">
 						<tr>
-							<td id="tab_for_public_timeline" style="border-left: none; margin-left: -5px;"><a id="public" href="#" onclick="Tweetbar.activate_panel('public_timeline',this); void 0;" alt="watch the public timeline" title="watch the public timeline">public</a></td>
-							<td id="tab_for_friends_timeline"><a id="user" href="#" onclick="Tweetbar.activate_panel('friends_timeline',this); void 0;">user</a></td>
-							<td id="tab_for_friends"><a id="friends" href="#" onclick="Tweetbar.activate_panel('friends',this); void 0">friends</a></td>
-							<td id="tab_for_followers"><a id="followers" href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;">followers</a></td>
-							<td id="tab_for_replies"><a id="replies" href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;">@s</a></td>
-							<td id="tab_for_me" style="margin: 0;"><a id="me" href="#" onclick="Tweetbar.activate_panel('me',this); void 0;">me</a></td>
+							<td id="tab_for_public_timeline" style="border-left: none; margin-left: -5px;"><a href="#" onclick="Tweetbar.activate_panel('public_timeline',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.public.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/public.png" /></a></td>
+							<td id="tab_for_friends_timeline"><a href="#" onclick="Tweetbar.activate_panel('friends_timeline',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.user.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;'"><img src="chrome://twitkit/skin/tabs/user.png" /></a></td>
+							<td id="tab_for_friends"><a href="#" onclick="Tweetbar.activate_panel('friends',this); void 0" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.friends.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/friends.png" /></a></td>
+							<td id="tab_for_followers"><a href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.followers.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/followers.png" /></a></td>
+							<td id="tab_for_replies"><a href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.replies.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/replies.png" /></a></td>
+							<td id="tab_for_me" style="margin: 0;"><a href="#" onclick="Tweetbar.activate_panel('me',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.me.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/me.png" /></a></td>
 						</tr>
 					</table>
 					<table id="refresher" border="0" cellpadding="0" cellspacing="0" width="100%" height="20">
