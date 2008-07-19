@@ -21,12 +21,14 @@ a img {
 	border:							none;
 }
 
-img#twitter-status {
+#icons {
 	position:						absolute;
-	left:							2px;
-	top:							2px;
-	width:							16px;
-	height:							16px;
+	left:								2px;
+	top:								2px;
+}
+#icons img {
+	width:							14px;
+	height:							14px;
 }
 
 #tweetbar {
