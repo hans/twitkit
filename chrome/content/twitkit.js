@@ -800,6 +800,7 @@ var Tweetbar = {
 							     postBody: {},
 							   	 onSuccess:
 							   		function () {
+						   				delete Tweetbar.tweets[Tweetbar.currentList][tweetid];
 							   			var slider = new Fx.Slide(tweetid);
 							   			slider.toggle();
 							   		},
