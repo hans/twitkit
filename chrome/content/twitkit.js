@@ -4,19 +4,7 @@
 	Based off of Tweetbar by Mike Demers [mike@mikedemers.net]
 	
 	homepage:  http://engel.uk.to/twitkit
-
-	Todo:
-		* Search (probably via Summize)
-			* How should this be orchestrated? With a new tab?
-		* improve behavior when twitter is down
-		* highlight friends and followers in public timeline
-		* add a configurable maximum tweet count
-		* add support for multiple accounts
-		* direct-messaging support
-		* alert user when they're making their 1000th/2000th/etc. tweet
-		* sound notifications
-		* change default URL shortening to ½.ws
-	*/
+*/
 
 /**
  * Tweetbar
