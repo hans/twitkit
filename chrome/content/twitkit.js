@@ -410,7 +410,22 @@ var Tweetbar = {
 	 */
 	compress_url:
 		function () {
-			var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+			var firstPosition = $('status').value.indexOf("http://");
+			var endPosition = $('status').value.indexOf(" ", firstPosition);
+			if (endPosition == -1) {
+				if ($('status').value.charAt(document.getElementById('status').selectionEnd - 1) == '.') {
+					var endPosition = document.getElementById('status').selectionEnd - 1;
+				}
+				else
+				{
+					var endPosition = document.getElementById('status').selectionEnd;
+				}
+			} else if ($('status').value.charAt($('status').value.indexOf(" ", firstPosition) - 1) == '.') {
+				endPosition = $('status').value.indexOf(" ", firstPosition) - 1;
+			}
+			
+			var selection = $('status').value.substring(firstPosition, endPosition);
+			
 			if ( selection.length == 0 ) {
 				return;
 			}
