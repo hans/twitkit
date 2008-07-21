@@ -1,0 +1,28 @@
+#!/bin/sh
+# ./compile - Simple builder for Mozilla extensions
+# By Hans Engel, released under the GPL 3.0 License
+
+# List all files and directories to compile
+files="chrome.manifest install.rdf chrome defaults"
+
+# Name of app ( this will be the XPI's name )
+app=twitkit
+
+echo "Copying files . . ."
+mkdir -p build
+for file in $files; do
+	echo "  $file -> build/$file"
+	cp -pr $file build/$file
+done
+
+echo "Compiling . . ."
+cd build
+zip -r9 ../$app.xpi *
+
+echo "Cleaning up . . ."
+cd ..
+echo "  build -> *poof*"
+rm -r build
+
+echo "Done."
+exit 0
