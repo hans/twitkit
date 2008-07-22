@@ -1,0 +1,21 @@
+<!ENTITY prefs.title "&twitKit;の設定">
+	<!ENTITY prefs.general "一般">
+		<!ENTITY prefs.general.showAppSource "from [application]' を表示する">
+		<!ENTITY prefs.general.refreshInterval "更新間隔:">
+			<!ENTITY prefs.general.refreshInterval.30 "30秒">
+			<!ENTITY prefs.general.refreshInterval.1 "1分">
+			<!ENTITY prefs.general.refreshInterval.3 "3分">
+			<!ENTITY prefs.general.refreshInterval.5 "5分">
+			<!ENTITY prefs.general.refreshInterval.10 "10分">
+		<!ENTITY prefs.general.showNamesAs "名前の表示:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "スクリーンネーム">
+			<!ENTITY prefs.general.showNamesAs.fullNames "フルネーム">
+	<!ENTITY prefs.theme "テーマ">
+		<!ENTITY prefs.theme.colorScheme "カラースキーム">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Deep Brown">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "Twitter Blue">
+			<!ENTITY prefs.theme.colorScheme.pastel "Pastel">
+			<!ENTITY prefs.theme.colorScheme.muted "Muted">
+		<!ENTITY prefs.theme.fontSize "フォントサイズ:">
+	<!ENTITY prefs.connection "接続">
+		<!ENTITY prefs.connection.secureConnection "安全な接続を使用する">
