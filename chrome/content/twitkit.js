@@ -85,9 +85,8 @@ var Tweetbar = {
 				$('using-ssl').setProperty('src', 'chrome://twitkit/skin/images/ssl-off.png');
 			
 			var initial_panel = Tweetbar.prefService.getCharPref('active_panel');
-			if ( initial_panel == '' ) {
+			if ( initial_panel == '' )
 				initial_panel = 'public_timeline';
-			}
 			
 			try {
 				Tweetbar.username = Tweetbar.prefService.getCharPref('username');
@@ -179,9 +178,8 @@ var Tweetbar = {
 					'X-Twitter-Client-Version': '1.1',
 					'X-Twitter-Client-URL': 'http://engel.uk.to/twitkit/1.1.xml',
 				};
-				if ( Tweetbar.username && Tweetbar.password ) {
+				if ( Tweetbar.username && Tweetbar.password )
 					Tweetbar.httpHeaders['Authorization'] = Tweetbar.http_basic_auth();
-				}
 			}
 			return Tweetbar.httpHeaders;
 		},
@@ -214,9 +212,8 @@ var Tweetbar = {
 			while ( iter.hasMoreElements() ) {
 				var cookie = iter.getNext();
 				if ( cookie instanceof Components.interfaces.nsICookie ) {
-					if ( url.indexOf(cookie.host.toUpperCase()) != -1 ) {
+					if ( url.indexOf(cookie.host.toUpperCase()) != -1 )
 						Tweetbar.cookieManager.remove(cookie.host, cookie.name, cookie.path, cookie.blocked);
-					}
 				}
 			}
 		},
@@ -337,23 +334,22 @@ var Tweetbar = {
 	 */
 	relative_time_string:
 		function (time_value) {
-		   var delta = parseInt(((new Date).getTime() - time_value) / 1000);
+			var delta = parseInt(((new Date).getTime() - time_value) / 1000);
 		   
-		   if ( delta < 60 ) {
-			   return 'less than a minute ago';
-		   } else if ( delta < 120 ) {
-			   return 'about a minute ago';
-		   } else if ( delta < ( 45*60 ) ) {
-			   return ( parseInt(delta / 60) ).toString() + ' minutes ago';
-		   } else if ( delta < ( 90*60 ) ) {
-			   return 'about an hour ago';
-		   } else if ( delta < ( 24*60*60 ) ) {
-			   return 'about ' + ( parseInt(delta / 3600) ).toString() + ' hours ago';
-		   } else if ( delta < ( 48*60*60 ) ) {
-			   return '1 day ago';
-		   } else {
-			   return ( parseInt(delta / 86400) ).toString() + ' days ago';
-		   }
+			if ( delta < 60 )
+				return 'less than a minute ago';
+			else if ( delta < 120 )
+				return 'about a minute ago';
+			else if ( delta < ( 45*60 ) )
+				return ( parseInt(delta / 60) ).toString() + ' minutes ago';
+			else if ( delta < ( 90*60 ) )
+				return 'about an hour ago';
+			else if ( delta < ( 24*60*60 ) )
+				return 'about ' + ( parseInt(delta / 3600) ).toString() + ' hours ago';
+			else if ( delta < ( 48*60*60 ) )
+				return '1 day ago';
+			else
+				return ( parseInt(delta / 86400) ).toString() + ' days ago';
 		},
 	
 	// Misc. Tweet Functions //
@@ -381,9 +377,8 @@ var Tweetbar = {
 			var panel = this.currentList;
 			
 			for ( var tweet in this.tweets[panel] ) {
-				if ( this.tweets[panel][tweet]._b ) {
+				if ( this.tweets[panel][tweet]._b )
 					delete this.tweets[panel][tweet];
-				}
 			}
 			this.update_current_list();
 		},
@@ -399,9 +394,8 @@ var Tweetbar = {
 	compress_url:
 		function () {
 			var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-			if ( selection.length == 0 ) {
+			if ( selection.length == 0 )
 				return;
-			}
 			var url = "http://is.gd/api.php?longurl="+selection;
 			var aj = new Ajax( url,
 							   { method: 'get',
@@ -430,21 +424,18 @@ var Tweetbar = {
 		function (tweet, li) {
 			var display_date = '';
 			if ( tweet ) {
-				if( !tweet._a ) {
+				if ( !tweet._a )
 					tweet._a = true;
-				} else if ( !tweet._b ) {
+				else if ( !tweet._b )
 					tweet._b = true;
-				}
-				if ( this.currentList != 'replies' ) { li.setProperty('id', tweet.id); }
+				if ( this.currentList != 'replies' )
+					li.setProperty('id', tweet.id);
 				var user_image = '';
-				if ( tweet.user && tweet.user.profile_image_url ) {
-					user_image = '<img src="' + tweet.user.profile_image_url +
-								 '" width="24" height="24" alt="'+tweet.user.name+'" />';
-				}
-				var tsource = tweet.source;
-				tsource = tsource.replace(/<a /, '<a target="_blank" ');
+				if ( tweet.user && tweet.user.profile_image_url )
+					user_image = '<img src="' + tweet.user.profile_image_url + '" width="24" height="24" alt="' + tweet.user.name + '" />';
+				var tsource = tweet.source.replace(/<a /, '<a target="_blank" ');
 				( Tweetbar.prefService.getBoolPref('showAppSource') ) ? source = '<div class="source">' + this._('misc.from') + ' ' + tsource + '</div>' : source = '';
-				( tweet.user['screen_name'] == Tweetbar.username ) ? dellink = '<a href="#" onclick="Tweetbar.delete_tweet(\'' + tweet.id + '\');"><img style="border: none; float: right;" src="chrome://twitkit/skin/images/delete.png" alt="" /></a>' : dellink = '';
+				( tweet.user.screen_name == Tweetbar.username ) ? dellink = '<a href="#" onclick="Tweetbar.delete_tweet(\'' + tweet.id + '\');"><img style="border: none; float: right;" src="chrome://twitkit/skin/images/delete.png" alt="" /></a>' : dellink = '';
 				( this.currentList == 'replies' ) ? date = '' : date = ' - ' + Tweetbar.relative_time_string(tweet.created_at);
 				/*
 				 * Hashtags implementation - by Joschi
@@ -460,8 +451,8 @@ var Tweetbar = {
 				else
 					favorite = '<a class="re" href="javascript: Tweetbar.fav_tweet(\'' + tweet.id + '\'); void 0;"><img id="fav-' + tweet.id + '" class="re" src="chrome://twitkit/skin/images/fav_add.png" alt="" /></a>';
 
-				return '<p class="pic"><a href="#" onclick="setReply(\'' + tweet.user['screen_name'] + '\');">'+ user_image + '</a>' +
-					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user['screen_name'] + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
+				return '<p class="pic"><a href="#" onclick="setReply(\'' + tweet.user.screen_name + '\');">'+ user_image + '</a>' +
+					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user.screen_name + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
 					   favorite + '</span></p>' +
 					   '<p class="what">' + tweet.text + '</p>' +
 					   '<p class="who">' + this.user_anchor_tag(tweet.user) + date + '</p>' +
@@ -491,10 +482,10 @@ var Tweetbar = {
 				status = status.replace(/(#(\w*))/g,'<a target="_blank" href="http://hashtags.org/tag/$2">$1</a>');
 			}
     
-			return '<p class="pic"><a href="#" onclick="setReply(\'' + user['screen_name'] + '\');"><img src="' + user['profile_image_url'] + '" width="24" height="24" alt="'+user['name']+'" /></a>' +
-				   '<p class="what" style="font-size: 120%;">' + user['name'] + '</p>' +
+			return '<p class="pic"><a href="#" onclick="setReply(\'' + user.screen_name + '\');"><img src="' + user.profile_image_url + '" width="24" height="24" alt="' + user.name + '" /></a>' +
+				   '<p class="what" style="font-size: 120%;">' + user.name + '</p>' +
 				   '<p class="who">' + status + '<br/>' +
-				   '<a target="_blank" href="' + Tweetbar.protocol + '://twitter.com/' + user['screen_name'] + '">' + user['screen_name'] + '</a></p>';
+				   '<a target="_blank" href="' + Tweetbar.protocol + '://twitter.com/' + user.screen_name + '">' + user.screen_name + '</a></p>';
 		},
 	
 	// List Updating //
@@ -508,22 +499,19 @@ var Tweetbar = {
 	update_current_list:
 		function () {
 			$('tweets').setHTML('');
-			if( ( this.currentList == 'public_timeline' ) || ( this.currentList == 'friends_timeline' ) ) {
+			if ( ( this.currentList == 'public_timeline' ) || ( this.currentList == 'friends_timeline' ) ) {
 				var current_tweets = this.current_tweets();
 				var tweet_ids = [];
-				for ( var tid in current_tweets ) {
+				for ( var tid in current_tweets )
 					tweet_ids.push(tid);
-				}
 				tweet_ids = tweet_ids.sort().reverse();
 				for ( var i=0; i < tweet_ids.length; i++ ) {
 					var li = new Element('li');
 					li.setHTML(this.render_tweet(current_tweets[tweet_ids[i]], li));
-					if ( ( i % 2 ) == 0 ) {
+					if ( ( i % 2 ) == 0 )
 						li.addClass('even');
-					}
-					if ( Tweetbar.username && current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 ) {
+					if ( Tweetbar.username && current_tweets[tweet_ids[i]].text.search('@' + Tweetbar.username) !== -1 )
 						li.addClass('reply');
-					}
 					li.injectInside($('tweets'));
 				}
 			} else if ( this.currentList == 'friends' || this.currentList == 'followers' ) {
@@ -533,19 +521,18 @@ var Tweetbar = {
 								     postBody: {},
 								   	 onSuccess:
 								   	 	function (raw_data) {
-											var rsp = Json.evaluate(raw_data);
-											var i = 0;
-											for ( var user in rsp ) {
-												if ( (rsp[user]['screen_name'] != undefined) && (rsp[user]['screen_name'] != 'forEach') ) {
-													var li = new Element('li');
-													li.setHTML(Tweetbar.render_user(rsp[user]));
-													if ( ( i % 2 ) == 0 ) {
-														li.addClass('even');
+												var rsp = Json.evaluate(raw_data);
+												var i = 0;
+												for ( var user in rsp ) {
+													if ( (rsp[user]['screen_name'] != undefined) && (rsp[user]['screen_name'] != 'forEach') ) {
+														var li = new Element('li');
+														li.setHTML(Tweetbar.render_user(rsp[user]));
+														if ( ( i % 2 ) == 0 )
+															li.addClass('even');
+														li.injectInside('tweets');
+														i++;
 													}
-													li.injectInside('tweets');
-													i++;
 												}
-											}
 								   	 	},
 								   }).request();
 			} else if ( this.currentList == 'replies' ) {
@@ -560,12 +547,11 @@ var Tweetbar = {
 								   	 			var li = new Element('li');
 								   	 			rsp[reply].text = Tweetbar.expand_status(rsp[reply].text);
 								   	 			li.setHTML(Tweetbar.render_tweet(rsp[reply]));
-								   	 			if ( ( i % 2 ) == 0 ) {
+								   	 			if ( ( i % 2 ) == 0 )
 								   	 				li.addClass('even');
-								   	 			}
 								   	 			li.injectInside('tweets');
 								   	 			i++;
-								   	 		}
+												}
 								   	 	}
 								   }).request();
 			} else if ( this.currentList == 'me' ) {
@@ -666,7 +652,7 @@ var Tweetbar = {
 	 */
 	clear_updater:
 		function () {
-			if(this.updater) {
+			if ( this.updater ) {
 				$clear(this.updater);
 			}
 		},
@@ -809,9 +795,9 @@ var Tweetbar = {
 	 */
 	update_status:
 		function (status, callback) {
-			if ( this.isAuthenticated ) {
+			if ( this.isAuthenticated )
 				this.send_tweet(status, callback);
-			} else {
+			else {
 				this.authenticate('update');
 				this.pendingUpdate = {callback: callback, status: status};
 			}
@@ -934,9 +920,8 @@ var Tweetbar = {
 			this.loginSlider.slideOut();
 			
 			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">' + this._('login.signIn') + '</a>');
-			if ( obj ) {
+			if ( obj )
 				obj.blur();
-			}
 			
 			var x = document.getElementById('username');
 			x.value = '';
@@ -957,9 +942,9 @@ var Tweetbar = {
 			this.loginSlider.slideIn();
 			
 			$('whoami').setHTML('<a href="#" class="signin" onclick="Tweetbar.close_login(this); return false;">' + this._('login.close') + '</a>');
-			if ( obj ) {
+			if ( obj )
 				obj.blur();
-			}
+
 			$('username').focus();
 		},
 	/**
@@ -974,11 +959,10 @@ var Tweetbar = {
 	 */
 	authorization_required_for:
 		function (resource) {
-			if ( resource == 'public_timeline' ) {
+			if ( resource == 'public_timeline' )
 				return false;
-			} else {
+			else
 				return true;
-			}
 		},
 	/**
 	 * authenticate ( action )
@@ -1019,9 +1003,8 @@ var Tweetbar = {
 										$('whoami').setStyle('backgroundColor', '#75b7ba');
 										$('loginwrap').setStyle('display', 'block');
 										Tweetbar.loginSlider.hide();
-										if ( Tweetbar.authorization_required_for(this.currentList) ) {
+										if ( Tweetbar.authorization_required_for(this.currentList) )
 											Tweetbar.activate_panel('public_timeline');
-										}
 							   	 	},
 							   	onFailure:
 							   		function () {
@@ -1066,10 +1049,9 @@ var Tweetbar = {
 													}
 												}
 												Tweetbar.set_username_on_page();
-											} else {
+											} else
 												alert(this._('errors.signOut'));
-											}
-											if(callback) {
+											if ( callback ) {
 												try { callback(); } catch(e) { };
 											}
 										},
