@@ -410,7 +410,10 @@ var Tweetbar = {
 	 */
 	compress_url:
 		function () {
-			var firstPosition = $('status').value.indexOf("http://");
+			var currentPos = 0;
+			while ($('status').value.indexOf("http://", currentPos) != -1)
+			{
+			var firstPosition = $('status').value.indexOf("http://", currentPos);
 			var endPosition = $('status').value.indexOf(" ", firstPosition);
 			if (endPosition == -1) {
 				if ($('status').value.charAt(document.getElementById('status').selectionEnd - 1) == '.') {
@@ -423,9 +426,9 @@ var Tweetbar = {
 			} else if ($('status').value.charAt($('status').value.indexOf(" ", firstPosition) - 1) == '.') {
 				endPosition = $('status').value.indexOf(" ", firstPosition) - 1;
 			}
-			
+
 			var selection = $('status').value.substring(firstPosition, endPosition);
-			
+
 			if ( selection.length == 0 ) {
 				return;
 			}
@@ -434,13 +437,14 @@ var Tweetbar = {
 							   { method: 'get',
 							     onSuccess:
 							     	function (replaced) {
-										var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-										var text = document.getElementById('status').value.substring(0,firstPosition) + replaced + (selection.length==selection.trim().length?"":" ")+ document.getElementById('status').value.substring(endPosition);  
-										document.getElementById('status').value=text;
+										text = $('status').value.replace(selection, replaced);
+										$('status').value = text;
 									},
 							   }).request();
+			var currentPos = endPosition;
+			}
 		},
-	
+		
 	// Rendering //
 	/**
 	 * render_tweet ( )
