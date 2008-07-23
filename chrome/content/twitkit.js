@@ -60,6 +60,13 @@ var Tweetbar = {
 			// Markdown //
 			Tweetbar.markDown = new Showdown.converter();
 			
+			Tweetbar.DOMWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				.getInterface(Components.interfaces.nsIWebNavigation)
+				.QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				.rootTreeItem
+				.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				.getInterface(Components.interfaces.nsIDOMWindow);
+			
 			var scheme = Tweetbar.prefService.getCharPref('colorScheme').toLowerCase();
 			var link = new Element('link');
 			link.setProperties({
@@ -893,6 +900,20 @@ var Tweetbar = {
 			$('lists').setStyle('height', h+'px');
 			var w = Window.getWidth() + 15;
 			$('tweets').setStyle('max-width', w+'px');
+		},
+	
+	// Docking //
+	/**
+	 * undock ( )
+	 * Undock TwitKit.
+	 * 
+	 * @methodOf Tweetbar
+	 * @since 1.1
+	 */
+	undock:
+		function () {
+			window.open('chrome://twitkit/content/twitkit.html', 'TwitKit', 'width=300,resizable=yes,scrollbars=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no');
+			Tweetbar.DOMWindow.toggleSidebar('viewTweetbar');
 		},
 	
 	// Authorization //
