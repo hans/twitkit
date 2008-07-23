@@ -1,7 +1,7 @@
 <!ENTITY  sidebar.heading    "twitkit">
 <!ENTITY  sidebar.title      "twitkit">
 
-<!ENTITY openTweetbar.commandkey     "T">
+<!ENTITY openTweetbar.commandkey     "A">
 <!ENTITY openTweetbar.modifierskey  "alt accel">
 
 <!ENTITY toolbar.label   "twitkit">
