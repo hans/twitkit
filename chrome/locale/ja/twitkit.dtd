@@ -1,8 +1,8 @@
 <!ENTITY  sidebar.heading    "twitkit">
 <!ENTITY  sidebar.title      "twitkit">
 
-<!ENTITY openTweetbar.commandkey     "F">
-<!ENTITY openTweetbar.modifierskey  "shift accel">
+<!ENTITY openTweetbar.commandkey     "T">
+<!ENTITY openTweetbar.modifierskey  "alt accel">
 
 <!ENTITY toolbar.label   "twitkit">
 <!ENTITY toolbar.tooltip "twitkitを開く">
