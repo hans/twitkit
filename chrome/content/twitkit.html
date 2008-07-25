@@ -109,15 +109,14 @@
 		function updateStatusTextCharCounter(value) {
 			var len = value.length;
 			$('status-field-char-counter').innerHTML = 140 - len;
-			if ( len >= 140 ) {
+			if ( len >= 140 )
 				$('status-field-char-counter').setStyles({'color': '#ff0000', 'font-weight': 'bold'});
-			} else if ( len > 130 ) {
+			else if ( len > 130 )
 				$('status-field-char-counter').setStyles({'color': '#d40d12', 'font-weight': 'normal'});
-			} else if ( len > 120 ) {
+			else if ( len > 120 )
 				$('status-field-char-counter').setStyles({'color': '#5c0002', 'font-weight': 'normal'});
-			} else {
+			else
 				$('status-field-char-counter').setStyles({'color': '#888888', 'font-weight': 'normal'});
-			}
 		};
 		
 		$('status-field-char-counter').innerHTML = 140 - $('status').value.length;
