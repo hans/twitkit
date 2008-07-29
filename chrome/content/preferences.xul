@@ -25,61 +25,66 @@
 			<preference id="extensions.twitkit.secureConnection" name="extensions.twitkit.secureConnection" type="bool"/>
 		</preferences>
    		
-   		<groupbox>
-   			<caption label="&prefs.general;"/>
-   			<checkbox label="&prefs.general.showAppSource;" preference="extensions.twitkit.showAppSource"/>
-			<grid>
-				<rows>
-   					<row>
-   						<label flex="1">&prefs.general.refreshInterval;</label>
-   						<menulist id="refreshInterval" preference="extensions.twitkit.refreshInterval">
-   							<menupopup>
-								<menuitem value="30000" label="&prefs.general.refreshInterval.30;"/>
-								<menuitem value="60000" label="&prefs.general.refreshInterval.1;"/>
-								<menuitem value="180000" label="&prefs.general.refreshInterval.3;"/>
-								<menuitem value="300000" label="&prefs.general.refreshInterval.5;"/>
-								<menuitem value="600000" label="&prefs.general.refreshInterval.10;"/>
-							</menupopup>
-			   			</menulist>
-			   		</row>
-			   		<row>
-			   			<label flex="1">&prefs.general.showNamesAs;</label>
-			   			<menulist id="showNamesAs" preference="extensions.twitkit.showNamesAs">
-			   				<menupopup>
-			   					<menuitem value="screennames" label="&prefs.general.showNamesAs.screenNames;"/>
-			   					<menuitem value="fullnames" label="&prefs.general.showNamesAs.fullNames;"/>
-			   				</menupopup>
-			   			</menulist>
-			   		</row>
-			   	</rows>
-			</grid>
-		</groupbox>
-		<groupbox>
-			<caption label="&prefs.theme;"/>
-			<grid>
-				<rows>
-					<row>
-						<label flex="1">&prefs.theme.colorScheme;</label>
-						<menulist id="colorScheme" preference="extensions.twitkit.colorScheme">
-							<menupopup>
-								<menuitem value="deepBrown" label="&prefs.theme.colorScheme.deepBrown;"/>
-								<menuitem value="twitterBlue" label="&prefs.theme.colorScheme.twitterBlue;"/>
-								<menuitem value="pastel" label="&prefs.theme.colorScheme.pastel;"/>
-								<menuitem value="muted" label="&prefs.theme.colorScheme.muted;"/>
-							</menupopup>
-						</menulist>
-					</row>
-					<row>
-						<label flex="1">&prefs.theme.fontSize;</label>
-						<textbox preference="extensions.twitkit.fontSize"></textbox>
-						<label flex="1">%</label>
-					</row>
-				</rows>
-			</grid>
-		</groupbox>
-		<groupbox>
-			<caption label="&prefs.connection;"/>
-			<checkbox label="&prefs.connection.secureConnection;" preference="extensions.twitkit.secureConnection"/>
-		</groupbox>
+   		<tabbox>
+   			<tabs>
+   				<tab label="&prefs.general;" />
+   				<tab label="&prefs.theme;" />
+   				<tab label="&prefs.connection;" />
+   			</tabs>
+   			<tabpanels>
+   				<tabpanel>
+						<grid>
+							<rows>
+			   					<row>
+			   						<label flex="1">&prefs.general.refreshInterval;</label>
+			   						<menulist id="refreshInterval" preference="extensions.twitkit.refreshInterval">
+			   							<menupopup>
+											<menuitem value="30000" label="&prefs.general.refreshInterval.30;"/>
+											<menuitem value="60000" label="&prefs.general.refreshInterval.1;"/>
+											<menuitem value="180000" label="&prefs.general.refreshInterval.3;"/>
+											<menuitem value="300000" label="&prefs.general.refreshInterval.5;"/>
+											<menuitem value="600000" label="&prefs.general.refreshInterval.10;"/>
+										</menupopup>
+						   			</menulist>
+						   		</row>
+						   		<row>
+						   			<label flex="1">&prefs.general.showNamesAs;</label>
+						   			<menulist id="showNamesAs" preference="extensions.twitkit.showNamesAs">
+						   				<menupopup>
+						   					<menuitem value="screennames" label="&prefs.general.showNamesAs.screenNames;"/>
+						   					<menuitem value="fullnames" label="&prefs.general.showNamesAs.fullNames;"/>
+						   				</menupopup>
+						   			</menulist>
+						   		</row>
+						   	</rows>
+						</grid>
+					</tabpanel>
+					<tabpanel>
+						<grid>
+							<rows>
+								<row>
+									<label flex="1">&prefs.theme.colorScheme;</label>
+									<menulist id="colorScheme" preference="extensions.twitkit.colorScheme">
+										<menupopup>
+											<menuitem value="deepBrown" label="&prefs.theme.colorScheme.deepBrown;"/>
+											<menuitem value="twitterBlue" label="&prefs.theme.colorScheme.twitterBlue;"/>
+											<menuitem value="pastel" label="&prefs.theme.colorScheme.pastel;"/>
+											<menuitem value="muted" label="&prefs.theme.colorScheme.muted;"/>
+										</menupopup>
+									</menulist>
+								</row>
+								<row>
+									<label flex="1">&prefs.theme.fontSize;</label>
+									<textbox preference="extensions.twitkit.fontSize"></textbox>
+									<label flex="1">%</label>
+								</row>
+							</rows>
+						</grid>
+					</tabpanel>
+					<tabpanel>
+						<checkbox label="&prefs.connection.secureConnection;" preference="extensions.twitkit.secureConnection"/>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
 	</prefpane>
 </prefwindow>
