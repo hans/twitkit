@@ -60,6 +60,12 @@ var Tweetbar = {
 			// Markdown //
 			Tweetbar.markDown = new Showdown.converter();
 			
+			// Docking //
+			var url = window.location.href;
+			if ( url.search('undocked') !== -1 ) {
+				$('is-undocked').remove();
+			}
+			
 			Tweetbar.DOMWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 				.getInterface(Components.interfaces.nsIWebNavigation)
 				.QueryInterface(Components.interfaces.nsIDocShellTreeItem)
@@ -921,7 +927,7 @@ var Tweetbar = {
 	 */
 	undock:
 		function () {
-			window.open('chrome://twitkit/content/twitkit.html', 'TwitKit', 'width=300,resizable=yes,scrollbars=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no');
+			window.open('chrome://twitkit/content/twitkit.html?undocked', 'TwitKit', 'width=300,resizable=yes,scrollbars=no,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no');
 			Tweetbar.DOMWindow.toggleSidebar('viewTweetbar');
 		},
 	
