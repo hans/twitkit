@@ -454,7 +454,7 @@ var Tweetbar = {
 				/*
 				 * Hashtags implementation - by Joschi
 				 */
-				tweet.text = tweet.text.replace(/(\s|^|)(#(\w*))(\s|$)/g,'$1<a target="_blank" href="http://hashtags.org/tag/$3">$2</a>$4');
+				tweet.text = tweet.text.replace(/(\s|^|)(#(\w*))([\s.!()/]|$)/g,'$1<a target="_blank" href="http://hashtags.org/tag/$3">$2</a>$4');
 
 				// Markdown //
 				tweet.text = Tweetbar.markDown.makeHtml(tweet.text);
