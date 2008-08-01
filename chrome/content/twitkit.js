@@ -251,10 +251,12 @@ var Tweetbar = {
 		function (s) {
 			ret = s.toString();
 			ret = ret.replace(/\</,'&lt;');
-			var re = new RegExp('(<\\w+.*?>|[^=!:\'"/]|^)((?:https?:\/\/)|(?:www\.))([-\\w]+(?:\.[-\\w]+)*(?::\\d+)?(?:/(?:(?:[~\\w\\+%-]|(?:[,.;@:][^\\s$]))+)?)*(?:\\?[\\w\\+%&=.;:-]+)?(?:\#[\\w\-\.]*)?)([?()!).\\s]|<|$)', 'gi');
+			var re = new RegExp('(<\\w+.*?>|[^=!:\'"/]|^|)((?:https?:\/\/)|(?:www\.))([-\\w]+(?:\.[-\\w]+)*(?::\\d+)?(?:/(?:(?:[~\\w\\+%-]|(?:[,.;@:][^\\s$]))+)?)*(?:\\?[\\w\\+%&=.;:-]+)?(?:\#[\\w\-\.]*)?)([?()!).\\s]|<|$)', 'gi');
 			ret = ret.replace(re, '$1' + this.anchor_tag('$2$3') + '$4');
 			ret = ret.replace(/<a href="www/g, '<a href="http:\/\/www');
-			ret = ret.replace(/<a href="([^\s]+) (.+)" target(.+)>([^\s]+) (.+)<\/a>/, '<a href="$1" target$3>$1</a> $5');
+			ret = ret.replace(/<a href="([^\s]+) ([^<>]+)" target(.+)>([^\s]+) ([^<]+)<\/a>/, '<a href="$1" target$3>$1</a> $5');
+			//if ( ret.search('foo') !== -1 )
+			//	alert(ret);
 			ret = ret.replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag(Tweetbar.protocol + ':\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
 			return ret;
 		},
