@@ -646,6 +646,7 @@ var Tweetbar = {
 	save_tweets:
 		function (panel, response_data) {
 			var new_tweets = Json.evaluate(response_data);
+			this.tweets[panel] = {};
 			for ( var i=0; i < new_tweets.length; i++ ) {
 				if ( new_tweets[i].user ) {
 					var status = Tweetbar.create_status_object(new_tweets[i]);
