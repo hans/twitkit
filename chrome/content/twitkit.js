@@ -1,5 +1,5 @@
 /*
-	TwitKit v1.1
+	TwitKit v1.2
 	
 	Based off of Tweetbar by Mike Demers [mike@mikedemers.net]
 	
