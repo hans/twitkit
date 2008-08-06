@@ -845,7 +845,7 @@ var Tweetbar = {
 								onSuccess:
 									function (raw_data) {
 										Tweetbar.save_tweets(this.currentList, raw_data);
-										if ( this.currentList == 'friends_timeline' )
+										if ( Tweetbar.currentList == 'friends_timeline' )
 											setTimeout('Tweetbar.manual_refresh();', 1000);
 									},
 								onFailure:
