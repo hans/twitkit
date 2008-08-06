@@ -867,6 +867,8 @@ var Tweetbar = {
 	 */
 	activate_panel:
 		function (name, caller) {
+			if ( name == '' )
+				name = 'public_timeline';
 			if ( !this.authorization_required_for(name) || this.isAuthenticated ) {
 				
 				this.currentList = name;
