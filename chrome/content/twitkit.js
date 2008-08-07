@@ -104,8 +104,13 @@ var Tweetbar = {
 			try {
 				Tweetbar.username = Tweetbar.prefService.getCharPref('username');
 				Tweetbar.password = Tweetbar.prefService.getCharPref('password');
-				Tweetbar.isAuthenticated = true;
-				Tweetbar.set_username_on_page();
+				if ( Tweetbar.username !== '' && Tweetbar.password !== '' ) {
+					Tweetbar.isAuthenticated = true;
+					Tweetbar.set_username_on_page();
+				} else {
+					Tweetbar.username = null;
+					Tweetbar.password = null;
+				}
 			} catch (e) { }
 			
 			this.activate_panel(initial_panel);
