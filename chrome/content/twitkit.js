@@ -72,6 +72,14 @@ var Tweetbar = {
 	 * Service which reads/writes cookies
 	 */
 	cookieService: null,
+	/**
+	 * Service that retrieves localized strings
+	 */
+	stringBundleService: null,
+	/**
+	 * Shorthand way of accessing Tweetbar#stringBundleService
+	 */
+	strings: null,
 	
 	// Startup Functions //
 	/**
