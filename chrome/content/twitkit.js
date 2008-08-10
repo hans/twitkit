@@ -11,6 +11,7 @@
  * The main JavaScript class for TwitKit.
  * 
  * @class
+ * @version 1.2
  */
 var Tweetbar = {
 	
