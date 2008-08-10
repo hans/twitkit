@@ -77,7 +77,7 @@ var Tweetbar = {
 	 */
 	stringBundleService: null,
 	/**
-	 * Shorthand way of accessing Tweetbar#stringBundleService
+	 * Shorthand way of accessing Tweetbar.stringBundleService
 	 */
 	strings: null,
 	
