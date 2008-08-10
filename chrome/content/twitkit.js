@@ -68,6 +68,10 @@ var Tweetbar = {
 	 * The service responsible for retrieving and setting preferences
 	 */
 	prefService: null,
+	/**
+	 * Service which reads/writes cookies
+	 */
+	cookieService: null,
 	
 	// Startup Functions //
 	/**
@@ -82,7 +86,7 @@ var Tweetbar = {
 	run:
 		function () {
 			Tweetbar.prefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.twitkit.");
-			Tweetbar.cookieManager = Components.classes["@mozilla.org/cookiemanager;1"].getService(Components.interfaces.nsICookieManager);
+			Tweetbar.cookieService = Components.classes["@mozilla.org/cookiemanager;1"].getService(Components.interfaces.nsICookieManager);
 			
 			// l10n //
 			Tweetbar.stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
@@ -254,12 +258,12 @@ var Tweetbar = {
 	clear_cookies:
 		function () {
 			var url = 'HTTP://TWITTER.COM';
-			var iter = Tweetbar.cookieManager.enumerator;
+			var iter = Tweetbar.cookieService.enumerator;
 			while ( iter.hasMoreElements() ) {
 				var cookie = iter.getNext();
 				if ( cookie instanceof Components.interfaces.nsICookie ) {
 					if ( url.indexOf(cookie.host.toUpperCase()) != -1 )
-						Tweetbar.cookieManager.remove(cookie.host, cookie.name, cookie.path, cookie.blocked);
+						Tweetbar.cookieService.remove(cookie.host, cookie.name, cookie.path, cookie.blocked);
 				}
 			}
 		},
