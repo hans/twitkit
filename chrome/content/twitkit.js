@@ -7,15 +7,18 @@
 */
 
 /**
- * Tweetbar
  * The main JavaScript class for TwitKit.
  * 
  * @class
+ * @requires MooTools
  * @version 1.2
  */
 var Tweetbar = {
 	
 	// Variables //
+	/**
+	 * Tweets for each panel are stored here
+	 */
 	tweets: {
 		friends: {},
 		followers: {},
@@ -24,20 +27,50 @@ var Tweetbar = {
 		replies: {},
 		me: {},
 	},
+	/**
+	 * Used for parsing Twitter's created_at API property later on
+	 */
 	month_names: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
+	/**
+	 * User is(n't) authenticated
+	 */
 	isAuthenticated: false,
+	/**
+	 * The current list being viewed
+	 */
 	currentList: null,
+	/**
+	 * Stores the updater object created by MooTools periodical() function
+	 */
 	updater: null,
+	/**
+	 * The MooTools Fx object responsible for showing/hiding the login window
+	 */
 	loginSlider: null,
+	/**
+	 * The current user's Twitter username
+	 */
 	username: null,
+	/**
+	 * The current user's Twitter password
+	 */
 	password: null,
+	/**
+	 * If we're waiting for the user to log in to do something, the action that
+	 * will be performed is stored here.
+	 */
 	pendingAction: null,
+	/**
+	 * Cached HTTP headers to send with API requests
+	 */
 	httpHeaders: null,
+	/**
+	 * The service responsible for retrieving and setting preferences
+	 */
 	prefService: null,
 	
 	// Startup Functions //
 	/**
-	 * run ( )
 	 * Initializes TwitKit processes and prepares the
 	 * sidebar. This function is essential for TwitKit to
 	 * function correctly.
@@ -117,7 +150,6 @@ var Tweetbar = {
 			this.activate_panel(initial_panel);
 		},
 	/**
-	 * localize ( )
 	 * Translates all words in the HTML document to the
 	 * user's current locale.
 	 * 
@@ -148,7 +180,6 @@ var Tweetbar = {
 	
 	// l10n //
 	/**
-	 * _ ( label )
 	 * Translates a string into the user's current locale.
 	 * If one parameter is given, the string is retrieved.
 	 * If more than one parameters are given, the string is
@@ -171,7 +202,6 @@ var Tweetbar = {
 	
 	// HTTP Headers //
 	/**
-	 * clear_http_headers ( )
 	 * Reset all HTTP headers (used in logging in/out)
 	 * 
 	 * @methodOf Tweetbar
@@ -182,7 +212,6 @@ var Tweetbar = {
 			Tweetbar.httpHeaders = null;
 		},
 	/**
-	 * http_headers ( )
 	 * Return standarad HTTP headers to be sent to Twitter.
 	 * 
 	 * @returns {Array} An array of HTTP headers.
@@ -203,7 +232,6 @@ var Tweetbar = {
 			return Tweetbar.httpHeaders;
 		},
 	/**
-	 * http_basic_auth ( )
 	 * Return Basic authentication for HTTP headers.
 	 * 
 	 * @returns {String} Basic authentication string.
@@ -217,7 +245,6 @@ var Tweetbar = {
 	
 	// Cookies //
 	/**
-	 * clear_cookies ( )
 	 * Clears cookies for twitter.com, to prevent sign-in
 	 * problems.
 	 * 
@@ -239,7 +266,6 @@ var Tweetbar = {
 	
 	// Miscellaneous //
 	/**
-	 * api_url_for ( resource )
 	 * Returns the Twitter API request URL for the specified action.
 	 * 
 	 * @param {String} resource A valid Twitter API request.
@@ -251,7 +277,6 @@ var Tweetbar = {
 			return Tweetbar.protocol + '://twitter.com/statuses/' + resource + '.json';
 		},
 	/**
-	 * expand_status ( s )
 	 * Make links and replies clickable.
 	 * 
 	 * @param {String} s Tweet text
@@ -272,7 +297,6 @@ var Tweetbar = {
 			return ret;
 		},
 	/**
-	 * create_status_object ( obj )
 	 * Take a JSON object, parse it for parameters we need, and format them.
 	 *
 	 * @param {Object} obj A JSON object returned from the Twitter API.
@@ -291,7 +315,6 @@ var Tweetbar = {
 			}
 		},
 	/**
-	 * create_user_object ( obj )
 	 * Take a JSON object containing a user, parse it, and format it.
 	 * 
 	 * @param {Object} obj A JSON object returned from a 'friends' or 'followers' API request.
@@ -313,7 +336,6 @@ var Tweetbar = {
 			}
 		},
 	/**
-	 * user_anchor_tag ( user, text )
 	 * Link a username to its Twitter profile.
 	 * 
 	 * @param {String} user A user object returned from Tweetbar#create_user_object.
@@ -333,7 +355,6 @@ var Tweetbar = {
 									user['name'] + ' in ' + user['location']);
 		},
 	/**
-	 * anchor_tag ( url, text, title )
 	 * Anchor a tag.
 	 * 
 	 * @param {String} url The URL to link to.
@@ -351,7 +372,6 @@ var Tweetbar = {
 					( (text) ? text : url ) + '</a>';
 		},
 	/**
-	 * relative_time_string ( time_value )
 	 * Convert a date returned from Twitter API requests to a relative time string.
 	 * 
 	 * @param {String} time_value A date returned from Twitter API requests
@@ -381,7 +401,6 @@ var Tweetbar = {
 	
 	// Misc. Tweet Functions //
 	/**
-	 * current_tweets ( )
 	 * This is a shorthand method of retrieving the tweets currently being displayed.
 	 * 
 	 * @returns {Object} An object filled with tweets
@@ -393,7 +412,6 @@ var Tweetbar = {
 			return this.tweets[this.currentList];
 		},
 	/**
-	 * clear_current_tweets ( )
 	 * Clear tweets from the current panel.
 	 * 
 	 * @methodOf Tweetbar
@@ -412,9 +430,8 @@ var Tweetbar = {
 	
 	// URL Compression //
 	/**
-	 * compress_url ( )
+	 * Replaces a long URL in the status box with a URL compressed by is.gd
 	 * 
-	 * @description Replaces a long URL in the status box with a URL compressed by is.gd
 	 * @methodOf Tweetbar
 	 * @since 1.0
 	 */
@@ -437,7 +454,6 @@ var Tweetbar = {
 	
 	// Rendering //
 	/**
-	 * render_tweet ( )
 	 * Render a tweet (but don't print it).
 	 * 
 	 * @param {Object} tweet A tweet object returned by Tweetbar#create_status_object.
@@ -487,7 +503,6 @@ var Tweetbar = {
 			}
 		},
 	/**
-	 * render_user ( user )
 	 * Render a user (but don't print it).
 	 * 
 	 * @param {Object} user A user object returned by Tweetbar#create_user_object.
@@ -517,7 +532,6 @@ var Tweetbar = {
 	
 	// List Updating //
 	/**
-	 * update_current_list ( )
 	 * Update the current list of tweets (print it).
 	 * 
 	 * @methodOf Tweetbar
@@ -606,7 +620,6 @@ var Tweetbar = {
 			}
 		},
 	/**
-	 * get_tweets ( )
 	 * Retrieve tweets from Twitter.
 	 * 
 	 * @methodOf Tweetbar
@@ -641,7 +654,6 @@ var Tweetbar = {
 							  }).request();
 		},
 	/**
-	 * save_tweets ( panel, response_data )
 	 * Save the fresh tweets to the current panel's registry.
 	 * 
 	 * @param {String} panel The name of the current panel.
@@ -672,7 +684,6 @@ var Tweetbar = {
 			}
 		},
 	/**
-	 * clear_updater ( )
 	 * Stop periodical updates.
 	 * 
 	 * @methodOf Tweetbar
@@ -685,7 +696,6 @@ var Tweetbar = {
 			}
 		},
 	/**
-	 * set_updater ( )
 	 * Reset (or start for the first time) periodical updates.
 	 * 
 	 * @methodOf Tweetbar
@@ -699,7 +709,6 @@ var Tweetbar = {
 			this.updater = this.get_tweets.periodical(up_int);
 		},
 	/**
-	 * manual_refresh ( )
 	 * Refresh the current panel, regardless of the periodical updater. Used when user manually clicks 'refresh'.
 	 * 
 	 * @methodOf Tweetbar
@@ -714,7 +723,6 @@ var Tweetbar = {
 	
 	// Refresh //
 	/**
-	 * show_refresh_activity ( )
 	 * Show the refresher label and icon.
 	 * 
 	 * @methodOf Tweetbar
@@ -726,7 +734,6 @@ var Tweetbar = {
 			$('refreshing').setStyle('display', 'inline');
 		},
 	/**
-	 * hide_refresh_activity ( )
 	 * Hide the refresher label and icon.
 	 * 
 	 * @methodOf Tweetbar
@@ -740,7 +747,6 @@ var Tweetbar = {
 	
 	// Tweet Actions //	
 	/**
-	 * fav_tweet ( tweetid )
 	 * Add a tweet to the user's favorites.
 	 * 
 	 * @param {String} tweetid The ID of the tweet to add to favorites.
@@ -764,7 +770,6 @@ var Tweetbar = {
 							   }).request();
 		},
 	/**
-	 * unfav_tweet ( tweetid )
 	 * Remove a tweet from the user's favorites.
 	 * 
 	 * @param {String} tweetid The ID of the tweet to remove from favorites.
@@ -788,7 +793,6 @@ var Tweetbar = {
 							   }).request();
 		},
 	/**
-	 * delete_tweet ( tweetid )
 	 * Delete one of the user's tweets.
 	 * 
 	 * @param {String} tweetid The ID of the tweet to delete. The user MUST own this tweet.
@@ -813,7 +817,6 @@ var Tweetbar = {
 							   }).request();
 		},
 	/**
-	 * update_status ( )
 	 * Umbrella function for updating the user's status -
 	 * does some authentication checking and then runs the
 	 * actual update function, Tweetbar#send_tweet.
@@ -831,7 +834,6 @@ var Tweetbar = {
 			}
 		},
 	/**
-	 * send_tweet ( status, callback )
 	 * Send a status update to Twitter.
 	 * 
 	 * @param {String} status Status to send to Twitter
@@ -863,7 +865,6 @@ var Tweetbar = {
 	
 	// Panel Functions //
 	/**
-	 * activate_panel ( name, caller )
 	 * Switch to a new panel.
 	 * 
 	 * @param {String} name The name of the panel to switch to.
@@ -907,7 +908,6 @@ var Tweetbar = {
 	
 	// Styling //
 	/**
-	 * setListSize ( )
 	 * Adjust the list of tweets to fit Firefox's current window size.
 	 * 
 	 * @methodOf Tweetbar
@@ -928,7 +928,6 @@ var Tweetbar = {
 	
 	// Docking //
 	/**
-	 * undock ( )
 	 * Undock TwitKit.
 	 * 
 	 * @methodOf Tweetbar
@@ -942,7 +941,6 @@ var Tweetbar = {
 	
 	// Authorization //
 	/**
-	 * toggle_login ( )
 	 * Toggle the display of the login window.
 	 * 
 	 * @methodOf Tweetbar
@@ -953,7 +951,6 @@ var Tweetbar = {
 			this.loginSlider.toggle();
 		},
 	/**
-	 * close_login ( obj )
 	 * Close the login window.
 	 * 
 	 * @param {Object} [obj=""] A DOM object from where the function was called.
@@ -975,7 +972,6 @@ var Tweetbar = {
 			x.value = '';
 		},
 	/**
-	 * open_login ( obj )
 	 * Open the login window.
 	 * 
 	 * @param {Object} [obj=""] A DOM object from where the function was called.
@@ -993,7 +989,6 @@ var Tweetbar = {
 			$('username').focus();
 		},
 	/**
-	 * authorization_required_for ( resource )
 	 * Check if authorization is required to make a certain
 	 * API request.
 	 * 
@@ -1010,7 +1005,6 @@ var Tweetbar = {
 				return true;
 		},
 	/**
-	 * authenticate ( action )
 	 * Have the user log in, and then perform an action.
 	 * 
 	 * @param {String} action An action (API request) to perform.
@@ -1023,7 +1017,6 @@ var Tweetbar = {
 			this.pendingAction = action;
 		},
 	/**
-	 * sign_out ( )
 	 * Sign out of the current Twitter account.
 	 * 
 	 * @methodOf Tweetbar
@@ -1058,7 +1051,6 @@ var Tweetbar = {
 							 }).request();
 		},
 	/**
-	 * sign_in ( un, pw, callback )
 	 * Sign in to a Twitter account.
 	 * 
 	 * @param {String} un Twitter username
@@ -1103,7 +1095,6 @@ var Tweetbar = {
 								  }).request();
 		},
 	/**
-	 * set_username_on_page ( )
 	 * Show the current user's name and a sign-out button
 	 * after signing in.
 	 * 
