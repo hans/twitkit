@@ -305,7 +305,7 @@ var Tweetbar = {
 			ret = ret.replace(/<a href="www/g, '<a href="http:\/\/www');
 			ret = ret.replace(/<a href="(\S+) ([^<>]+)" target(.+)>(\S+) ([^<]+)<\/a>/, '<a href="$1" target$3>$1</a> $5');
 			ret = ret.replace(/([\w-]+)@([\w-]+\.)([\w-]+)/, this.anchor_tag('mailto:$1&#64;$2$3', '$1&#64;$2$3'));
-			ret = ret.replace(/\@([0-9a-z_A-Z]+)/g, this.anchor_tag(Tweetbar.protocol + ':\/\/twitter.com/$1'.toLowerCase(),'@$1','$1 ' + this._('misc.onTwitter')));
+			ret = ret.replace(/(\s|^)\@([0-9a-z_A-Z]+)/g, this.anchor_tag(Tweetbar.protocol + ':\/\/twitter.com/$2'.toLowerCase(),'$1@$2','$2 ' + this._('misc.onTwitter')));
 			return ret;
 		},
 	/**
