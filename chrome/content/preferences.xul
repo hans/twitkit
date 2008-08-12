@@ -35,6 +35,7 @@
    				<tabpanel>
 						<grid>
 							<rows>
+									<checkbox label="&prefs.general.showAppSource;" preference="extensions.twitkit.showAppSource"/>
 			   					<row>
 			   						<label flex="1">&prefs.general.refreshInterval;</label>
 			   						<menulist id="refreshInterval" preference="extensions.twitkit.refreshInterval">
