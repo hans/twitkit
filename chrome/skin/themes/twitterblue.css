@@ -1,109 +1,109 @@
 body {
-	background-color:				#9ae4e8;
+	background-color: #9ae4e8;
 }
 
 #loginform {
-	color:							#fff;
-	background-color:				#75b7ba;
-	border:							2px solid #5c9a9d;
+	color: #fff;
+	background-color: #75b7ba;
+	border: 2px solid #5c9a9d;
 }
 #loginform h3 a {
-	color:							#fff;
+	color: #fff;
 }
 #loginform h3 a:hover {
-	color:							#333;
-	background-color:				#9ae4e8;
+	color: #333;
+	background-color: #9ae4e8;
 }
 #loginform input.textbox {
-	border:							1px solid #5c9a9d;
+	border: 1px solid #5c9a9d;
 }
 #loginform input.piton {
-	border:							1px solid #4c8a8d;
-	background-color:				#5c9a9d;
-	color:							#fff;
+	border: 1px solid #4c8a8d;
+	background-color: #5c9a9d;
+	color: #fff;
 }
 
 #whoami p {
-	background-color:				#9ae4e8;
-	color:							#fff;
+	background-color: #9ae4e8;
+	color: #fff;
 }
 #whoami p a {
-	color:							#fff;
+	color: #fff;
 }
 #whoami p a:hover {
-	background-color:				#75b7ba;
+	background-color: #75b7ba;
 }
 #whoami a.signin {
-	background-color:				#75b7ba;
-	color:							#fff;
+	background-color: #75b7ba;
+	color: #fff;
 }
 #whoami a.signin:hover {
-	background-color:				#5c9a9d;
+	background-color: #5c9a9d;
 }
 
 #poster h3 {
-	color:							#888;
+	color: #888;
 }
 
 input#status {
-	background-color:				#fff;
-	border-top:					1px solid #aaa;
-	border-left:					1px solid #aaa;
-	border-bottom:					1px solid #ccc;
-	border-right:					1px solid #ccc;
+	background-color: #fff;
+	border-top: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
 #navigation td {
-	border-right:					4px solid #9ae4e8;
-	padding:							0px 5px;
+	border-right: 4px solid #9ae4e8;
+	padding: 0px 5px;
 }
 #navigation td.active {
-	background-color:				#fff;
+	background-color: #fff;
 }
 
 #refresher {
-	background-color:				#fff;
-	color:							#333;
+	background-color: #fff;
+	color: #333;
 }
 #refresher label {
-	color:							#777;
+	color: #777;
 }
 #refresher select {
-	border:							1px solid #ccc;
-	background-color:				#eee;
-	color:							#777;
+	border: 1px solid #ccc;
+	background-color: #eee;
+	color: #777;
 }
 #refresher a {
-	color:							#555;
+	color: #555;
 }
 
 #lists {
-	background-color:				#9ae4e8;
+	background-color: #9ae4e8;
 }
 
 .even {
-	background-color:				#eee;
+	background-color: #eee;
 }
 .even:hover {
-	background-color:				#fff;
+	background-color: #fff;
 }
 
 .reply {
-	background-color:				#ffffe0;
+	background-color: #ffffe0;
 }
 
 ul#tweets {
-	background-color:				#fff;
+	background-color: #fff;
 }
 ul#tweets li p.pic a img {
-	border:							1px solid #ccc;
+	border: 1px solid #ccc;
 }
 ul#tweets li p.what {
-	color:							#333;
+	color: #333;
 }
 ul#tweets li p.who {
-	color:							#555;
+	color: #555;
 }
 ul#tweets li p.who a {
-	color:							#00f;
+	color: #00f;
 }
