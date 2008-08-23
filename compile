@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # ./compile - Simple builder for Mozilla extensions
 # By Hans Engel, released under the GPL 3.0 License
 
@@ -7,22 +7,44 @@ files="chrome.manifest install.rdf chrome defaults"
 
 # Name of app ( this will be the XPI's name )
 app=twitkit
+dir=`pwd`
 
-echo "Copying files . . ."
-mkdir -p build
-for file in $files; do
-	echo "  $file -> build/$file"
-	cp -pr $file build/$file
-done
+function prepare {
+	echo "running task 'prepare' . . ."
+	mkdir -p $dir/build
+	for file in $files; do
+		echo "  $file -> build/$file"
+		cp -pr $file $dir/build/$file
+	done
+}
 
-echo "Compiling . . ."
-cd build
-zip -r9 ../$app.xpi *
+function build {
+	echo "running task 'build' . . ."
+	cd $dir/build
+	zip -r9 ../$app.xpi *
+}
 
-echo "Cleaning up . . ."
-cd ..
-echo "  build -> *poof*"
-rm -r build
+function clean {
+	echo "running task 'clean' . . ."
+	cd $dir
+	echo "  build -> *poof*"
+	rm -r $dir/build
+}
+
+if [ "$1" = "prepare" ]; then
+	prepare
+	exit 0
+elif [ "$1" = "build" ]; then
+	build
+	exit 0
+elif [ "$1" = "clean" ]; then
+	clean
+	exit 0
+fi
+
+prepare
+build
+clean
 
 echo "Done."
 exit 0
