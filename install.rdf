@@ -2,46 +2,46 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 		<Description about="urn:mozilla:install-manifest">
-			<em:id>twitkit@engel.uk.to</em:id>
-			<em:name>TwitKit</em:name>
-			<em:version>1.2</em:version>
-			<em:type>2</em:type>
-			
-			<em:creator>Hans Engel</em:creator>
-			
-			<em:developer>Jochen Cichon</em:developer>
-			<em:developer>Alan Rice</em:developer>
-			<em:developer>Guy Lewin</em:developer>
-			
-			<em:contributor>Michael Kaiser</em:contributor>
-			<em:contributor>Mike Demers</em:contributor>
-			
-			<em:translator>Patrick Heinecke</em:translator>
-			<em:translator>Guy Lewin</em:translator>
-			<em:translator>Toshiya Tsuru</em:translator>
-			
-			<em:description>An extension that adds a Twitter sidebar to your browsing experience!</em:description>
-			<em:homepageURL>http://engel.uk.to/twitkit/</em:homepageURL>
-			<em:iconURL>chrome://twitkit/skin/images/twitter-icon.png</em:iconURL>
-			<em:optionsURL>chrome://twitkit/content/preferences.xul</em:optionsURL>
-			<em:aboutURL>chrome://twitkit/content/about.xul</em:aboutURL>
-			
-			<!-- Firefox -->
-			<em:targetApplication>
-				<Description>
-					<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-					<em:minVersion>1.5</em:minVersion>
-					<em:maxVersion>3.1a2pre</em:maxVersion>
-				</Description>
-			</em:targetApplication>
-			
-			<!-- Flock -->
-			<em:targetApplication>
-				<Description>
-					<em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
-					<em:minVersion>0.7.*</em:minVersion>
-					<em:maxVersion>2.0</em:maxVersion>
-				</Description>
-			</em:targetApplication>
+				<em:id>twitkit@engel.uk.to</em:id>
+				<em:name>TwitKit</em:name>
+				<em:version>1.2</em:version>
+				<em:type>2</em:type>
+				
+				<em:creator>Hans Engel</em:creator>
+				
+				<em:developer>Jochen Cichon</em:developer>
+				<em:developer>Alan Rice</em:developer>
+				<em:developer>Guy Lewin</em:developer>
+				
+				<em:contributor>Michael Kaiser</em:contributor>
+				<em:contributor>Mike Demers</em:contributor>
+				
+				<em:translator>Patrick Heinecke</em:translator>
+				<em:translator>Guy Lewin</em:translator>
+				<em:translator>Toshiya Tsuru</em:translator>
+				
+				<em:description>An extension that adds a Twitter sidebar to your browsing experience!</em:description>
+				<em:homepageURL>http://engel.uk.to/twitkit/</em:homepageURL>
+				<em:iconURL>chrome://twitkit/skin/images/twitter-icon.png</em:iconURL>
+				<em:optionsURL>chrome://twitkit/content/preferences.xul</em:optionsURL>
+				<em:aboutURL>chrome://twitkit/content/about.xul</em:aboutURL>
+				
+				<!-- Firefox -->
+				<em:targetApplication>
+						<Description>
+								<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+								<em:minVersion>1.5</em:minVersion>
+								<em:maxVersion>3.1a2pre</em:maxVersion>
+						</Description>
+				</em:targetApplication>
+				
+				<!-- Flock -->
+				<em:targetApplication>
+						<Description>
+								<em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
+								<em:minVersion>0.7.*</em:minVersion>
+								<em:maxVersion>2.0</em:maxVersion>
+						</Description>
+				</em:targetApplication>
 		</Description>
 </RDF>
