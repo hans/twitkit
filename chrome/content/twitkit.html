@@ -1,126 +1,127 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head id="thehead">
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
-	<script type="text/javascript" src="chrome://twitkit/skin/mootools.js"></script>
-	<script type="text/javascript" src="chrome://twitkit/content/lib/showdown.js"></script>
-	<script type="text/javascript" src="chrome://twitkit/content/twitkit.js"></script>
-	<script type="text/javascript">
-		function setReply(username) {
-			var bah = $('status');
-			bah.value = bah.value + '@' + username + ' ';
-			document.getElementById('status').focus();
-		}
-		function copySelection() {
-			var selection = content.window.getSelection();
-			if ( selection == '' )
-				selection = window.getSelection();
-			var bah = $('status');
-			bah.value = bah.value + selection;
-			document.getElementById('status').focus();
-		}
-	</script>
-	<link rel="stylesheet" type="text/css" href="chrome://twitkit/content/twitkit.css" />
-	<title>TwitKit</title>
-</head>
-<body id="thebody" onfocus="var x=document.getElementById('status');x.focus();">
-	<div id="icons">
-		<img id="using-ssl" src="chrome://twitkit/skin/images/ssl-on.png" alt="" />
-		<a href="#" onclick="Tweetbar.undock();">
-			<img id="is-undocked" src="chrome://twitkit/skin/images/undock.png" alt="" />
-		</a>
-		<a onclick="openDialog('chrome://twitkit/content/preferences.xul', '_blank', 'chrome,titlebar,centerscreen,modal');" href="#">
-			<img src="chrome://twitkit/skin/images/preferences.png" alt="" />
-		</a>
-	</div>
-	<table id="loginbox" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
-				<div id="whoami">
-					<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">sign in!</a>
-				</div>
-				<div id="loginwrap">
-					<div id="loginform"><div>
-						<h1 id="login-header">Please Sign In</h1>
-						<form action="#" onsubmit="try { var btn=$('loginbutton'); btn.value='Signing in...'; Tweetbar.sign_in($('username').value, $('password').value, function() {btn.value='Sign In';}); } catch(e) {}; return false;">
-							<label id="username-label" for="username">username or email:</label>
-							<input class="textbox" type="text" name="username" id="username" size="10" />
-							<label id="password-label" for="password">password:</label>
-							<input class="textbox" type="password" name="password" id="password" size="10" />
-							<input class="piton" type="submit" name="loginbutton" id="loginbutton" value="Sign In!" />
-						</form>
-						<h3 id="signup">or <a href="http://twitter.com/account/create?tb_10" target="_content">sign up now</a>!</h3>
+	<head id="thehead">
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+		<script type="text/javascript" src="chrome://twitkit/skin/mootools.js"></script>
+		<script type="text/javascript" src="chrome://twitkit/content/lib/showdown.js"></script>
+		<script type="text/javascript" src="chrome://twitkit/content/twitkit.js"></script>
+		<script type="text/javascript">
+			function setReply(username) {
+				var bah = $('status');
+				bah.value = bah.value + '@' + username + ' ';
+				document.getElementById('status').focus();
+			}
+			function copySelection() {
+				var selection = content.window.getSelection();
+				if ( selection == '' )
+					selection = window.getSelection();
+				var bah = $('status');
+				bah.value = bah.value + selection;
+				document.getElementById('status').focus();
+			}
+		</script>
+		<link rel="stylesheet" type="text/css" href="chrome://twitkit/content/twitkit.css" />
+		<title>TwitKit</title>
+	</head>
+	<body id="thebody" onfocus="var x=document.getElementById('status');x.focus();">
+		<div id="icons">
+			<img id="using-ssl" src="chrome://twitkit/skin/images/ssl-on.png" alt="" />
+			<a href="#" onclick="Tweetbar.undock();">
+				<img id="is-undocked" src="chrome://twitkit/skin/images/undock.png" alt="" />
+			</a>
+			<a onclick="openDialog('chrome://twitkit/content/preferences.xul', '_blank', 'chrome,titlebar,centerscreen,modal');" href="#">
+				<img src="chrome://twitkit/skin/images/preferences.png" alt="" />
+			</a>
+		</div>
+		<table id="loginbox" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<div id="whoami">
+						<a href="#" class="signin" onclick="Tweetbar.open_login(this); return false;">sign in!</a>
+					</div>
+					<div id="loginwrap">
+						<div id="loginform"><div>
+							<h1 id="login-header">Please Sign In</h1>
+							<form action="#" onsubmit="try { var btn=$('loginbutton'); btn.value='Signing in...'; Tweetbar.sign_in($('username').value, $('password').value, function() {btn.value='Sign In';}); } catch(e) {}; return false;">
+								<label id="username-label" for="username">username or email:</label>
+								<input class="textbox" type="text" name="username" id="username" size="10" />
+								<label id="password-label" for="password">password:</label>
+								<input class="textbox" type="password" name="password" id="password" size="10" />
+								<input class="piton" type="submit" name="loginbutton" id="loginbutton" value="Sign In!" />
+							</form>
+							<h3 id="signup">or <a href="http://twitter.com/account/create?tb_10" target="_content">sign up now</a>!</h3>
+							</div>
 						</div>
 					</div>
-				</div>
-			</td>
-		</tr>
-	</table>
-	<table id="tweetbar" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td id="topper">
-				<div id="poster">
-					<h1 id="question">what are you doing?</h1>
-					<h3><a id="copy-selection" href="#" class="tweet-action" title="Copy selection to status box" onclick="copySelection();"><img src="chrome://twitkit/skin/images/copy-selection.png" /></a><a id="compress" href="#" class="signin" id="tinyurl" title="Select textpart, and convert to tinyurl" onclick="Tweetbar.compress_url();"><img src="chrome://twitkit/skin/images/compress.png" /></a><span id="status-field-char-counter">0</span></h3>
-					<form action="./" onsubmit="var box=document.getElementById('status'); Tweetbar.update_status(box.value, function() { updateStatusTextCharCounter('');}); box.value = ''; return false;">
-						<div id="statusbox">
-							 <input type="text" name="status" id="status" onkeyup="updateStatusTextCharCounter(this.value)" />
-						</div>
-					</form>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td id="stalker">
-					<div id="nav-label">&nbsp;</div>
-					<table id="navigation" border="0" cellpadding="0" cellspacing="0">
-						<tr>
-							<td id="tab_for_public_timeline" style="border-left: none; margin-left: -5px;"><a href="#" onclick="Tweetbar.activate_panel('public_timeline',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.public.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/public.png" /></a></td>
-							<td id="tab_for_friends_timeline"><a href="#" onclick="Tweetbar.activate_panel('friends_timeline',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.user.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;'"><img src="chrome://twitkit/skin/tabs/user.png" /></a></td>
-							<td id="tab_for_friends"><a href="#" onclick="Tweetbar.activate_panel('friends',this); void 0" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.friends.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/friends.png" /></a></td>
-							<td id="tab_for_followers"><a href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.followers.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/followers.png" /></a></td>
-							<td id="tab_for_replies"><a href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.replies.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/replies.png" /></a></td>
-							<td id="tab_for_me" style="margin: 0;"><a href="#" onclick="Tweetbar.activate_panel('me',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.me.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/me.png" /></a></td>
-						</tr>
-					</table>
-					<table id="refresher" border="0" cellpadding="0" cellspacing="0" width="100%" height="20">
-						<tr>
-							<td id="refresh_activity" width="18" align="left" valign="middle">
-								<img width="16" height="16" src="chrome://twitkit/skin/images/activity-white.gif" />
-							</td>
-							<td align="left" valign="middle">
-								<h3 id="refreshing" style="display:none;">refreshing...</h3>
-								<label id="refresh_interval_label"><a id="refresh" href="#" onclick="Tweetbar.manual_refresh(); this.blur(); return false;">refresh</a></label>
-							</td>
-							<td align="right" valign="middle">
-								[<a id="clear-link" href="#" onclick="Tweetbar.clear_current_tweets();">clear</a>]
-							</td>
-						</tr>
-					</table>
-				<div id="lists">
-					<ul id="tweets">
-						<li id="loading">loading...</li>
-					</ul>
-				</div>
-			</td>
-		</tr>
-	</table><script type="text/javascript">
-	//<![CDATA[
-		function updateStatusTextCharCounter(value) {
-			var len = value.length;
-			$('status-field-char-counter').innerHTML = 140 - len;
-			if ( len >= 140 )
-				$('status-field-char-counter').setStyles({'color': '#ff0000', 'font-weight': 'bold'});
-			else if ( len > 130 )
-				$('status-field-char-counter').setStyles({'color': '#d40d12', 'font-weight': 'normal'});
-			else if ( len > 120 )
-				$('status-field-char-counter').setStyles({'color': '#5c0002', 'font-weight': 'normal'});
-			else
-				$('status-field-char-counter').setStyles({'color': '#888888', 'font-weight': 'normal'});
-		};
-		
-		$('status-field-char-counter').innerHTML = 140 - $('status').value.length;
-		//]]>
-	</script>
-</body>
+				</td>
+			</tr>
+		</table>
+		<table id="tweetbar" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td id="topper">
+					<div id="poster">
+						<h1 id="question">what are you doing?</h1>
+						<h3><a id="copy-selection" href="#" class="tweet-action" title="Copy selection to status box" onclick="copySelection();"><img src="chrome://twitkit/skin/images/copy-selection.png" /></a><a id="compress" href="#" class="signin" id="tinyurl" title="Select textpart, and convert to tinyurl" onclick="Tweetbar.compress_url();"><img src="chrome://twitkit/skin/images/compress.png" /></a><span id="status-field-char-counter">0</span></h3>
+						<form action="./" onsubmit="var box=document.getElementById('status'); Tweetbar.update_status(box.value, function() { updateStatusTextCharCounter('');}); box.value = ''; return false;">
+							<div id="statusbox">
+								 <input type="text" name="status" id="status" onkeyup="updateStatusTextCharCounter(this.value)" />
+							</div>
+						</form>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td id="stalker">
+						<div id="nav-label">&nbsp;</div>
+						<table id="navigation" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td id="tab_for_public_timeline" style="border-left: none; margin-left: -5px;"><a href="#" onclick="Tweetbar.activate_panel('public_timeline',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.public.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/public.png" /></a></td>
+								<td id="tab_for_friends_timeline"><a href="#" onclick="Tweetbar.activate_panel('friends_timeline',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.user.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;'"><img src="chrome://twitkit/skin/tabs/user.png" /></a></td>
+								<td id="tab_for_friends"><a href="#" onclick="Tweetbar.activate_panel('friends',this); void 0" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.friends.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/friends.png" /></a></td>
+								<td id="tab_for_followers"><a href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.followers.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/followers.png" /></a></td>
+								<td id="tab_for_replies"><a href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.replies.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/replies.png" /></a></td>
+								<td id="tab_for_me" style="margin: 0;"><a href="#" onclick="Tweetbar.activate_panel('me',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.me.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/me.png" /></a></td>
+							</tr>
+						</table>
+						<table id="refresher" border="0" cellpadding="0" cellspacing="0" width="100%" height="20">
+							<tr>
+								<td id="refresh_activity" width="18" align="left" valign="middle">
+									<img width="16" height="16" src="chrome://twitkit/skin/images/activity-white.gif" />
+								</td>
+								<td align="left" valign="middle">
+									<h3 id="refreshing" style="display:none;">refreshing...</h3>
+									<label id="refresh_interval_label"><a id="refresh" href="#" onclick="Tweetbar.manual_refresh(); this.blur(); return false;">refresh</a></label>
+								</td>
+								<td align="right" valign="middle">
+									[<a id="clear-link" href="#" onclick="Tweetbar.clear_current_tweets();">clear</a>]
+								</td>
+							</tr>
+						</table>
+					<div id="lists">
+						<ul id="tweets">
+							<li id="loading">loading...</li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+		//<![CDATA[
+			function updateStatusTextCharCounter(value) {
+				var len = value.length;
+				$('status-field-char-counter').innerHTML = 140 - len;
+				if ( len >= 140 )
+					$('status-field-char-counter').setStyles({'color': '#ff0000', 'font-weight': 'bold'});
+				else if ( len > 130 )
+					$('status-field-char-counter').setStyles({'color': '#d40d12', 'font-weight': 'normal'});
+				else if ( len > 120 )
+					$('status-field-char-counter').setStyles({'color': '#5c0002', 'font-weight': 'normal'});
+				else
+					$('status-field-char-counter').setStyles({'color': '#888888', 'font-weight': 'normal'});
+			};
+			
+			$('status-field-char-counter').innerHTML = 140 - $('status').value.length;
+			//]]>
+		</script>
+	</body>
 </html>
