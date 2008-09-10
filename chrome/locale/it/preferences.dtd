@@ -1,0 +1,21 @@
+<!ENTITY prefs.title "Preferenze di &twitKit;">
+	<!ENTITY prefs.general "Generale">
+		<!ENTITY prefs.general.showAppSource "Mostra 'da [applicazione]' dopo i cinquettii">
+		<!ENTITY prefs.general.refreshInterval "Intervallo di aggiornamento:">
+			<!ENTITY prefs.general.refreshInterval.30 "30 secondi">
+			<!ENTITY prefs.general.refreshInterval.1 "1 minuto">
+			<!ENTITY prefs.general.refreshInterval.3 "3 minuti">
+			<!ENTITY prefs.general.refreshInterval.5 "5 minuti">
+			<!ENTITY prefs.general.refreshInterval.10 "10 minuti">
+		<!ENTITY prefs.general.showNamesAs "Mostra nomi come:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Alias">
+			<!ENTITY prefs.general.showNamesAs.fullNames "Nome completo">
+	<!ENTITY prefs.theme "Tema">
+		<!ENTITY prefs.theme.colorScheme "Colori:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Marrone Scuro">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "Blu di Twitter">
+			<!ENTITY prefs.theme.colorScheme.pastel "Pastello">
+			<!ENTITY prefs.theme.colorScheme.muted "Silenzioso">
+		<!ENTITY prefs.theme.fontSize "Dimensione dei caratteri:">
+	<!ENTITY prefs.connection "Connection">
+		<!ENTITY prefs.connection.secureConnection "Use secure connection with Twitter">
