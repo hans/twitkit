@@ -328,7 +328,8 @@ var Tweetbar = {
 				'created_at': Date.parse(obj.created_at || Date()),
 				'source': obj.source,
 				'favorited': obj.favorited,
-				'truncated': obj.truncated
+				'truncated': obj.truncated,
+				'reply_id': parseInt(obj.in_reply_to_status_id)
 			}
 		},
 	/**
@@ -513,12 +514,19 @@ var Tweetbar = {
 				
 				if ( tweet.truncated )
 					tweet.text = tweet.text.replace(/\.\.\.$/, Tweetbar.anchor_tag(Tweetbar.protocol + '://twitter.com/' + tweet.user.screen_name + '/statuses/' + tweet.id, '...'));
+				
+				if ( tweet.reply_id ) {
+					user_regexp = /@([a-zA-Z0-9_]+)/;
+					user = user_regexp.exec(tweet.text)[1];
+					in_reply_to = '<br/>in reply to <a href="' + Tweetbar.protocol + '://twitter.com/' + user + '/statuses/' + tweet.reply_id + '/" target="_blank">' + user + '</a>';
+				} else
+					in_reply_to = '';
 
 				return '<p class="pic"><a href="#" onclick="setReply(\'' + tweet.user.screen_name + '\');">'+ user_image + '</a>' +
 					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user.screen_name + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
 					   favorite + '</span></p>' +
 					   '<p class="what">' + tweet.text + '</p>' +
-					   '<p class="who">' + this.user_anchor_tag(tweet.user) + date + '</p>' +
+					   '<p class="who">' + this.user_anchor_tag(tweet.user) + date + in_reply_to + '</p>' +
 					   source + dellink;
 			}
 		},
