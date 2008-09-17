@@ -491,13 +491,19 @@ var Tweetbar = {
 					tweet._b = true;
 				if ( this.currentList != 'replies' )
 					li.setProperty('id', tweet.id);
+				
 				var user_image = '';
 				if ( tweet.user && tweet.user.profile_image_url )
 					user_image = '<img src="' + tweet.user.profile_image_url + '" width="24" height="24" alt="' + tweet.user.name + '" />';
+				
 				var tsource = tweet.source.replace(/<a /, '<a target="_blank" ');
+				
 				( Tweetbar.prefService.getBoolPref('showAppSource') ) ? source = '<div class="source">' + this._('misc.from') + ' ' + tsource + '</div>' : source = '';
+				
 				( tweet.user.screen_name == Tweetbar.username ) ? dellink = '<a href="#" onclick="Tweetbar.delete_tweet(\'' + tweet.id + '\');"><img style="border: none; float: right;" src="chrome://twitkit/skin/images/delete.png" alt="" /></a>' : dellink = '';
+				
 				( this.currentList == 'replies' ) ? date = '' : date = ' - ' + Tweetbar.relative_time_string(tweet.created_at);
+				
 				/*
 				 * Hashtags implementation - by Joschi
 				 */
