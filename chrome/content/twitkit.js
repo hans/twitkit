@@ -1059,7 +1059,7 @@ var Tweetbar = {
 	 */
 	sign_out:
 		function () {
-			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/account/end_session',
+			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/account/end_session.json',
 							   { headers: Tweetbar.http_headers(),
 							     postBody: {},
 							   	 onSuccess:
