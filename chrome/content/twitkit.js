@@ -1081,7 +1081,7 @@ var Tweetbar = {
 							   	 	},
 							   	onFailure:
 							   		function () {
-							   			alert(this._('errors.signOut'));
+							   			alert(Tweetbar._('errors.signOut'));
 							   		},
 							 }).request();
 		},
