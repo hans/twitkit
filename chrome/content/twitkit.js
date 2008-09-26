@@ -300,8 +300,8 @@ var Tweetbar = {
 		function (s) {
 			ret = s.toString();
 			ret = ret.replace(/\</,'&lt;');
-			re = new RegExp('http:\/\/twitpic.com\/([a-zA-Z0-9]+)([?()!).,\\s]|<|$)', 'g');
-			ret = ret.replace(re, '<a rel="twitpic_gm" href="tkavoidurl://twitpic.com/$1" target="_blank"><img style="border: 1px solid #ccc; float: left; margin: 0 3px 3px 0; height: 72px; width: 72px;" src="tkavoidurl://twitpic.com/$1-thumb" border="0" /></a>$2');
+			re = new RegExp('http:\/\/(www\.|)twitpic\.com\/([a-zA-Z0-9]+)([?()!).,\\s]|<|$)', 'g');
+			ret = ret.replace(re, '<a rel="twitpic_gm" href="tkavoidurl://twitpic.com/$2" target="_blank"><img style="border: 1px solid #ccc; float: left; margin: 0 3px 3px 0; height: 72px; width: 72px;" src="tkavoidurl://twitpic.com/$2-thumb" border="0" /></a>$3');
 			re = new RegExp('(<\\w+.*?>|[^=!:\'"/]|^|)((?:https?:\/\/)|(?:irc:\/\/)|(?:www\.){4})([-\\w]+(?:\.[-\\w]+)*(?::\\d+)?(?:/(?:(?:[~\\w\\+#%-]|(?:[,.;@:][^\\s$]))+)?)*(?:\\?[\\w\\+%&=.;:-]+)?(?:\#[\\w\-\.]*)?)([?()!).,\\s]|<|$)', 'gi');
 			ret = ret.replace(re, '$1' + this.anchor_tag('$2$3') + '$4');
 			re = new RegExp('tkavoidurl://', 'g');
