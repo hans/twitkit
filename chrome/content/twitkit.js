@@ -458,20 +458,97 @@ var Tweetbar = {
 			var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
 			if ( selection.length == 0 )
 				return;
-			var url = "http://is.gd/api.php?longurl="+selection;
-			var aj = new Ajax( url, {
-				method: 'get',
-				onSuccess:
-					function (replaced) {
-						var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-						var text = document.getElementById('status').value
-								.substring(0, document.getElementById('status').selectionStart) + replaced +
-								( selection.length == selection.trim().length ? "" : " " ) +
-							document.getElementById('status').value
-								.substring(document.getElementById('status').selectionEnd);  
-						document.getElementById('status').value = text;
-					}
-				}).request();
+			var shortener_service = Tweetbar.prefService.getCharPref('shortenerService').toLowerCase();
+				if ( shortener_service == 'is.gd' ) {
+					var shortener_url = "http://is.gd/api.php?longurl=";
+					var url = shortener_url+escape(selection);
+					var aj = new Ajax( url, {
+						method: 'get',
+						onSuccess:
+							function (replaced) {
+								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+								var text = document.getElementById('status').value
+										.substring(0, document.getElementById('status').selectionStart) + replaced +
+										( selection.length == selection.trim().length ? "" : " " ) +
+									document.getElementById('status').value
+										.substring(document.getElementById('status').selectionEnd);  
+								document.getElementById('status').value = text;
+							}
+					}).request();
+				}
+				if ( shortener_service == 'bit.ly' ) {
+					var shortener_url = "http://api.bit.ly/shorten?version=2.0.1&longUrl=";
+					var extra_bits = "&login=alanrice38181&apiKey=R_10186c964026f2d848ed3ca19e797ef6";
+					var url = shortener_url+escape(selection)+extra_bits;
+					var aj = new Ajax( url, {
+						method: 'get',
+						onSuccess:
+							function (raw_data) {
+								var results = Json.evaluate(raw_data);
+								var i = 0;
+								for ( var shortUrl in results ) {
+								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+								var text = document.getElementById('status').value
+										.substring(0, document.getElementById('status').selectionStart) + shortUrl +
+										( selection.length == selection.trim().length ? "" : " " ) +
+									document.getElementById('status').value
+										.substring(document.getElementById('status').selectionEnd);  
+								document.getElementById('status').value = text;
+								}
+							}
+					}).request();
+				}
+				if ( shortener_service == 'tinyurl' ) {
+					var shortener_url = "http://tinyurl.com/api-create.php?url=";
+					var url = shortener_url+escape(selection);
+					var aj = new Ajax( url, {
+						method: 'get',
+						onSuccess:
+							function (replaced) {
+								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+								var text = document.getElementById('status').value
+										.substring(0, document.getElementById('status').selectionStart) + replaced +
+										( selection.length == selection.trim().length ? "" : " " ) +
+									document.getElementById('status').value
+										.substring(document.getElementById('status').selectionEnd);  
+								document.getElementById('status').value = text;
+							}
+					}).request();
+				}
+				if ( shortener_service == 'tr.im' ) {
+					var shortener_url = "http://tr.im/api/trim_simple?url=";
+					var url = shortener_url+escape(selection);
+					var aj = new Ajax( url, {
+						method: 'get',
+						onSuccess:
+							function (replaced) {
+								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+								var text = document.getElementById('status').value
+										.substring(0, document.getElementById('status').selectionStart) + replaced +
+										( selection.length == selection.trim().length ? "" : " " ) +
+									document.getElementById('status').value
+										.substring(document.getElementById('status').selectionEnd);  
+								document.getElementById('status').value = text;
+							}
+					}).request();
+				}
+				if ( shortener_service == 'xrl.us' ) {
+					var shortener_url = "http://metamark.net/api/rest/simple?long_url=";
+					var url = shortener_url+escape(selection);
+					var aj = new Ajax( url, {
+						method: 'get',
+						onSuccess:
+							function (replaced) {
+								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+								var text = document.getElementById('status').value
+										.substring(0, document.getElementById('status').selectionStart) + replaced +
+										( selection.length == selection.trim().length ? "" : " " ) +
+									document.getElementById('status').value
+										.substring(document.getElementById('status').selectionEnd);  
+								document.getElementById('status').value = text;
+							}
+					}).request();
+				}
 		},
 	
 	// Rendering //
