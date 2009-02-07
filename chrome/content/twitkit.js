@@ -25,6 +25,7 @@ var Tweetbar = {
 		public_timeline: {},
 		friends_timeline: {},
 		replies: {},
+		direct_messages: {},
 		me: {},
 	},
 	/**
@@ -183,6 +184,7 @@ var Tweetbar = {
 			$('friends').innerHTML = this._('tabs.friends.title');
 			$('followers').innerHTML = this._('tabs.followers.title');
 			$('replies').innerHTML = this._('tabs.replies.title');
+			$('direct-messages').innerHTML = this._('tabs.directMessages.title');
 			$('me').innerHTML = this._('tabs.me.title');
 			$('refreshing').innerHTML = this._('misc.refreshing');
 			$('refresh').innerHTML = this._('misc.refresh');
@@ -284,9 +286,13 @@ var Tweetbar = {
 	 * @methodOf Tweetbar
 	 * @since 1.0
 	 */
-	api_url_for:
+	api_url_for_statuses:
 		function (resource) {
 			return Tweetbar.protocol + '://twitter.com/statuses/' + resource + '.json';
+		},
+	api_url_for_nonstatuses:
+		function (resource) {
+			return Tweetbar.protocol + '://twitter.com/' + resource + '.json';
 		},
 	/**
 	 * Make links and replies clickable.
@@ -618,6 +624,47 @@ var Tweetbar = {
 			}
 		},
 	/**
+	 * Render a direct message (but don't print it).
+	 * 
+	 * @param {Object} tweet A tweet object returned by Tweetbar#create_status_object.
+	 * @param {Object} li A MooTools Element object of a 'li' element.
+	 * @returns {String} Fully-rendered tweet HTML.
+	 * @see Tweetbar#create_status_object
+	 * @methodOf Tweetbar
+	 * @since 1.2
+	 */
+	render_direct_message:
+		function (tweet, li) {
+			var display_date = '';
+			if ( tweet ) {
+				if ( !tweet._a )
+					tweet._a = true;
+				else if ( !tweet._b )
+					tweet._b = true;
+				if ( this.currentList != 'direct_messages' )
+					li.setProperty('id', tweet.id);
+				
+				var sender_image = '';
+				if ( tweet.sender && tweet.sender.profile_image_url )
+					sender_image = '<img src="' + tweet.sender.profile_image_url + '" width="24" height="24" alt="' + tweet.sender.name + '" />';
+				
+				( this.currentList == 'direct_messages' ) ? date = '' : date = ' - ' + Tweetbar.relative_time_string(tweet.created_at);
+				
+				/*
+				 * Hashtags implementation - by Joschi
+				 */
+				tweet.text = tweet.text.replace(/(\s|^|)(#(\w*))([\s.!()/]|$)/g,'$1<a target="_blank" href="http://hashtags.org/tag/$3">$2</a>$4');
+
+				// Markdown //
+				tweet.text = Tweetbar.markDown.makeHtml(tweet.text);
+				
+				return '<p class="pic"><a href="#" onclick="setReplyDM(\'' + tweet.sender.screen_name + '\');">'+ sender_image + '</a>' +
+					   '<span class="re"><a class="re" href="#" onclick="setReplyDM(\''+ tweet.sender.screen_name + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' + '</span></p>' +
+					   '<p class="what">' + tweet.text + '</p>' +
+					   '<p class="who">' + this.user_anchor_tag(tweet.sender) + date + '</p>';
+			}
+		},
+	/**
 	 * Render a user (but don't print it).
 	 * 
 	 * @param {Object} user A user object returned by Tweetbar#create_user_object.
@@ -674,7 +721,7 @@ var Tweetbar = {
 				( this.currentList == 'friends' ) ? theurl = Tweetbar.protocol + '://twitter.com/statuses/friends/' + this.username + '.json?lite=true' : theurl = Tweetbar.protocol + '://twitter.com/statuses/followers.json?lite=true';
 				var aj = new Ajax( theurl, {
 					headers: Tweetbar.http_headers(),
-					postBody: {},
+					method: 'get',
 					onSuccess:
 						function (raw_data) {
 							var rsp = Json.evaluate(raw_data);
@@ -694,7 +741,7 @@ var Tweetbar = {
 			} else if ( this.currentList == 'replies' ) {
 				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/replies.json', {
 					headers: Tweetbar.http_headers(),
-					postBody: {},
+					method: 'get',
 					onSuccess:
 						function (raw_data) {
 							var rsp = Json.evaluate(raw_data);
@@ -710,10 +757,29 @@ var Tweetbar = {
 							}
 						}
 					}).request();
+			} else if ( this.currentList == 'direct_messages' ) {
+				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/direct_messages.json', {
+					headers: Tweetbar.http_headers(),
+					method: 'get',
+					onSuccess:
+						function (raw_data) {
+							var rsp = Json.evaluate(raw_data);
+							var i = 0;
+							for ( var direct_message in rsp ) {
+								var li = new Element('li');
+								rsp[direct_message].text = Tweetbar.expand_status(rsp[direct_message].text);
+								li.setHTML(Tweetbar.render_direct_message(rsp[direct_message]));
+								if ( ( i % 2 ) == 0 )
+									li.addClass('even');
+								li.injectInside('tweets');
+								i++;
+							}
+						}
+					}).request();
 			} else if ( this.currentList == 'me' ) {
 				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/users/show/' + this.username + '.json', {
 					headers: Tweetbar.http_headers(),
-					postBody: {},
+					method: 'get',
 					onSuccess:
 						function (raw_data) {
 							var user = Json.evaluate(raw_data);
@@ -743,30 +809,57 @@ var Tweetbar = {
 	get_tweets:
 		function () {
 			var panel = Tweetbar.currentList;
-			var aj = new Ajax( Tweetbar.api_url_for(panel), {
-				headers: Tweetbar.http_headers(),
-				postBody: {},
-				onComplete:
-					function (raw_data) {
-						Tweetbar.hide_refresh_activity();
-						Tweetbar.set_updater();
-					},
-				onSuccess:
-					function (raw_data) {
-						Tweetbar.save_tweets(panel, raw_data);
-						Tweetbar.update_current_list();
-					},
-				onFailure:
-					function (e) {
-						Tweetbar.hide_refresh_activity();
-						Tweetbar.set_updater();
-					},
-				onRequest:
-					function () {
-						Tweetbar.show_refresh_activity();
-						Tweetbar.clear_updater();
-					}
-			}).request();
+			if ( panel == 'direct_messages' ) {
+				var aj = new Ajax( Tweetbar.api_url_for_nonstatuses(panel), {
+					headers: Tweetbar.http_headers(),
+					method: 'get',
+					onComplete:
+						function (raw_data) {
+							Tweetbar.hide_refresh_activity();
+							Tweetbar.set_updater();
+						},
+					onSuccess:
+						function (raw_data) {
+							Tweetbar.save_tweets(panel, raw_data);
+							Tweetbar.update_current_list();
+						},
+					onFailure:
+						function (e) {
+							Tweetbar.hide_refresh_activity();
+							Tweetbar.set_updater();
+						},
+					onRequest:
+						function () {
+							Tweetbar.show_refresh_activity();
+							Tweetbar.clear_updater();
+						}
+				}).request();
+			} else {
+				var aj = new Ajax( Tweetbar.api_url_for_statuses(panel), {
+					headers: Tweetbar.http_headers(),
+					method: 'get',
+					onComplete:
+						function (raw_data) {
+							Tweetbar.hide_refresh_activity();
+							Tweetbar.set_updater();
+						},
+					onSuccess:
+						function (raw_data) {
+							Tweetbar.save_tweets(panel, raw_data);
+							Tweetbar.update_current_list();
+						},
+					onFailure:
+						function (e) {
+							Tweetbar.hide_refresh_activity();
+							Tweetbar.set_updater();
+						},
+					onRequest:
+						function () {
+							Tweetbar.show_refresh_activity();
+							Tweetbar.clear_updater();
+						}
+				}).request();
+			}
 		},
 	/**
 	 * Save the fresh tweets to the current panel's registry.
@@ -957,7 +1050,7 @@ var Tweetbar = {
 	 */
 	send_tweet:
 		function (status, callback) {
-			var aj = new Ajax( Tweetbar.api_url_for('update'), {
+			var aj = new Ajax( Tweetbar.api_url_for_statuses('update'), {
 				headers: Tweetbar.http_headers(),
 				postBody: Object.toQueryString({status: status, source: 'twitkit'}),
 				onComplete:
@@ -1000,6 +1093,7 @@ var Tweetbar = {
 				$('tab_for_friends').removeClass('active');
 				$('tab_for_followers').removeClass('active');
 				$('tab_for_replies').removeClass('active');
+				$('tab_for_direct_messages').removeClass('active');
 				$('tab_for_me').removeClass('active');
 				
 				$('tab_for_'+name).addClass('active');

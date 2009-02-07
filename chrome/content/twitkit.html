@@ -11,6 +11,11 @@
 				bah.value = bah.value + '@' + username + ' ';
 				document.getElementById('status').focus();
 			}
+			function setReplyDM(username) {
+				var bah = $('status');
+				bah.value = bah.value + 'dm ' + username + ' ';
+				document.getElementById('status').focus();
+			}
 			function copySelection() {
 				var selection = content.window.getSelection();
 				if ( selection == '' )
@@ -80,6 +85,7 @@
 								<td id="tab_for_friends"><a href="#" onclick="Tweetbar.activate_panel('friends',this); void 0" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.friends.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/friends.png" /></a></td>
 								<td id="tab_for_followers"><a href="#" onclick="Tweetbar.activate_panel('followers',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.followers.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/followers.png" /></a></td>
 								<td id="tab_for_replies"><a href="#" onclick="Tweetbar.activate_panel('replies',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.replies.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/replies.png" /></a></td>
+								<td id="tab_for_direct_messages"><a href="#" onclick="Tweetbar.activate_panel('direct_messages',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.directMessages.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/direct_messages.png" /></a></td>
 								<td id="tab_for_me" style="margin: 0;"><a href="#" onclick="Tweetbar.activate_panel('me',this); void 0;" onmouseover="$('nav-label').innerHTML = Tweetbar._('tabs.me.title');" onmouseout="$('nav-label').innerHTML = '&nbsp;';"><img src="chrome://twitkit/skin/tabs/me.png" /></a></td>
 							</tr>
 						</table>
