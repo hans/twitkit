@@ -207,8 +207,13 @@ var Tweetbar = {
 	 */
 	_:
 		function (label) {
-			if ( arguments.length === 1 )
-				return Tweetbar.strings.UI.GetStringFromName(label);
+			if ( arguments.length === 1 ) {
+				try {
+					return Tweetbar.strings.UI.GetStringFromName(label);
+				} catch (e) {
+					return label;
+				}
+			}
 			return Tweetbar.strings.UI.formatStringFromName(label,
 				Array.prototype.slice.call(arguments, 1),
 				arguments.length - 1);
