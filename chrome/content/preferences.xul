@@ -53,19 +53,19 @@
 						   													<menuitem value="fullnames" label="&prefs.general.showNamesAs.fullNames;"/>
 						   											</menupopup>
 						   									</menulist>
-														</row>
-														<row>
-																<label flex="1">&prefs.general.shortenerService;</label>
-																<menulist id="shortenerService" preference="extensions.twitkit.shortenerService">
-																		<menupopup>
-																				<menuitem value="is.gd" label="&prefs.general.shortenerService.isGd;"/>
-																				<menuitem value="bit.ly" label="&prefs.general.shortenerService.bitLy;"/>
-																				<menuitem value="tinyurl" label="&prefs.general.shortenerService.tinyUrl;"/>
-																				<menuitem value="tr.im" label="&prefs.general.shortenerService.trIm;"/>
-																				<menuitem value="xrl.us" label="&prefs.general.shortenerService.xrlUs;"/>
-																		</menupopup>
-																</menulist>
-														</row>
+													</row>
+													<row>
+															<label flex="1">&prefs.general.shortenerService;</label>
+															<menulist id="shortenerService" preference="extensions.twitkit.shortenerService">
+																	<menupopup>
+																			<menuitem value="is.gd" label="&prefs.general.shortenerService.isGd;"/>
+																			<menuitem value="bit.ly" label="&prefs.general.shortenerService.bitLy;"/>
+																			<menuitem value="tinyurl" label="&prefs.general.shortenerService.tinyUrl;"/>
+																			<menuitem value="tr.im" label="&prefs.general.shortenerService.trIm;"/>
+																			<menuitem value="xrl.us" label="&prefs.general.shortenerService.xrlUs;"/>
+																	</menupopup>
+															</menulist>
+													</row>
 						 			  		</rows>
 										</grid>
 								</tabpanel>

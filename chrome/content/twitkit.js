@@ -470,96 +470,92 @@ var Tweetbar = {
 			if ( selection.length == 0 )
 				return;
 			var shortener_service = Tweetbar.prefService.getCharPref('shortenerService').toLowerCase();
-				if ( shortener_service == 'is.gd' ) {
-					var shortener_url = "http://is.gd/api.php?longurl=";
-					var url = shortener_url+escape(selection);
-					var aj = new Ajax( url, {
-						method: 'get',
-						onSuccess:
-							function (replaced) {
+			if ( shortener_service == 'is.gd' ) {
+				var shortener_url = "http://is.gd/api.php?longurl=";
+				var url = shortener_url+escape(selection);
+				var aj = new Ajax( url, {
+					method: 'get',
+					postBody: {},
+					onSuccess:
+						function (replaced) {
+							var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+							var text = document.getElementById('status').value
+								.substring(0, document.getElementById('status').selectionStart) + replaced +
+								( selection.length == selection.trim().length ? "" : " " ) +
+								document.getElementById('status').value.substring(document.getElementById('status').selectionEnd);  
+							document.getElementById('status').value = text;
+						}
+				}).request();
+			} else if ( shortener_service == 'bit.ly' ) {
+				var shortener_url = "http://api.bit.ly/shorten?version=2.0.1&longUrl=";
+				var extra_bits = "&login=alanrice38181&apiKey=R_10186c964026f2d848ed3ca19e797ef6";
+				var url = shortener_url+escape(selection)+extra_bits;
+				var aj = new Ajax( url, {
+					method: 'get',
+					postBody: {},
+					onSuccess:
+						function (raw_data) {
+							var results = Json.evaluate(raw_data);
+							var i = 0;
+							for ( var shortUrl in results ) {
 								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
 								var text = document.getElementById('status').value
-										.substring(0, document.getElementById('status').selectionStart) + replaced +
-										( selection.length == selection.trim().length ? "" : " " ) +
-									document.getElementById('status').value
-										.substring(document.getElementById('status').selectionEnd);  
+									.substring(0, document.getElementById('status').selectionStart) + shortUrl +
+									( selection.length == selection.trim().length ? "" : " " ) +
+									document.getElementById('status').value.substring(document.getElementById('status').selectionEnd);  
 								document.getElementById('status').value = text;
 							}
-					}).request();
-				}
-				if ( shortener_service == 'bit.ly' ) {
-					var shortener_url = "http://api.bit.ly/shorten?version=2.0.1&longUrl=";
-					var extra_bits = "&login=alanrice38181&apiKey=R_10186c964026f2d848ed3ca19e797ef6";
-					var url = shortener_url+escape(selection)+extra_bits;
-					var aj = new Ajax( url, {
-						method: 'get',
-						onSuccess:
-							function (raw_data) {
-								var results = Json.evaluate(raw_data);
-								var i = 0;
-								for ( var shortUrl in results ) {
-								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-								var text = document.getElementById('status').value
-										.substring(0, document.getElementById('status').selectionStart) + shortUrl +
-										( selection.length == selection.trim().length ? "" : " " ) +
-									document.getElementById('status').value
-										.substring(document.getElementById('status').selectionEnd);  
-								document.getElementById('status').value = text;
-								}
-							}
-					}).request();
-				}
-				if ( shortener_service == 'tinyurl' ) {
-					var shortener_url = "http://tinyurl.com/api-create.php?url=";
-					var url = shortener_url+escape(selection);
-					var aj = new Ajax( url, {
-						method: 'get',
-						onSuccess:
-							function (replaced) {
-								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-								var text = document.getElementById('status').value
-										.substring(0, document.getElementById('status').selectionStart) + replaced +
-										( selection.length == selection.trim().length ? "" : " " ) +
-									document.getElementById('status').value
-										.substring(document.getElementById('status').selectionEnd);  
-								document.getElementById('status').value = text;
-							}
-					}).request();
-				}
-				if ( shortener_service == 'tr.im' ) {
-					var shortener_url = "http://tr.im/api/trim_simple?url=";
-					var url = shortener_url+escape(selection);
-					var aj = new Ajax( url, {
-						method: 'get',
-						onSuccess:
-							function (replaced) {
-								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-								var text = document.getElementById('status').value
-										.substring(0, document.getElementById('status').selectionStart) + replaced +
-										( selection.length == selection.trim().length ? "" : " " ) +
-									document.getElementById('status').value
-										.substring(document.getElementById('status').selectionEnd);  
-								document.getElementById('status').value = text;
-							}
-					}).request();
-				}
-				if ( shortener_service == 'xrl.us' ) {
-					var shortener_url = "http://metamark.net/api/rest/simple?long_url=";
-					var url = shortener_url+escape(selection);
-					var aj = new Ajax( url, {
-						method: 'get',
-						onSuccess:
-							function (replaced) {
-								var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
-								var text = document.getElementById('status').value
-										.substring(0, document.getElementById('status').selectionStart) + replaced +
-										( selection.length == selection.trim().length ? "" : " " ) +
-									document.getElementById('status').value
-										.substring(document.getElementById('status').selectionEnd);  
-								document.getElementById('status').value = text;
-							}
-					}).request();
-				}
+						}
+				}).request();
+			} else if ( shortener_service == 'tinyurl' ) {
+				var shortener_url = "http://tinyurl.com/api-create.php?url=";
+				var url = shortener_url+escape(selection);
+				var aj = new Ajax( url, {
+					method: 'get',
+					postBody: {},
+					onSuccess:
+						function (replaced) {
+							var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+							var text = document.getElementById('status').value
+								.substring(0, document.getElementById('status').selectionStart) + replaced +
+								( selection.length == selection.trim().length ? "" : " " ) +
+								document.getElementById('status').value.substring(document.getElementById('status').selectionEnd);  
+							document.getElementById('status').value = text;
+						}
+				}).request();
+			} else if ( shortener_service == 'tr.im' ) {
+				var shortener_url = "http://tr.im/api/trim_simple?url=";
+				var url = shortener_url+escape(selection);
+				var aj = new Ajax( url, {
+					method: 'get',
+					postBody: {},
+					onSuccess:
+						function (replaced) {
+							var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+							var text = document.getElementById('status').value
+								.substring(0, document.getElementById('status').selectionStart) + replaced +
+								( selection.length == selection.trim().length ? "" : " " ) +
+								document.getElementById('status').value.substring(document.getElementById('status').selectionEnd);  
+							document.getElementById('status').value = text;
+						}
+				}).request();
+			} else if ( shortener_service == 'xrl.us' ) {
+				var shortener_url = "http://metamark.net/api/rest/simple?long_url=";
+				var url = shortener_url+escape(selection);
+				var aj = new Ajax( url, {
+					method: 'get',
+					postBody: {},
+					onSuccess:
+						function (replaced) {
+							var selection = document.getElementById('status').value.substring(document.getElementById('status').selectionStart, document.getElementById('status').selectionEnd);
+							var text = document.getElementById('status').value
+								.substring(0, document.getElementById('status').selectionStart) + replaced +
+								( selection.length == selection.trim().length ? "" : " " ) +
+								document.getElementById('status').value.substring(document.getElementById('status').selectionEnd);  
+							document.getElementById('status').value = text;
+						}
+				}).request();
+			}
 		},
 	
 	// Rendering //
@@ -727,6 +723,7 @@ var Tweetbar = {
 				var aj = new Ajax( theurl, {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
+					postBody: {},
 					onSuccess:
 						function (raw_data) {
 							var rsp = Json.evaluate(raw_data);
@@ -742,11 +739,12 @@ var Tweetbar = {
 								}
 							}
 						}
-					}).request();
+				}).request();
 			} else if ( this.currentList == 'replies' ) {
 				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/replies.json', {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
+					postBody: {},
 					onSuccess:
 						function (raw_data) {
 							var rsp = Json.evaluate(raw_data);
@@ -761,11 +759,12 @@ var Tweetbar = {
 								i++;
 							}
 						}
-					}).request();
+				}).request();
 			} else if ( this.currentList == 'direct_messages' ) {
 				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/direct_messages.json', {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
+					postBody: {},
 					onSuccess:
 						function (raw_data) {
 							var rsp = Json.evaluate(raw_data);
@@ -780,11 +779,12 @@ var Tweetbar = {
 								i++;
 							}
 						}
-					}).request();
+				}).request();
 			} else if ( this.currentList == 'me' ) {
 				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/users/show/' + this.username + '.json', {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
+					postBody: {},
 					onSuccess:
 						function (raw_data) {
 							var user = Json.evaluate(raw_data);
@@ -802,7 +802,7 @@ var Tweetbar = {
 								'</div>';
 							tweets.setHTML(inner);
 						}
-					}).request();
+				}).request();
 			}
 		},
 	/**
@@ -814,57 +814,34 @@ var Tweetbar = {
 	get_tweets:
 		function () {
 			var panel = Tweetbar.currentList;
-			if ( panel == 'direct_messages' ) {
-				var aj = new Ajax( Tweetbar.api_url_for_nonstatuses(panel), {
-					headers: Tweetbar.http_headers(),
-					method: 'get',
-					onComplete:
-						function (raw_data) {
-							Tweetbar.hide_refresh_activity();
-							Tweetbar.set_updater();
-						},
-					onSuccess:
-						function (raw_data) {
-							Tweetbar.save_tweets(panel, raw_data);
-							Tweetbar.update_current_list();
-						},
-					onFailure:
-						function (e) {
-							Tweetbar.hide_refresh_activity();
-							Tweetbar.set_updater();
-						},
-					onRequest:
-						function () {
-							Tweetbar.show_refresh_activity();
-							Tweetbar.clear_updater();
-						}
-				}).request();
-			} else {
-				var aj = new Ajax( Tweetbar.api_url_for_statuses(panel), {
-					headers: Tweetbar.http_headers(),
-					method: 'get',
-					onComplete:
-						function (raw_data) {
-							Tweetbar.hide_refresh_activity();
-							Tweetbar.set_updater();
-						},
-					onSuccess:
-						function (raw_data) {
-							Tweetbar.save_tweets(panel, raw_data);
-							Tweetbar.update_current_list();
-						},
-					onFailure:
-						function (e) {
-							Tweetbar.hide_refresh_activity();
-							Tweetbar.set_updater();
-						},
-					onRequest:
-						function () {
-							Tweetbar.show_refresh_activity();
-							Tweetbar.clear_updater();
-						}
-				}).request();
-			}
+			var url = Tweetbar.api_url_for_statuses(panel);
+			if ( panel == 'direct_messages' )
+				url = Tweetbar.api_url_for_nonstatuses(panel);
+			var aj = new Ajax( url, {
+				headers: Tweetbar.http_headers(),
+				method: 'get',
+				postBody: {},
+				onComplete:
+					function (raw_data) {
+						Tweetbar.hide_refresh_activity();
+						Tweetbar.set_updater();
+					},
+				onSuccess:
+					function (raw_data) {
+						Tweetbar.save_tweets(panel, raw_data);
+						Tweetbar.update_current_list();
+					},
+				onFailure:
+					function (e) {
+						Tweetbar.hide_refresh_activity();
+						Tweetbar.set_updater();
+					},
+				onRequest:
+					function () {
+						Tweetbar.show_refresh_activity();
+						Tweetbar.clear_updater();
+					}
+			}).request();
 		},
 	/**
 	 * Save the fresh tweets to the current panel's registry.
