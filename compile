@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # ./compile - Simple builder for Mozilla extensions
 # By Hans Engel, released under the GPL 3.0 License
 
