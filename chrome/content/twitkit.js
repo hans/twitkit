@@ -741,7 +741,7 @@ var Tweetbar = {
 						}
 				}).request();
 			} else if ( this.currentList == 'replies' ) {
-				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/replies.json', {
+				var aj = new Ajax( Tweetbar.protocol + '://twitter.com/statuses/mentions.json', {
 					headers: Tweetbar.http_headers(),
 					method: 'get',
 					postBody: {},
