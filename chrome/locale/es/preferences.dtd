@@ -1,0 +1,27 @@
+<!ENTITY prefs.title "Preferencias de &twitKit;">
+	<!ENTITY prefs.general "General">
+		<!ENTITY prefs.general.showAppSource "Mostrar 'desde [aplicación]' despues de tweets">
+		<!ENTITY prefs.general.refreshInterval "Intervalo de recarga:">
+			<!ENTITY prefs.general.refreshInterval.30 "30 segundos">
+			<!ENTITY prefs.general.refreshInterval.1 "1 minuto">
+			<!ENTITY prefs.general.refreshInterval.3 "3 minutos">
+			<!ENTITY prefs.general.refreshInterval.5 "5 minutos">
+			<!ENTITY prefs.general.refreshInterval.10 "10 minutos">
+		<!ENTITY prefs.general.shortenerService "URL Shortening Service:">
+			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
+			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
+			<!ENTITY prefs.general.shortenerService.tinyUrl "TinyURL">
+			<!ENTITY prefs.general.shortenerService.trIm "tr.im">
+			<!ENTITY prefs.general.shortenerService.xrlUs "xrl.us">
+		<!ENTITY prefs.general.showNamesAs "Mostrar nombres como:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Nombres de pantalla">
+			<!ENTITY prefs.general.showNamesAs.fullNames "Nombres completos">
+	<!ENTITY prefs.theme "Tema">
+		<!ENTITY prefs.theme.colorScheme "Esquema de color:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Marron Oscuro">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "Azul Twitter">
+			<!ENTITY prefs.theme.colorScheme.pastel "Pastel">
+			<!ENTITY prefs.theme.colorScheme.muted "Apagado">
+		<!ENTITY prefs.theme.fontSize "Tamaño de tipografia:">
+	<!ENTITY prefs.connection "Conexión">
+		<!ENTITY prefs.connection.secureConnection "Use una conexion segura con Twitter">
