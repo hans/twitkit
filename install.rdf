@@ -16,9 +16,12 @@
 				<em:contributor>Michael Kaiser</em:contributor>
 				<em:contributor>Mike Demers</em:contributor>
 				
-				<em:translator>Patrick Heinecke</em:translator>
-				<em:translator>Guy Lewin</em:translator>
-				<em:translator>Toshiya Tsuru</em:translator>
+				<em:translator>Patrick Heinecke</em:translator>		<!-- de -->
+				<em:translator>Guy Lewin</em:translator>			<!-- he -->
+				<em:translator>Toshiya Tsuru</em:translator>		<!-- ja -->
+				<em:translator>Carlos Zenteno</em:translator>		<!-- es -->
+				<em:translator>David Páez</em:translator>			<!-- es -->
+				<em:translator>Feder Sáiz</em:translator>			<!-- es -->
 				
 				<em:description>An extension that adds a Twitter sidebar to your browsing experience!</em:description>
 				<em:homepageURL>http://engel.uk.to/twitkit/</em:homepageURL>
