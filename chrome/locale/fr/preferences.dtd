@@ -1,4 +1,4 @@
-<!ENTITY prefs.title "&twitKit; Preferences">
+<!ENTITY prefs.title "&twitKit; Préférences">
 	<!ENTITY prefs.general "Général">
 		<!ENTITY prefs.general.showAppSource "Le spectacle '[de l'application]' après les pépiements">
 		<!ENTITY prefs.general.refreshInterval "Rafraîchissez l'intervalle:">
