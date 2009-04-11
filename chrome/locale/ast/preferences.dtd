@@ -1,0 +1,27 @@
+<!ENTITY prefs.title "&twitKit; Preferences">
+	<!ENTITY prefs.general "Xeneral">
+		<!ENTITY prefs.general.showAppSource "Amosar 'de [application]' dempués los twitts">
+		<!ENTITY prefs.general.refreshInterval "Interval de refrescu:">
+			<!ENTITY prefs.general.refreshInterval.30 "30 segundos">
+			<!ENTITY prefs.general.refreshInterval.1 "1 minutos">
+			<!ENTITY prefs.general.refreshInterval.3 "3 minutos">
+			<!ENTITY prefs.general.refreshInterval.5 "5 minutos">
+			<!ENTITY prefs.general.refreshInterval.10 "10 minutos">
+		<!ENTITY prefs.general.shortenerService "URL Shortening Service:">
+			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
+			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
+			<!ENTITY prefs.general.shortenerService.tinyUrl "TinyURL">
+			<!ENTITY prefs.general.shortenerService.trIm "tr.im">
+			<!ENTITY prefs.general.shortenerService.xrlUs "xrl.us">
+		<!ENTITY prefs.general.showNamesAs "Amosar nomes comu:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Nomes de pantalla">
+			<!ENTITY prefs.general.showNamesAs.fullNames "Nomes completos">
+	<!ENTITY prefs.theme "Tema">
+		<!ENTITY prefs.theme.colorScheme "Esquema de color:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Marrón Escuru">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "Azul Twitter">
+			<!ENTITY prefs.theme.colorScheme.pastel "Pastel">
+			<!ENTITY prefs.theme.colorScheme.muted "Silenciáu">
+		<!ENTITY prefs.theme.fontSize "Tamañu de lletra:">
+	<!ENTITY prefs.connection "Conexón">
+		<!ENTITY prefs.connection.secureConnection "Usar conexón segura con Twitter">
