@@ -1,0 +1,27 @@
+<!ENTITY prefs.title "&twitKit; Preferences">
+	<!ENTITY prefs.general "Général">
+		<!ENTITY prefs.general.showAppSource "Le spectacle '[de l'application]' après les pépiements">
+		<!ENTITY prefs.general.refreshInterval "Rafraîchissez l'intervalle:">
+			<!ENTITY prefs.general.refreshInterval.30 "30 secondes">
+			<!ENTITY prefs.general.refreshInterval.1 "1 minute">
+			<!ENTITY prefs.general.refreshInterval.3 "3 minutes">
+			<!ENTITY prefs.general.refreshInterval.5 "5 minutes">
+			<!ENTITY prefs.general.refreshInterval.10 "10 minutes">
+		<!ENTITY prefs.general.shortenerService "URL Shortening Service:">
+			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
+			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
+			<!ENTITY prefs.general.shortenerService.tinyUrl "tinyurl">
+			<!ENTITY prefs.general.shortenerService.trIm "tr.im">
+			<!ENTITY prefs.general.shortenerService.xrlUs "xrl.us">
+		<!ENTITY prefs.general.showNamesAs "Afficher les noms comme:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Noms affichés">
+			<!ENTITY prefs.general.showNamesAs.fullNames "Noms complets">
+	<!ENTITY prefs.theme "Thème">
+		<!ENTITY prefs.theme.colorScheme "Palette de couleurs:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Marron Foncé">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "Blue Twitter">
+			<!ENTITY prefs.theme.colorScheme.pastel "Pastel">
+			<!ENTITY prefs.theme.colorScheme.muted "Sourdine">
+		<!ENTITY prefs.theme.fontSize "Taille de caractère:">
+	<!ENTITY prefs.connection "Connexion">
+		<!ENTITY prefs.connection.secureConnection "Se protègent la connexion avec le Twitter">
