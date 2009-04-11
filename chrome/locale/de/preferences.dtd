@@ -8,9 +8,9 @@
 			<!ENTITY prefs.general.refreshInterval.5 "5 Minuten">
 			<!ENTITY prefs.general.refreshInterval.10 "10 Minuten">
 		<!ENTITY prefs.general.showNamesAs "Namen anzeigen als:">
-			<!ENTITY prefs.general.showNamesAs.screenNames "Nicknamen">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Spitznamen">
 			<!ENTITY prefs.general.showNamesAs.fullNames "Ganze Namen">
-	<!ENTITY prefs.theme "Anzeige">
+	<!ENTITY prefs.theme "Stil">
 		<!ENTITY prefs.theme.colorScheme "Farbschema:">
 			<!ENTITY prefs.theme.colorScheme.deepBrown "Sattes Braun">
 			<!ENTITY prefs.theme.colorScheme.twitterBlue "Twitter Blau">
