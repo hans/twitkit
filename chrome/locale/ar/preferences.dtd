@@ -1,0 +1,27 @@
+<!ENTITY prefs.title "&twitKit; Preferences">
+	<!ENTITY prefs.general "عام">
+		<!ENTITY prefs.general.showAppSource "إظهار 'بواسطة [application]' بعد الرسالة">
+		<!ENTITY prefs.general.refreshInterval "فترة التجديد:">
+			<!ENTITY prefs.general.refreshInterval.30 "٣٠ ثانية">
+			<!ENTITY prefs.general.refreshInterval.1 "دقيقة واحدة">
+			<!ENTITY prefs.general.refreshInterval.3 "٣ دقائق">
+			<!ENTITY prefs.general.refreshInterval.5 "٥ دقائق">
+			<!ENTITY prefs.general.refreshInterval.10 "١٠ دقائق">
+		<!ENTITY prefs.general.shortenerService "URL Shortening Service:">
+			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
+			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
+			<!ENTITY prefs.general.shortenerService.tinyUrl "TinyURL">
+			<!ENTITY prefs.general.shortenerService.trIm "tr.im">
+			<!ENTITY prefs.general.shortenerService.xrlUs "xrl.us">
+		<!ENTITY prefs.general.showNamesAs "إظهار الإسم كـ:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "الأسماء">
+			<!ENTITY prefs.general.showNamesAs.fullNames "الأسماء الكاملة">
+	<!ENTITY prefs.theme "السِمة">
+		<!ENTITY prefs.theme.colorScheme "مخطط الألوان:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "بني داكن">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "تويتر الأزرق">
+			<!ENTITY prefs.theme.colorScheme.pastel "باستيل">
+			<!ENTITY prefs.theme.colorScheme.muted "صامت">
+		<!ENTITY prefs.theme.fontSize "حجم الخط:">
+	<!ENTITY prefs.connection "الإتصال">
+		<!ENTITY prefs.connection.secureConnection "إستخدم إتصال آمن مع تويتر">

@@ -1,0 +1,19 @@
+<!ENTITY  sidebar.heading    "تويتكت">
+<!ENTITY  sidebar.title      "تويتكت">
+
+<!ENTITY openTweetbar.commandkey     "A">
+<!ENTITY openTweetbar.modifierskey  "alt accel">
+
+<!ENTITY toolbar.label   "تويتكت">
+<!ENTITY toolbar.tooltip "إفتح تويتكت">
+
+<!ENTITY menu.toggle "فتح / إغلاق">
+<!ENTITY menu.prefs "إعدادات تويتكت">
+<!ENTITY menu.about "حول">
+<!ENTITY menu.help "مساعدة">
+
+<!ENTITY twitKit "تويتكت">
+
+<!ENTITY about "حول تويتكت">
+	<!ENTITY about.version "تويتكت 1.2">
+	<!ENTITY about.credits "المساهمون">
