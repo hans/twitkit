@@ -9,11 +9,11 @@
 
 <!ENTITY menu.toggle "פתח / סגור">
 <!ENTITY menu.prefs "העדפות TwitKit">
-<!ENTITY menu.about "מידע">
+<!ENTITY menu.about "אודות">
 <!ENTITY menu.help "עזרה">
 
 <!ENTITY twitKit "TwitKit">
 
 <!ENTITY about "מידע על TwitKit">
 	<!ENTITY about.version "TwitKit 1.2">
-	<!ENTITY about.credits "קרדיטים">
+	<!ENTITY about.credits "תודות">
