@@ -1255,6 +1255,7 @@ var Tweetbar = {
 			
 			var aj = new Ajax( Tweetbar.protocol + '://twitter.com/account/verify_credentials', {
 				headers: this.http_headers(),
+				method: 'get',
 				postBody: {},
 				onComplete:
 					function (raw_data) {
