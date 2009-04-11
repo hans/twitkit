@@ -1,0 +1,27 @@
+<!ENTITY prefs.title "Настройки &twitKit;">
+	<!ENTITY prefs.general "Главные">
+		<!ENTITY prefs.general.showAppSource "Показывать 'из [программы]' после текста">
+		<!ENTITY prefs.general.refreshInterval "Интервал обновления:">
+			<!ENTITY prefs.general.refreshInterval.30 "30 секунд">
+			<!ENTITY prefs.general.refreshInterval.1 "1 минута">
+			<!ENTITY prefs.general.refreshInterval.3 "3 минуты">
+			<!ENTITY prefs.general.refreshInterval.5 "5 минут">
+			<!ENTITY prefs.general.refreshInterval.10 "10 минут">
+		<!ENTITY prefs.general.shortenerService "URL Shortening Service:">
+			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
+			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
+			<!ENTITY prefs.general.shortenerService.tinyUrl "TinyURL">
+			<!ENTITY prefs.general.shortenerService.trIm "tr.im">
+			<!ENTITY prefs.general.shortenerService.xrlUs "xrl.us">
+		<!ENTITY prefs.general.showNamesAs "Показывать имена как:">
+			<!ENTITY prefs.general.showNamesAs.screenNames "Логин">
+			<!ENTITY prefs.general.showNamesAs.fullNames "Полные имена">
+	<!ENTITY prefs.theme "Тема">
+		<!ENTITY prefs.theme.colorScheme "Цветовая схема:">
+			<!ENTITY prefs.theme.colorScheme.deepBrown "Темно коричневый">
+			<!ENTITY prefs.theme.colorScheme.twitterBlue "голубой под Twitter">
+			<!ENTITY prefs.theme.colorScheme.pastel "Пастэльный">
+			<!ENTITY prefs.theme.colorScheme.muted "Розовый">
+		<!ENTITY prefs.theme.fontSize "Размер шрифта:">
+	<!ENTITY prefs.connection "Соединение">
+		<!ENTITY prefs.connection.secureConnection "Используйте безопасное подключение с Twitter">
