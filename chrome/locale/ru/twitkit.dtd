@@ -15,5 +15,5 @@
 <!ENTITY twitKit "TwitKit">
 
 <!ENTITY about "О TwitKit">
-	<!ENTITY about.version "TwitKit 1.2">
+	<!ENTITY about.version "TwitKit 1.2.1">
 	<!ENTITY about.credits "список участников">
