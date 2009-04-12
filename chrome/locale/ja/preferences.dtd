@@ -7,6 +7,12 @@
 			<!ENTITY prefs.general.refreshInterval.3 "3分">
 			<!ENTITY prefs.general.refreshInterval.5 "5分">
 			<!ENTITY prefs.general.refreshInterval.10 "10分">
+		<!ENTITY prefs.general.shortenerService "URL shortening service:">
+			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
+			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
+			<!ENTITY prefs.general.shortenerService.tinyUrl "TinyURL">
+			<!ENTITY prefs.general.shortenerService.trIm "tr.im">
+			<!ENTITY prefs.general.shortenerService.xrlUs "xrl.us">
 		<!ENTITY prefs.general.showNamesAs "名前の表示:">
 			<!ENTITY prefs.general.showNamesAs.screenNames "スクリーンネーム">
 			<!ENTITY prefs.general.showNamesAs.fullNames "フルネーム">

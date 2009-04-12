@@ -7,6 +7,12 @@
 			<!ENTITY prefs.general.refreshInterval.3 "3 דקות">
 			<!ENTITY prefs.general.refreshInterval.5 "5 דקות">
 			<!ENTITY prefs.general.refreshInterval.10 "10 דקות">
+		<!ENTITY prefs.general.shortenerService "URL shortening service:">
+			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
+			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
+			<!ENTITY prefs.general.shortenerService.tinyUrl "TinyURL">
+			<!ENTITY prefs.general.shortenerService.trIm "tr.im">
+			<!ENTITY prefs.general.shortenerService.xrlUs "xrl.us">
 		<!ENTITY prefs.general.showNamesAs "הראה שם כ:">
 			<!ENTITY prefs.general.showNamesAs.screenNames "כינוי">
 			<!ENTITY prefs.general.showNamesAs.fullNames "שם מלא">

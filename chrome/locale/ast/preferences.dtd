@@ -7,7 +7,7 @@
 			<!ENTITY prefs.general.refreshInterval.3 "3 minutos">
 			<!ENTITY prefs.general.refreshInterval.5 "5 minutos">
 			<!ENTITY prefs.general.refreshInterval.10 "10 minutos">
-		<!ENTITY prefs.general.shortenerService "URL Shortening Service:">
+		<!ENTITY prefs.general.shortenerService "URL shortening service:">
 			<!ENTITY prefs.general.shortenerService.bitLy "bit.ly">
 			<!ENTITY prefs.general.shortenerService.isGd "is.gd">
 			<!ENTITY prefs.general.shortenerService.tinyUrl "TinyURL">
