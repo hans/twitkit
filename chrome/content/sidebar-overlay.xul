@@ -31,12 +31,12 @@
 		</keyset>
 		<broadcasterset id="mainBroadcasterSet"> 
 				<broadcaster id="viewTweetbar" 
-					label="TwitKit"
+					label="&twitKit;"
 					autoCheck="false"
 					type="checkbox"
 					group="sidebar"
 					sidebarurl="chrome://twitkit/content/twitkit.xul"
-					sidebarTitle="Sidebar Title"
+					sidebartitle="&twitKit;"
 					oncommand="toggleSidebar('viewTweetbar');" />
 		</broadcasterset>
 </overlay>
