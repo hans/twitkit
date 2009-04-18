@@ -1,0 +1,217 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TwitKit 1.1\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-04-18 14:45-0700\n"
+"Last-Translator: Hans Engel <engel@engel.uk.to>\n"
+"Language-Team: TwitKit Translation <twitkit@engel.uk.to>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "General"
+msgstr ""
+
+msgid "Show 'from [application]' after tweets"
+msgstr ""
+
+msgid "Refresh interval:"
+msgstr ""
+
+msgid "30 seconds"
+msgstr ""
+
+msgid "1 minute"
+msgstr ""
+
+msgid "3 minutes"
+msgstr ""
+
+msgid "5 minutes"
+msgstr ""
+
+msgid "10 minutes"
+msgstr ""
+
+msgid "Show names as:"
+msgstr ""
+
+msgid "Screen names"
+msgstr ""
+
+msgid "Full names"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Color scheme:"
+msgstr ""
+
+msgid "Deep Brown"
+msgstr ""
+
+msgid "Twitter Blue"
+msgstr ""
+
+msgid "Pastel"
+msgstr ""
+
+msgid "Muted"
+msgstr ""
+
+msgid "Font size:"
+msgstr ""
+
+msgid "Connection"
+msgstr ""
+
+msgid "Use secure connection with Twitter"
+msgstr ""
+
+msgid "open twitkit"
+msgstr ""
+
+msgid "Open / Close"
+msgstr ""
+
+msgid "TwitKit Preferences"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "About TwitKit"
+msgstr ""
+
+# As in thanking people
+msgid "Credits"
+msgstr ""
+
+# You should probably leave 'AJAX' how it is. (JavaScript term)
+msgid "TwitKit AJAX Error:"
+msgstr ""
+
+# An error occurred during the sign-in process
+msgid "There was an error signing in."
+msgstr ""
+
+# An error occurred during the sign-out process
+msgid "There was an error signing out."
+msgstr ""
+
+# As in closing a dialog
+msgid "close"
+msgstr ""
+
+msgid "password:"
+msgstr ""
+
+msgid "Sign In!"
+msgstr ""
+
+msgid "username or email:"
+msgstr ""
+
+msgid "Please Sign In"
+msgstr ""
+
+msgid "sign in!"
+msgstr ""
+
+msgid "sign out"
+msgstr ""
+
+msgid "or %1$Ssign up now%2$S!"
+msgstr ""
+
+# Clear the list of tweets
+msgid "clear"
+msgstr ""
+
+# Used in 'from [application]'
+msgid "from"
+msgstr ""
+
+msgid "loading..."
+msgstr ""
+
+msgid "Sorry, you need to be logged in to view that tab."
+msgstr ""
+
+# [username] on twitter
+msgid "on twitter"
+msgstr ""
+
+# Command. When clicked, refreshes list
+msgid "refresh"
+msgstr ""
+
+msgid "refreshing..."
+msgstr ""
+
+msgid "Select textpart, and convert to tinyurl"
+msgstr ""
+
+msgid "what are you doing?"
+msgstr ""
+
+# followers tab
+msgid "followers"
+msgstr ""
+
+# friends tab
+msgid "friends"
+msgstr ""
+
+msgid "My updates are protected."
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Bio"
+msgstr ""
+
+# number of friends
+msgid "Friends"
+msgstr ""
+
+# number of followers
+msgid "Followers"
+msgstr ""
+
+# number of favorites
+msgid "Favorites"
+msgstr ""
+
+# 'me' tab - view profile
+msgid "me"
+msgstr ""
+
+# number of updates
+msgid "Updates"
+msgstr ""
+
+# public timeline
+msgid "public"
+msgstr ""
+
+# replies tab - you should leave this alone unless your language doesn't have a standard Latin alphabet
+msgid "@s"
+msgstr ""
+
+# direct messages tab
+msgid "direct messages"
+msgstr ""
+
+# user timeline
+msgid "user"
+msgstr ""
+
