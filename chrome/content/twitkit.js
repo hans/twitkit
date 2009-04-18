@@ -242,8 +242,8 @@ var Tweetbar = {
 			if ( !Tweetbar.httpHeaders ) {
 				Tweetbar.httpHeaders = {
 					'X-Twitter-Client': 'TwitKit',
-					'X-Twitter-Client-Version': '1.1',
-					'X-Twitter-Client-URL': 'http://engel.uk.to/twitkit/1.1.xml',
+					'X-Twitter-Client-Version': '1.3',
+					'X-Twitter-Client-URL': 'http://engel.uk.to/twitkit/1.3.xml',
 				};
 				if ( Tweetbar.username && Tweetbar.password )
 					Tweetbar.httpHeaders['Authorization'] = Tweetbar.http_basic_auth();
