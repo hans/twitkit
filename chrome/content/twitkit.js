@@ -1,5 +1,5 @@
 /*
-	TwitKit v1.2.1
+	TwitKit v1.3
 	
 	Based off of Tweetbar by Mike Demers [mike@mikedemers.net]
 	
@@ -11,7 +11,7 @@
  * 
  * @class
  * @requires MooTools
- * @version 1.2.1
+ * @version 1.3
  */
 var Tweetbar = {
 	
