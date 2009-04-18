@@ -53,8 +53,7 @@ var TwitOverlay = {
 			openDialog(
 				"chrome://twitkit/content/preferences.xul",
 				"_blank",
-				"chrome,titlebar,centerscreen," +
-				( ( this.getPref("browser.preferences.instantApply", false ) ) ? "dialog=no" : "modal" )
+				"chrome,titlebar,centerscreen,modal"
 			);
 		},
 	/**
