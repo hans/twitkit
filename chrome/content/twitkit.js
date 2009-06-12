@@ -620,7 +620,9 @@ var Tweetbar = {
 					   '<span class="re"><a class="re" href="#" onclick="setReply(\''+ tweet.user.screen_name + '\'); return false;"><img class="re" src="chrome://twitkit/skin/images/reply.png" alt="" /></a>&nbsp;' +
 					   favorite + '</span></p>' +
 					   '<p class="what">' + tweet.text + '</p>' +
-					   '<p class="who">' + this.user_anchor_tag(tweet.user) + date + in_reply_to + '</p>' +
+					   '<p class="who">' + this.user_anchor_tag(tweet.user) +
+					   '<a href="http://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id + '" target="_blank">' + date + '</a>' +
+					   in_reply_to + '</p>' +
 					   source + dellink;
 			}
 		},
